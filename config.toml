@@ -1,0 +1,36 @@
+author = "Ayush Biswas"
+
+editor = "zeditor"
+
+[code]
+filename = '''
+function filename(title, url) {
+  const urlMatch = url.match(/problemset\/problem\/(\d+)\/([A-Za-z0-9]+)/i);
+  if (!urlMatch) throw new Error("Invalid Codeforces problem URL");
+  const contestId = urlMatch[1];
+  const problemIndex = urlMatch[2].toLowerCase();
+
+  // Extract problem index and actual title from title string
+  const titleMatch = title.match(/^([A-Za-z0-9]+)\.\s*(.+)$/);
+  if (!titleMatch) throw new Error("Title format should be like 'A. Problem Title'");
+  const problemTitle = titleMatch[2];
+
+  // Format title: lowercase, words separated by hyphens
+  const formattedTitle = problemTitle
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-") // Replace non-alphanumeric with hyphen
+    .replace(/^-+|-+$/g, "")     // Trim leading/trailing hyphens
+    .replace(/-+/g, "-");        // Collapse multiple hyphens
+
+  return `./src/bin/${contestId}-${problemIndex}-${formattedTitle}.rs`;
+}
+'''
+template = "./src/main.rs"
+modifier = '''
+function modify(code, lib_files) {
+    return `${code}\nmod cpio {\n${lib_files.cpio}\n}`;
+}
+'''
+
+[include]
+cpio = "./src/cpio.rs"
