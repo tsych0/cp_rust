@@ -28,9 +28,19 @@ function filename(title, url) {
 template = "./src/main.rs"
 modifier = '''
 function modify(code, lib_files) {
-    return `${code}\nmod cpio {\n${lib_files.cpio}\n}`;
+    return `
+${code}
+
+mod cpio {
+    ${lib_files.cpio}
+}
+
+mod itertools {
+    ${lib_files.itertools}
+}`;
 }
 '''
 
 [include]
 cpio = "./src/cpio.rs"
+itertools = "./src/itertools.rs"

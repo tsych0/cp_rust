@@ -14,7 +14,7 @@ fn solution<R>(input: &mut cpio::CPInput<R>) -> bool
 where
     R: Read,
 {
-    let n: usize = input.read_line(cpio::parse).unwrap();
+    let _n: usize = input.read_line(cpio::parse).unwrap();
     let a: Vec<usize> = input.read_line(cpio::parse_vec).unwrap();
     let b: Vec<usize> = input.read_line(cpio::parse_vec).unwrap();
     a.into_iter().collect::<HashSet<_>>().len() + b.into_iter().collect::<HashSet<_>>().len() > 3
