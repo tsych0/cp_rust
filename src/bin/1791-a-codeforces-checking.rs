@@ -1,11 +1,10 @@
-#![allow(unused)]
-
+// Created by Ayush Biswas at 2025/05/19 22:25
+// https://codeforces.com/problemset/problem/1791/A
 use cf_rust::cpio;
-use cf_rust::itertools;
 
 // @code begin
 use cpio::*;
-use itertools::Itertools;
+#[allow(unused)]
 use std::convert::TryInto;
 use std::io::Read;
 
@@ -17,7 +16,7 @@ fn solution<R>(input: &mut CPInput<R>) -> bool
 where
     R: Read,
 {
-    let n: usize = input.read_line(parse).unwrap();
-    n > 2 && n % 2 == 0
+    let c: String = input.read_line(parse).unwrap();
+    "codeforces".contains(&c)
 }
 // @code end

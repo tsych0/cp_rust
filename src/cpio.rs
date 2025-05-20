@@ -21,7 +21,29 @@ pub trait CPOutput {
 // Specific implementation for bool
 impl CPOutput for bool {
     fn cp_fmt(&self) -> Vec<u8> {
-        if *self { "Yes" } else { "No" }.as_bytes().to_vec()
+        if *self { "YES" } else { "NO" }.as_bytes().to_vec()
+    }
+}
+
+impl<T> Display for ListOf<T>
+where
+    T: Display,
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let res = match self {
+            ListOf::WordsOf(ws) => ws
+                .into_iter()
+                .map(|w| w.to_string())
+                .collect::<Vec<_>>()
+                .join(" "),
+            ListOf::LinesOf(ls) => ls
+                .into_iter()
+                .map(|w| w.to_string())
+                .collect::<Vec<_>>()
+                .join("\n"),
+        };
+
+        write!(f, "{}", res)
     }
 }
 
