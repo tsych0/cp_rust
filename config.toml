@@ -1,6 +1,6 @@
 author = "Ayush Biswas"
 
-editor = "zeditor"
+editor = "zed"
 
 [code]
 filename = '''

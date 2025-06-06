@@ -137,6 +137,10 @@ pub fn parse_vec<T: FromStr>(s: &str) -> Vec<T> {
         .collect()
 }
 
+pub fn parse_chars(s: &str) -> Vec<char> {
+    s.chars().collect()
+}
+
 pub fn parse_binary(s: &str) -> Vec<u8> {
     s.chars().map(|s| if s == '0' { 0 } else { 1 }).collect()
 }
