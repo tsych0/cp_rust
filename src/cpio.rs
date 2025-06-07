@@ -15,13 +15,13 @@ pub struct CPInput<R: Read> {
 }
 
 pub trait CPOutput {
-    fn cp_fmt(&self) -> Vec<u8>;
+    fn cp_fmt(&self) -> String;
 }
 
 // Specific implementation for bool
 impl CPOutput for bool {
-    fn cp_fmt(&self) -> Vec<u8> {
-        if *self { "YES" } else { "NO" }.as_bytes().to_vec()
+    fn cp_fmt(&self) -> String {
+        if *self { "YES" } else { "NO" }.to_string()
     }
 }
 
@@ -49,23 +49,21 @@ where
 
 impl<T> CPOutput for ListOf<T>
 where
-    T: Display,
+    T: CPOutput,
 {
-    fn cp_fmt(&self) -> Vec<u8> {
-        let res = match self {
+    fn cp_fmt(&self) -> String {
+        match self {
             ListOf::WordsOf(ws) => ws
                 .into_iter()
-                .map(|w| w.to_string())
+                .map(|w| w.cp_fmt())
                 .collect::<Vec<_>>()
                 .join(" "),
             ListOf::LinesOf(ls) => ls
                 .into_iter()
-                .map(|w| w.to_string())
+                .map(|w| w.cp_fmt())
                 .collect::<Vec<_>>()
                 .join("\n"),
-        };
-
-        res.as_bytes().to_vec()
+        }
     }
 }
 
@@ -74,8 +72,8 @@ macro_rules! impl_cp_output {
                 ($($t:ty),*) => {
                     $(
                         impl CPOutput for $t {
-                            fn cp_fmt(&self) -> Vec<u8>  {
-                                format!("{self}").as_bytes().to_vec()
+                            fn cp_fmt(&self) -> String {
+                                format!("{self}")
                             }
                         }
                     )*
@@ -151,7 +149,10 @@ where
 {
     let mut io = CPInput::new(stdin().lock());
     let output = solution(&mut io);
-    stdout().lock().write_all(&output.cp_fmt()).unwrap();
+    stdout()
+        .lock()
+        .write_all(&output.cp_fmt().as_bytes())
+        .unwrap();
 }
 
 pub fn solve_n<O>(solution: fn(&mut CPInput<StdinLock<'static>>) -> O)
@@ -163,7 +164,7 @@ where
     let n = input.read_line(parse).unwrap();
     for _ in 0..n {
         let output = solution(&mut input);
-        writer.write_all(&output.cp_fmt()).unwrap();
+        writer.write_all(&output.cp_fmt().as_bytes()).unwrap();
         writer.write("\n".as_bytes()).unwrap();
     }
     writer.flush().unwrap();
