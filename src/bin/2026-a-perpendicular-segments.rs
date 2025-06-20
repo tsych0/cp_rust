@@ -1,0 +1,31 @@
+// Created by Ayush Biswas at 2025/06/10 22:05
+// https://codeforces.com/problemset/problem/2026/A
+#![allow(unused)]
+
+use cf_rust::cpio;
+use cf_rust::itertools;
+
+// @code begin
+use cpio::*;
+use itertools::Itertools;
+use std::convert::TryInto;
+use std::io::Read;
+
+fn main() {
+    solve_n(solution)
+}
+
+fn solution<R>(input: &mut CPInput<R>) -> Lines<Words<usize>>
+where
+    R: Read,
+{
+    let [x, y, k]: [usize; 3] = input.read_line(parse_vec).unwrap().try_into().unwrap();
+    if x >= k && y >= k {
+        vec![vec![0, 0, x, 0].into(), vec![0, 0, 0, y].into()]
+    } else {
+        let z = x.min(y);
+        vec![vec![0, 0, z, z].into(), vec![0, z, z, 0].into()]
+    }
+    .into()
+}
+// @code end
