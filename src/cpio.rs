@@ -1,12 +1,32 @@
 use std::{
     fmt::Display,
     io::{stdin, stdout, BufRead, BufReader, BufWriter, Read, Result, StdinLock, Write},
+    iter::FromIterator,
     str::FromStr,
 };
 
-pub enum ListOf<T> {
-    WordsOf(Vec<T>),
-    LinesOf(Vec<T>),
+pub struct ListOf<const SEP: char, T>(pub Vec<T>);
+pub type Words<T> = ListOf<' ', T>;
+pub type Lines<T> = ListOf<'\n', T>;
+
+pub fn words_of<T>(v: Vec<T>) -> Words<T> {
+    ListOf(v)
+}
+
+pub fn lines_of<T>(v: Vec<T>) -> Lines<T> {
+    ListOf(v)
+}
+
+impl<T, const S: char> From<Vec<T>> for ListOf<S, T> {
+    fn from(value: Vec<T>) -> Self {
+        ListOf(value)
+    }
+}
+
+impl<R, const S: char> FromIterator<R> for ListOf<S, R> {
+    fn from_iter<T: IntoIterator<Item = R>>(iter: T) -> Self {
+        iter.into_iter().collect::<Vec<_>>().into()
+    }
 }
 
 pub struct CPInput<R: Read> {
@@ -15,55 +35,54 @@ pub struct CPInput<R: Read> {
 }
 
 pub trait CPOutput {
-    fn cp_fmt(&self) -> String;
+    fn cp_fmt(self) -> String;
 }
 
 // Specific implementation for bool
 impl CPOutput for bool {
-    fn cp_fmt(&self) -> String {
-        if *self { "YES" } else { "NO" }.to_string()
+    fn cp_fmt(self) -> String {
+        if self { "YES" } else { "NO" }.to_string()
     }
 }
 
-impl<T> Display for ListOf<T>
+impl<T, const SEP: char> Display for ListOf<SEP, T>
 where
     T: Display,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let res = match self {
-            ListOf::WordsOf(ws) => ws
-                .into_iter()
-                .map(|w| w.to_string())
-                .collect::<Vec<_>>()
-                .join(" "),
-            ListOf::LinesOf(ls) => ls
-                .into_iter()
-                .map(|w| w.to_string())
-                .collect::<Vec<_>>()
-                .join("\n"),
+        let sep = if SEP != '\0' {
+            SEP.to_string()
+        } else {
+            "".to_string()
         };
+
+        let res = self
+            .0
+            .iter()
+            .map(|w| w.to_string())
+            .collect::<Vec<_>>()
+            .join(&sep);
 
         write!(f, "{}", res)
     }
 }
 
-impl<T> CPOutput for ListOf<T>
+impl<T, const SEP: char> CPOutput for ListOf<SEP, T>
 where
     T: CPOutput,
 {
-    fn cp_fmt(&self) -> String {
-        match self {
-            ListOf::WordsOf(ws) => ws
-                .into_iter()
-                .map(|w| w.cp_fmt())
-                .collect::<Vec<_>>()
-                .join(" "),
-            ListOf::LinesOf(ls) => ls
-                .into_iter()
-                .map(|w| w.cp_fmt())
-                .collect::<Vec<_>>()
-                .join("\n"),
-        }
+    fn cp_fmt(self) -> String {
+        let sep = if SEP != '\0' {
+            SEP.to_string()
+        } else {
+            "".to_string()
+        };
+
+        self.0
+            .into_iter()
+            .map(|w| w.cp_fmt())
+            .collect::<Vec<_>>()
+            .join(&sep)
     }
 }
 
@@ -72,7 +91,7 @@ macro_rules! impl_cp_output {
                 ($($t:ty),*) => {
                     $(
                         impl CPOutput for $t {
-                            fn cp_fmt(&self) -> String {
+                            fn cp_fmt(self) -> String {
                                 format!("{self}")
                             }
                         }

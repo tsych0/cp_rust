@@ -3,14 +3,14 @@
 use cf_rust::cpio;
 
 // @code begin
-use cpio::{solve_n, ListOf};
+use cpio::*;
 use std::io::Read;
 
 fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(io: &mut cpio::CPInput<R>) -> ListOf<usize>
+fn solution<R>(io: &mut cpio::CPInput<R>) -> Words<usize>
 where
     R: Read,
 {
@@ -29,7 +29,7 @@ where
     }
     res.push(front);
     res.reverse();
-    ListOf::WordsOf(res)
+    ListOf(res)
 }
 
 // @code end

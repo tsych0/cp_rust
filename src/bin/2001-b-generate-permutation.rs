@@ -12,21 +12,19 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<isize>
+fn solution<R>(input: &mut CPInput<R>) -> Words<isize>
 where
     R: Read,
 {
     let n: usize = input.read_line(parse).unwrap();
     if n % 2 == 0 {
-        ListOf::WordsOf(vec![-1])
+        vec![-1].into()
     } else {
         let second_part = (1..=n as isize).take((n + 1) / 2).collect::<Vec<_>>();
         let first_part = (1..=n as isize).rev().take(n / 2).collect::<Vec<_>>();
-        ListOf::WordsOf(
-            [first_part.as_slice(), second_part.as_slice()]
-                .concat()
-                .to_vec(),
-        )
+        [first_part.as_slice(), second_part.as_slice()]
+            .concat()
+            .into()
     }
 }
 // @code end

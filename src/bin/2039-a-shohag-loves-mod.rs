@@ -10,11 +10,11 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<u8>
+fn solution<R>(input: &mut CPInput<R>) -> Words<u8>
 where
     R: Read,
 {
     let n: u8 = input.read_line(parse).unwrap();
-    ListOf::WordsOf((0..n).map(|i| 2 * i + 1).collect())
+    (0..n).map(|i| 2 * i + 1).collect()
 }
 // @code end

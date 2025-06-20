@@ -12,7 +12,7 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<ListOf<isize>>
+fn solution<R>(input: &mut CPInput<R>) -> Lines<Words<isize>>
 where
     R: Read,
 {
@@ -21,15 +21,15 @@ where
     if n != 1 {
         let x = matrix.pop().unwrap();
         matrix.insert(0, x);
-        ListOf::LinesOf(matrix.into_iter().map(|v| ListOf::WordsOf(v)).collect())
+        matrix.into_iter().map(|v| ListOf(v)).collect()
     } else if m != 1 {
         for i in 0..n {
             let y = matrix[i].pop().unwrap();
             matrix[i].insert(0, y);
         }
-        ListOf::LinesOf(matrix.into_iter().map(|v| ListOf::WordsOf(v)).collect())
+        matrix.into_iter().map(|v| ListOf(v)).collect()
     } else {
-        ListOf::WordsOf(vec![ListOf::WordsOf(vec![-1])])
+        ListOf(vec![ListOf(vec![-1])])
     }
 }
 // @code end

@@ -12,7 +12,7 @@ fn main() {
     solve(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<usize>
+fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
 where
     R: Read,
 {
@@ -22,6 +22,6 @@ where
     for i in 0..n {
         res[p[i] - 1] = i + 1;
     }
-    ListOf::WordsOf(res)
+    res.into()
 }
 // @code end

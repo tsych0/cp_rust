@@ -25,7 +25,7 @@ where
     if 2023 % b_prod == 0 {
         format!(
             "YES\n{}",
-            ListOf::WordsOf([vec![1; k - 1].as_slice(), &[2023 / b_prod]].concat()).to_string()
+            words_of([vec![1; k - 1].as_slice(), &[2023 / b_prod]].concat()).to_string()
         )
     } else {
         "NO".into()

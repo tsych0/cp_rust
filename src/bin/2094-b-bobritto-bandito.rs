@@ -1,9 +1,9 @@
 // Created by Ayush Biswas at 2025/05/14 10:27
 // https://codeforces.com/problemset/problem/2094/B
-use cf_rust::cpio;
+use cf_rust::cpio::{self};
 
 // @code begin
-use cpio::{solve_n, ListOf};
+use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
@@ -11,7 +11,7 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(io: &mut cpio::CPInput<R>) -> ListOf<isize>
+fn solution<R>(io: &mut cpio::CPInput<R>) -> Words<isize>
 where
     R: Read,
 {
@@ -29,6 +29,6 @@ where
         }
     }
 
-    ListOf::WordsOf(vec![l, r])
+    ListOf(vec![l, r])
 }
 // @code end

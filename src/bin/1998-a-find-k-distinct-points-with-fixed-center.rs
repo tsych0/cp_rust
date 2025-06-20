@@ -12,7 +12,7 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<ListOf<isize>>
+fn solution<R>(input: &mut CPInput<R>) -> Lines<Words<isize>>
 where
     R: Read,
 {
@@ -27,6 +27,6 @@ where
     } else {
         res.push(vec![x * k, y * k]);
     }
-    ListOf::LinesOf(res.into_iter().map(|v| ListOf::WordsOf(v)).collect())
+    res.into_iter().map(ListOf).collect()
 }
 // @code end

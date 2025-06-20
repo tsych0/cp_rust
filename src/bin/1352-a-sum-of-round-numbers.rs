@@ -15,7 +15,7 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<ListOf<usize>>
+fn solution<R>(input: &mut CPInput<R>) -> Lines<Words<usize>>
 where
     R: Read,
 {
@@ -29,6 +29,6 @@ where
         n /= 10;
         mask *= 10;
     }
-    ListOf::LinesOf(vec![ListOf::WordsOf(vec![res.len()]), ListOf::WordsOf(res)])
+    vec![vec![res.len()].into(), ListOf(res)].into()
 }
 // @code end

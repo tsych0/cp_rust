@@ -15,7 +15,7 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<usize>
+fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
 where
     R: Read,
 {
@@ -24,6 +24,6 @@ where
     if x < n {
         r.push(x);
     }
-    ListOf::WordsOf(r)
+    ListOf(r)
 }
 // @code end

@@ -12,11 +12,11 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<usize>
+fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
 where
     R: Read,
 {
     let n: usize = input.read_line(parse).unwrap();
-    ListOf::WordsOf((1..=n).collect::<Vec<usize>>())
+    (1..=n).collect()
 }
 // @code end

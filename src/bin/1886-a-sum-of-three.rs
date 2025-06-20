@@ -15,7 +15,7 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<String>
+fn solution<R>(input: &mut CPInput<R>) -> Words<String>
 where
     R: Read,
 {
@@ -29,20 +29,22 @@ where
         let sum_ijk = rem_n / 3;
         if i == j {
             if sum_ijk >= 3 {
-                return ListOf::LinesOf(vec![
+                return vec![
                     "YES".into(),
-                    ListOf::WordsOf(vec![i, 3 + j, (sum_ijk - 1) * 3 + k]).to_string(),
-                ]);
+                    words_of(vec![i, 3 + j, (sum_ijk - 1) * 3 + k]).to_string(),
+                ]
+                .into();
             }
         } else {
             if sum_ijk >= 1 {
-                return ListOf::LinesOf(vec![
+                return vec![
                     "YES".into(),
-                    ListOf::WordsOf(vec![i, j, sum_ijk * 3 + k]).to_string(),
-                ]);
+                    words_of(vec![i, j, sum_ijk * 3 + k]).to_string(),
+                ]
+                .into();
             }
         }
     }
-    ListOf::WordsOf(vec!["NO".into()])
+    ListOf(vec!["NO".into()])
 }
 // @code end

@@ -15,18 +15,18 @@ fn main() {
     solve_n(solution)
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<usize>
+fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
 where
     R: Read,
 {
     let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
     let cut_point = n - k;
-    ListOf::WordsOf(
-        [
-            (cut_point..=n).collect::<Vec<_>>(),
-            (1..cut_point).rev().collect::<Vec<_>>(),
-        ]
-        .concat(),
-    )
+
+    [
+        (cut_point..=n).collect::<Vec<_>>(),
+        (1..cut_point).rev().collect::<Vec<_>>(),
+    ]
+    .concat()
+    .into()
 }
 // @code end
