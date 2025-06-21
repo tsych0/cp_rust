@@ -353,7 +353,7 @@ where
 
 impl<T: Iterator> Itertools for T {}
 
-fn cartesian_product<I, J>(iter1: I, iter2: J) -> Vec<(I::Item, J::Item)>
+pub fn cartesian_product<I, J>(iter1: I, iter2: J) -> Vec<(I::Item, J::Item)>
 where
     I: IntoIterator,
     J: IntoIterator,
@@ -367,7 +367,7 @@ where
         .collect()
 }
 
-fn permutations<I>(iterable: I, r: usize) -> Vec<Vec<I::Item>>
+pub fn permutations<I>(iterable: I, r: usize) -> Vec<Vec<I::Item>>
 where
     I: IntoIterator,
     I::Item: Clone + PartialEq,

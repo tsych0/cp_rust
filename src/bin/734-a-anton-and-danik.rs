@@ -16,7 +16,7 @@ fn solution<R>(input: &mut CPInput<R>) -> String
 where
     R: Read,
 {
-    let n: usize = input.read_line(parse).unwrap();
+    let _n: usize = input.read_line(parse).unwrap();
     let s: String = input.read_line(parse).unwrap();
     let anton = s.chars().filter(|&c| c == 'A').count();
     let danik = s.chars().filter(|&c| c == 'D').count();

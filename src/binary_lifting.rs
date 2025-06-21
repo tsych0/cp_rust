@@ -47,7 +47,7 @@ impl BinaryLifting {
         self.dfs(root, None);
     }
 
-    pub fn lift(&self, mut node: usize, mut k: usize) -> Option<usize> {
+    pub fn lift(&self, mut node: usize, k: usize) -> Option<usize> {
         for j in 0..self.log {
             if k & (1 << j) != 0 {
                 if let Some(next_node) = self.up[node][j] {
@@ -114,7 +114,7 @@ impl BinaryLifting {
         }
     }
 
-    pub fn path_nodes(&self, mut u: usize, mut v: usize) -> Option<Vec<usize>> {
+    pub fn path_nodes(&self, u: usize, v: usize) -> Option<Vec<usize>> {
         let lca_node = self.lca(u, v)?;
         let mut path = Vec::new();
 

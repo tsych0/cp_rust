@@ -103,4 +103,4 @@ impl<const MOD: u32> DivAssign for Mint<MOD> {
     }
 }
 
-type ModInt = Mint<1000000007>;
+pub type ModInt = Mint<1000000007>;

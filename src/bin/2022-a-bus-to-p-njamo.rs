@@ -15,7 +15,7 @@ fn solution<R>(input: &mut CPInput<R>) -> usize
 where
     R: Read,
 {
-    let [n, r]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
+    let [_n, r]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
     let a: Vec<usize> = input.read_line(parse_vec).unwrap();
     let rows_used: usize = a.iter().map(|ai| ai / 2).sum();
     let people_left: usize = a.iter().map(|ai| ai % 2).sum();
