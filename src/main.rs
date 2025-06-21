@@ -1,7 +1,6 @@
 #![allow(unused)]
 
-use cf_rust::cpio;
-use cf_rust::itertools;
+use cp_rust::*;
 
 // @code begin
 use cpio::*;

@@ -1,13 +1,13 @@
-// Created by Ayush Biswas at 2025/06/20 14:19
-// https://codeforces.com/problemset/problem/1467/A
+// Created by Ayush Biswas at 2025/06/21 11:12
+// https://codeforces.com/problemset/problem/1436/B
 #![allow(unused)]
 
-use cf_rust::cpio;
-use cf_rust::itertools;
+use cp_rust::*;
 
 // @code begin
 use cpio::*;
 use itertools::Itertools;
+use sieve::Sieve;
 use std::convert::TryInto;
 use std::io::Read;
 
@@ -20,6 +20,7 @@ where
     R: Read,
 {
     let n: usize = input.read_line(parse).unwrap();
+    let sive = Sieve::new(200);
     n > 2 && n % 2 == 0
 }
 // @code end

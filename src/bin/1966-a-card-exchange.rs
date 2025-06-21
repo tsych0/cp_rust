@@ -1,7 +1,6 @@
 // Created by Ayush Biswas at 2025/05/20 11:30
 // https://codeforces.com/problemset/problem/1966/A
-use cf_rust::cpio;
-use cf_rust::itertools;
+use cp_rust::*;
 
 // @code begin
 use cpio::*;

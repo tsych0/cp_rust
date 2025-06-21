@@ -1,9 +1,8 @@
-// Created by Ayush Biswas at 2025/06/20 14:14
-// https://codeforces.com/problemset/problem/1467/A
+// Created by Ayush Biswas at 2025/06/21 11:30
+// https://codeforces.com/contest/2121/problem/A
 #![allow(unused)]
 
-use cf_rust::cpio;
-use cf_rust::itertools;
+use cp_rust::*;
 
 // @code begin
 use cpio::*;

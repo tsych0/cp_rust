@@ -1,9 +1,9 @@
 // Created by Ayush Biswas at 2025/05/14 10:35
 // https://codeforces.com/problemset/problem/2084/A
-use cf_rust::cpio::{self, Words};
+use cp_rust::*;
 
 // @code begin
-use cpio::{solve_n, ListOf};
+use cpio::*;
 use std::io::Read;
 
 fn main() {

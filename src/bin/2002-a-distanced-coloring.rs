@@ -1,6 +1,6 @@
 // Created by Ayush Biswas at 2025/05/18 20:16
 // https://codeforces.com/problemset/problem/2002/A
-use cf_rust::cpio;
+use cp_rust::*;
 
 // @code begin
 use cpio::*;

@@ -2,8 +2,7 @@
 // https://codeforces.com/problemset/problem/1837/B
 #![allow(unused)]
 
-use cf_rust::cpio;
-use cf_rust::itertools;
+use cp_rust::*;
 
 // @code begin
 use cpio::*;
@@ -21,6 +20,6 @@ where
 {
     let n: usize = input.read_line(parse).unwrap();
     let s: String = input.read_line(parse).unwrap();
-    s.chars().group_by(|&c| c).map(|g| g.len()).max().unwrap() + n%2
+    s.chars().group_by(|&c| c).map(|g| g.len()).max().unwrap() + n % 2
 }
 // @code end

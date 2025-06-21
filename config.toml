@@ -5,7 +5,7 @@ editor = "zed"
 [code]
 filename = '''
 {{#with (regex_captures
-  pattern="problemset/problem/(\\d+)/([A-Za-z0-9]+)"
+  pattern="(?:problemset/problem|contest)/(\\d+)(?:/problem)?/([A-Za-z0-9]+)"
   on=url) as |url_parts|}}
   {{#with (regex_captures
     pattern="^[A-Za-z0-9]+\\.\\s*(.+)$"
@@ -22,7 +22,7 @@ modifier = '''
 
 {{!-- Iterate over each library in lib_files --}}
 {{#each lib_files}}
-mod {{@key}} {
+mod {{{@key}}} {
     {{{this}}}
 }
 {{/each}}

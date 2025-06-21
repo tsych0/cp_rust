@@ -2,8 +2,7 @@
 // https://codeforces.com/problemset/problem/1559/A
 #![allow(unused)]
 
-use cf_rust::cpio;
-use cf_rust::itertools;
+use cp_rust::*;
 
 // @code begin
 use cpio::*;
