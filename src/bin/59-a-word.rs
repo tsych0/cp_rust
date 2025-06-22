@@ -1,6 +1,6 @@
 // Created by Ayush Biswas at 2025/05/15 12:33
 // https://codeforces.com/problemset/problem/59/A
-use cp_rust::*;
+use cp_lib::*;
 
 // @code begin
 use cpio::*;

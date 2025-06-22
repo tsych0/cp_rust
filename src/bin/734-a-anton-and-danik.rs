@@ -1,10 +1,9 @@
 // Created by Ayush Biswas at 2025/05/19 16:28
 // https://codeforces.com/problemset/problem/734/A
-use cp_rust::*;
+use cp_lib::*;
 
 // @code begin
 use cpio::*;
-#[allow(unused)]
 use std::convert::TryInto;
 use std::io::Read;
 

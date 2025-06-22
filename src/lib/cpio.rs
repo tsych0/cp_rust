@@ -41,7 +41,7 @@ pub trait CPOutput {
 // Specific implementation for bool
 impl CPOutput for bool {
     fn cp_fmt(self) -> String {
-        if self { "YES" } else { "NO" }.to_string()
+        if self { "Yes" } else { "No" }.to_string()
     }
 }
 

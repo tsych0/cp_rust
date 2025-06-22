@@ -3,7 +3,7 @@ pub struct BinaryLifting {
     up: Vec<Vec<Option<usize>>>,
     depth: Vec<usize>,
     log: usize,
-    n: usize,
+    _n: usize,
 }
 
 impl BinaryLifting {
@@ -14,7 +14,7 @@ impl BinaryLifting {
             up: vec![vec![None; log]; n],
             depth: vec![0; n],
             log,
-            n,
+            _n: n,
         }
     }
 

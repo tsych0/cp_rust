@@ -1,12 +1,11 @@
 // Created by Ayush Biswas at 2025/06/09 12:33
 // https://codeforces.com/problemset/problem/2035/B
-#![allow(unused)]
 
-use cp_rust::*;
+use cp_lib::*;
 
 // @code begin
+use crate::itertools::Itertools;
 use cpio::*;
-use itertools::Itertools;
 use std::convert::TryInto;
 use std::io::Read;
 use std::iter::repeat;

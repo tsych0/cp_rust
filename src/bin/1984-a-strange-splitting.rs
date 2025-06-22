@@ -1,10 +1,9 @@
 // Created by Ayush Biswas at 2025/05/20 09:07
 // https://codeforces.com/problemset/problem/1984/A
-use cp_rust::*;
+use cp_lib::*;
 
 // @code begin
 use cpio::*;
-#[allow(unused)]
 use std::convert::TryInto;
 use std::{collections::HashSet, io::Read};
 

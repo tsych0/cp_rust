@@ -1,13 +1,10 @@
 // Created by Ayush Biswas at 2025/06/19 10:50
 // https://codeforces.com/problemset/problem/1525/B
-#![allow(unused)]
 
-use cp_rust::*;
+use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use itertools::Itertools;
-use std::convert::TryInto;
 use std::io::Read;
 
 fn main() {

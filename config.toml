@@ -42,15 +42,28 @@ mod {{{@key}}} {
 '''
 
 [include]
-cpio = "./src/cpio.rs"
-itertools = "./src/itertools.rs"
-binary_lifting = "./src/binary_lifting.rs"
-combinatorics = "./src/combinatorics.rs"
-dsu = "./src/dsu.rs"
-lazy_segment_tree = "./src/lazy_segment_tree.rs"
-modint = "./src/modint.rs"
-segment_tree = "./src/segment_tree.rs"
-sieve = "./src/sieve.rs"
+cpio = "./src/lib/cpio.rs"
+itertools = "./src/lib/itertools.rs"
+superslice = "./src/lib/superslice.rs"
+dsu = "./src/lib/dsu.rs"
+scc = "./src/lib/scc.rs"
+twosat = "./src/lib/twosat.rs"
+sieve = "./src/lib/sieve.rs"
+convolution = "./src/lib/convolution.rs"
+fenwicktree = "./src/lib/fenwicktree.rs"
+internal_bit = "./src/lib/internal_bit.rs"
+internal_math = "./src/lib/internal_math.rs"
+internal_queue = "./src/lib/internal_queue.rs"
+internal_scc = "./src/lib/internal_scc.rs"
+internal_type_traits = "./src/lib/internal_type_traits.rs"
+mincostflow = "./src/lib/mincostflow.rs"
+maxflow = "./src/lib/maxflow.rs"
+binary_lifting = "./src/lib/binary_lifting.rs"
+math = "./src/lib/math.rs"
+string = "./src/lib/string.rs"
+lazysegtree = "./src/lib/lazysegtree.rs"
+modint = "./src/lib/modint.rs"
+segtree = "./src/lib/segtree.rs"
 
 [toggle]
 create_file = true

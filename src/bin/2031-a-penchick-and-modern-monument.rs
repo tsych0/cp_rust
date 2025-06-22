@@ -1,10 +1,10 @@
 // Created by Ayush Biswas at 2025/05/15 13:42
 // https://codeforces.com/problemset/problem/2031/A
-use cp_rust::*;
+use cp_lib::*;
 
 // @code begin
+use crate::itertools::Itertools;
 use cpio::*;
-use itertools::Itertools;
 use std::io::Read;
 
 fn main() {

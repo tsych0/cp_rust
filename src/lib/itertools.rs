@@ -3,7 +3,6 @@ use std::collections::HashSet;
 use std::hash::Hash;
 
 pub trait Itertools: Iterator {
-    // Your existing methods...
     fn group_by<F, K>(self, key_fn: F) -> GroupBy<Self, F, K>
     where
         Self: Sized,
@@ -24,7 +23,6 @@ pub trait Itertools: Iterator {
         Unique::new(self)
     }
 
-    // New methods
     fn is_sorted(self) -> bool
     where
         Self: Sized,

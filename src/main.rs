@@ -1,11 +1,7 @@
-#![allow(unused)]
-
-use cp_rust::*;
+use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use itertools::Itertools;
-use std::convert::TryInto;
 use std::io::Read;
 
 fn main() {
