@@ -4,9 +4,7 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
-use std::convert::TryInto;
 use std::io::Read;
 
 fn main() {
@@ -23,13 +21,13 @@ where
     let b = s
         .chars()
         .enumerate()
-        .filter(|&(i, c)| c == 'B')
+        .filter(|&(_, c)| c == 'B')
         .map(|(i, _)| i)
         .take(count);
     let a = s
         .chars()
         .enumerate()
-        .filter(|&(i, c)| c == 'N')
+        .filter(|&(_, c)| c == 'N')
         .map(|(i, _)| i)
         .collect::<Vec<_>>()
         .into_iter()

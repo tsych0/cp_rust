@@ -16,7 +16,6 @@ where
     R: Read,
 {
     let n: usize = input.read_line(parse).unwrap();
-    let shift = 10 - n % 10;
     vec![9]
         .into_iter()
         .chain((1..n).map(|i| (i + 7) % 10))

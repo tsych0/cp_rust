@@ -4,9 +4,7 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
-use std::convert::TryInto;
 use std::io::Read;
 
 fn main() {
@@ -24,7 +22,7 @@ where
     let mut a = a.chars().into_iter();
     let mut b = b.chars().into_iter();
     let mut c = c.chars().into_iter();
-    for i in 0..n {
+    for _ in 0..n {
         let ai = a.next().unwrap();
         let bi = b.next().unwrap();
         let ci = c.next().unwrap();

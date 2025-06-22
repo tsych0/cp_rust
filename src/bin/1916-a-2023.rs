@@ -4,7 +4,6 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
@@ -17,7 +16,7 @@ fn solution<R>(input: &mut CPInput<R>) -> String
 where
     R: Read,
 {
-    let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
+    let [_n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
     let b: Vec<usize> = input.read_line(parse_vec).unwrap();
     let b_prod = b.iter().fold(1, |acc, bi| acc * bi);
     if 2023 % b_prod == 0 {

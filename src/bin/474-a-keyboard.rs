@@ -4,10 +4,8 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
 use std::collections::HashMap;
-use std::convert::TryInto;
 use std::io::Read;
 use std::ops::Add;
 use std::ops::Sub;

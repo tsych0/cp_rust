@@ -4,7 +4,6 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
@@ -17,7 +16,7 @@ fn solution<R>(input: &mut CPInput<R>) -> String
 where
     R: Read,
 {
-    let [n, q]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
+    let [_n, q]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
 
     let queries: Vec<Vec<String>> = input.read_lines(q, parse_vec).unwrap();
     let mut res = vec![];

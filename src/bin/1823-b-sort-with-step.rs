@@ -23,14 +23,14 @@ where
     let x = p
         .into_iter()
         .enumerate()
-        .sorted_by_key(|(i, j)| i % k)
-        .group_by(|(i, j)| i % k)
-        .map(|g| g.into_iter().map(|(i, j)| j).collect::<HashSet<_>>());
+        .sorted_by_key(|(i, _)| i % k)
+        .group_by(|(i, _)| i % k)
+        .map(|g| g.into_iter().map(|(_, j)| j).collect::<HashSet<_>>());
     let y = (1..=n)
         .enumerate()
-        .sorted_by_key(|(i, j)| i % k)
-        .group_by(|(i, j)| i % k)
-        .map(|g| g.into_iter().map(|(i, j)| j).collect::<HashSet<_>>());
+        .sorted_by_key(|(i, _)| i % k)
+        .group_by(|(i, _)| i % k)
+        .map(|g| g.into_iter().map(|(_, j)| j).collect::<HashSet<_>>());
 
     let faults = x.zip(y).map(|(xi, yi)| xi.difference(&yi).count()).sum();
 

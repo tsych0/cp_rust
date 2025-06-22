@@ -14,7 +14,7 @@ fn solution<R>(input: &mut CPInput<R>) -> usize
 where
     R: Read,
 {
-    let n: usize = input.read_line(parse).unwrap();
+    let _n: usize = input.read_line(parse).unwrap();
     let a: Vec<usize> = input.read_line(parse_vec).unwrap();
     a.into_iter().fold(usize::MAX, |acc, ai| acc & ai)
 }

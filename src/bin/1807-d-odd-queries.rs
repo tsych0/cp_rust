@@ -4,7 +4,6 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
@@ -17,7 +16,7 @@ fn solution<R>(input: &mut CPInput<R>) -> Lines<bool>
 where
     R: Read,
 {
-    let [n, q]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
+    let [_n, q]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
     let a: Vec<usize> = input.read_line(parse_vec).unwrap();
     let (a_partial_sum, a_sum) = a.into_iter().fold((vec![0], 0), |(mut acc, acc_sum), i| {
         acc.push(acc_sum + i);

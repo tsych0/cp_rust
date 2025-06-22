@@ -205,7 +205,6 @@ impl<T> Ext for [T] {
     where
         Self::Item: Ord,
     {
-        // Adapted from http://en.cppreference.com/w/cpp/algorithm/next_permutation.
         if self.len() <= 1 {
             return false;
         }
@@ -234,7 +233,6 @@ impl<T> Ext for [T] {
     where
         Self::Item: Ord,
     {
-        // Adapted from http://en.cppreference.com/w/cpp/algorithm/prev_permutation.
         if self.len() <= 1 {
             return false;
         }

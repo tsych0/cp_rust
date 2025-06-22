@@ -4,9 +4,7 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
-use std::convert::TryInto;
 use std::io::Read;
 
 fn main() {
@@ -17,7 +15,7 @@ fn solution<R>(input: &mut CPInput<R>) -> usize
 where
     R: Read,
 {
-    let n: usize = input.read_line(parse).unwrap();
+    let _n: usize = input.read_line(parse).unwrap();
     let a: Vec<usize> = input.read_line(parse_vec).unwrap();
     a.iter().max().unwrap() - a.iter().min().unwrap()
 }

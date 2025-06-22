@@ -17,7 +17,7 @@ fn solution<R>(input: &mut CPInput<R>) -> bool
 where
     R: Read,
 {
-    let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
+    let [_n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
     let s: String = input.read_line(parse).unwrap();
     if s < s.chars().rev().collect() {
         true

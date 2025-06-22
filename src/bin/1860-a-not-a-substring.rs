@@ -4,9 +4,7 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
-use std::convert::TryInto;
 use std::io::Read;
 
 fn main() {
@@ -19,7 +17,7 @@ where
 {
     let s: String = input.read_line(parse).unwrap();
     let n = s.len();
-    let mut r = vec!["()".repeat(n), "(".repeat(n) + &")".repeat(n)];
+    let r = vec!["()".repeat(n), "(".repeat(n) + &")".repeat(n)];
     match r.into_iter().find(|ri| !ri.contains(&s)) {
         Some(r) => ListOf(vec!["YES".into(), r]),
         None => ListOf(vec!["NO".into()]),

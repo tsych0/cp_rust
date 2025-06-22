@@ -4,9 +4,7 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
-use std::convert::TryInto;
 use std::io::Read;
 
 fn main() {
@@ -18,7 +16,7 @@ where
     R: Read,
 {
     let n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
+    let _a: Vec<usize> = input.read_line(parse_vec).unwrap();
     vec![
         "4".into(),
         format!("1 {n}"),

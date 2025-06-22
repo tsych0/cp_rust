@@ -17,7 +17,7 @@ fn solution<R>(input: &mut CPInput<R>) -> bool
 where
     R: Read,
 {
-    let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
+    let [_n, _k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
     let s: Vec<u8> = input.read_line(parse_binary).unwrap();
     let t: Vec<u8> = input.read_line(parse_binary).unwrap();
     if s.iter().group_by(|&c| c).filter(|g| g.len() > 1).count() == 0 {

@@ -4,10 +4,8 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
 use std::collections::HashMap;
-use std::convert::TryInto;
 use std::io::Read;
 
 fn main() {
@@ -25,7 +23,7 @@ where
 
     for i in 0..n {
         for j in 0..n {
-            let diag = (i as isize - j as isize);
+            let diag = i as isize - j as isize;
             let v = values.remove(&diag).unwrap_or(0);
             values.insert(diag, v.min(a[i][j]));
         }

@@ -4,11 +4,9 @@
 use cp_lib::*;
 
 // @code begin
-use crate::itertools::Itertools;
 use cpio::*;
 use std::collections::HashMap;
 use std::collections::VecDeque;
-use std::convert::TryInto;
 use std::io::Read;
 
 fn main() {
@@ -19,7 +17,7 @@ fn solution<R>(input: &mut CPInput<R>) -> String
 where
     R: Read,
 {
-    let n: usize = input.read_line(parse).unwrap();
+    let _n: usize = input.read_line(parse).unwrap();
     let a: Vec<usize> = input.read_line(parse_vec).unwrap();
     let mut trace = HashMap::<usize, VecDeque<char>>::new();
     trace.insert(

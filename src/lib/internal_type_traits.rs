@@ -45,7 +45,7 @@ pub trait Integral:
 }
 
 /// Class that has additive identity element
-pub trait Zero {
+pub trait Zero: Sized + Add<Self, Output = Self> {
     /// The additive identity element
     fn zero() -> Self;
 }
@@ -101,3 +101,47 @@ macro_rules! impl_integral {
 }
 
 impl_integral!(i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize);
+
+pub trait Bounded {
+    fn min_value() -> Self;
+    fn max_value() -> Self;
+}
+
+macro_rules! impl_bounded {
+    ($($t:ty),*) => {
+        $(
+            impl Bounded for $t {
+                fn min_value() -> Self { <$t>::MIN }
+                fn max_value() -> Self { <$t>::MAX }
+            }
+        )*
+    };
+}
+
+pub trait Signed: Sized + std::ops::Sub<Output = Self> + std::ops::Neg<Output = Self> {
+    fn abs(&self) -> Self;
+    fn abs_sub(&self, other: &Self) -> Self;
+    fn signum(&self) -> Self;
+    fn is_positive(&self) -> bool;
+    fn is_negative(&self) -> bool;
+}
+
+macro_rules! impl_signed {
+    ($($t:ty),*) => {
+        $(
+            impl Signed for $t {
+                fn abs(&self) -> Self { <$t>::abs(*self) }
+                fn abs_sub(&self, other: &Self) -> Self {
+                    if *self <= *other { 0 as $t } else { *self - *other }
+                }
+                fn signum(&self) -> Self { <$t>::signum(*self) }
+                fn is_positive(&self) -> bool { *self > 0 as $t }
+                fn is_negative(&self) -> bool { *self < 0 as $t }
+            }
+        )*
+    };
+}
+
+// Apply to all types
+impl_bounded!(u8, u16, u32, u64, u128, usize, i8, i16, i32, i64, i128, isize, f32, f64);
+impl_signed!(i8, i16, i32, i64, i128, isize, f32, f64);

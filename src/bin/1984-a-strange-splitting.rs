@@ -4,7 +4,6 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::convert::TryInto;
 use std::{collections::HashSet, io::Read};
 
 fn main() {

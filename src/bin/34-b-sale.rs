@@ -17,7 +17,7 @@ fn solution<R>(input: &mut CPInput<R>) -> isize
 where
     R: Read,
 {
-    let [n, m]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
+    let [_n, m]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
     let a: Vec<isize> = input.read_line(parse_vec).unwrap();
     -a.into_iter()
         .filter(|&i| i < 0)

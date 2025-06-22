@@ -17,7 +17,7 @@ fn solution<R>(input: &mut CPInput<R>) -> Words<isize>
 where
     R: Read,
 {
-    let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
+    let [n, _k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
     let a: Vec<isize> = input.read_line(parse_vec).unwrap();
     let mut b: Vec<isize> = input.read_line(parse_vec).unwrap();
     b.sort();
@@ -27,7 +27,7 @@ where
         .enumerate()
         .map(|(i, (_, j))| (j, i))
         .sorted()
-        .map(|(j, i)| b[i])
+        .map(|(_, i)| b[i])
         .collect()
 }
 // @code end
