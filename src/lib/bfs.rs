@@ -61,13 +61,6 @@ where
 }
 
 /// Return one of the shortest loop from start to start if it exists, `None` otherwise.
-///
-/// - `start` is the starting node.
-/// - `successors` returns a list of successors for a given node.
-///
-/// Except the start node which will be included both at the beginning and the end of
-/// the path, a node will never be included twice in the path as determined
-/// by the `Eq` relationship.
 pub fn bfs_loop<'a, N, S, FN, IN>(start: S, successors: FN) -> Option<Vec<N>>
 where
     N: Eq + Hash + Clone + 'a,

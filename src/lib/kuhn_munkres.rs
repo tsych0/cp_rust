@@ -50,66 +50,6 @@ impl<C: Copy> Weights<C> for Matrix<C> {
 /// vertices using the
 /// [Kuhn-Munkres algorithm](https://en.wikipedia.org/wiki/Hungarian_algorithm)
 /// (also known as Hungarian algorithm).
-///
-/// The weights between the first and second sets are given into the
-/// `weights` adjacency matrix. The return value is a pair with
-/// the total assignments weight, and a vector containing the column
-/// corresponding the every row.
-///
-/// For this reason, the number of rows must not be larger than the number of
-/// columns as no row will be left unassigned.
-///
-/// This algorithm executes in O(n³) where n is the cardinality of the sets.
-///
-/// # Example
-///
-/// Three people in an art gallery are interested by the same three pieces.
-/// Each of them has a budget of $300, and as if the world was perfect they
-/// each determine that this corresponds to what they are ready to pay for
-/// every piece:
-///
-/// - Ann estimates the Cloth to $100, the Statue to $110, and the Painting to $90
-/// - Bernard estimates the Cloth to $95, the Statue to $130, and the Painting to $75
-/// - Claude estimates the Cloth to $95, the Statue to $140 and the Painting to $65
-///
-/// The gallery owner doesn't want to totally frustrate any customer and decides to
-/// sell one piece of art to each one of them. What would be the best way to maximize
-/// the cash flow?
-///
-/// ```
-/// use pathfinding::prelude::{kuhn_munkres, Matrix, Weights};
-///
-/// // Assign weights to everybody choices
-/// let weights = Matrix::from_rows(vec![
-///     //   Cloth, Statue, Painting
-///     vec![100,   110,    90],        // Ann
-///     vec![95,    130,    75],        // Bernard
-///     vec![95,    140,    65],        // Claude
-/// ]).unwrap();
-///
-/// // Find the maximum bipartite matching
-/// let (cash_flow, assignments) = kuhn_munkres(&weights);
-///
-/// // Gallery owner receives $325, this is the maximum they can get
-/// assert_eq!(cash_flow, 325);
-///
-/// // Ann gets the Painting for $90, Bernard gets the Cloth for $95,
-/// // Claude gets the Statue for $140, which makes a total of $325
-/// assert_eq!(assignments, vec![2, 0, 1]);
-/// ```
-///
-/// # See also
-///
-/// To minimize the sum of weights instead of maximizing it, use the
-/// [`kuhn_munkres_min()`] function.
-///
-/// # Panics
-///
-/// This function panics if the number of rows is larger than the number of
-/// columns, or if the total assignments weight overflows or underflows.
-///
-/// Also, using indefinite values such as positive or negative infinity or
-/// NaN can cause this function to loop endlessly.
 pub fn kuhn_munkres<C, W>(weights: &W) -> (C, Vec<usize>)
 where
     C: Bounded + Sum<C> + Signed + Zero + Ord + Copy,
@@ -227,29 +167,6 @@ where
 /// vertices using the
 /// [Kuhn-Munkres algorithm](https://en.wikipedia.org/wiki/Hungarian_algorithm)
 /// (also known as Hungarian algorithm).
-///
-/// The weights between the first and second sets are given into the
-/// `weights` adjacency matrix. The return value is a pair with
-/// the total assignments weight, and a vector containing the column
-/// corresponding the every row.
-///
-/// For this reason, the number of rows must not be larger than the number of
-/// columns as no row will be left unassigned.
-///
-/// This algorithm executes in O(n³) where n is the cardinality of the sets.
-///
-/// # See also
-///
-/// To maximize the sum of weights instead of minimizing it, use the
-/// [`kuhn_munkres()`] function.
-///
-/// # Panics
-///
-/// This function panics if the number of rows is larger than the number of
-/// columns, or if the total assignments weight overflows or underflows.
-///
-/// Also, using indefinite values such as positive or negative infinity or
-/// NaN can cause this function to loop endlessly.
 pub fn kuhn_munkres_min<C, W>(weights: &W) -> (C, Vec<usize>)
 where
     C: Bounded + Sum<C> + Zero + Signed + Ord + Copy,

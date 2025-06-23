@@ -40,6 +40,7 @@ mod {{{@key}}} {
 }
 {{/each}}
 '''
+lib_check_regex = "use.*{{name}}(::|;)"
 
 [include]
 lib = "./src/lib/"

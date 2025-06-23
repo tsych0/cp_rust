@@ -52,7 +52,7 @@ where
                 table[group_index] = usize::MAX;
             }
         }
-        for mut group_index in indices.values_mut() {
+        for group_index in indices.values_mut() {
             *group_index = find(&mut table, *group_index);
         }
         for group_index in 0..groups.len() {

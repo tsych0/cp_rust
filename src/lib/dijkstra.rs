@@ -13,62 +13,6 @@ use std::{cmp::Ordering, collections::HashSet};
 
 /// Compute a shortest path using the [Dijkstra search
 /// algorithm](https://en.wikipedia.org/wiki/Dijkstra's_algorithm).
-///
-/// The shortest path starting from `start` up to a node for which `success` returns `true` is
-/// computed and returned along with its total cost, in a `Some`. If no path can be found, `None`
-/// is returned instead.
-///
-/// - `start` is the starting node.
-/// - `successors` returns a list of successors for a given node, along with the cost for moving
-///   from the node to the successor. This cost must be non-negative.
-/// - `success` checks whether the goal has been reached. It is not a node as some problems require
-///   a dynamic solution instead of a fixed node.
-///
-/// A node will never be included twice in the path as determined by the `Eq` relationship.
-///
-/// The returned path comprises both the start and end node.
-///
-/// # Example
-///
-/// We will search the shortest path on a chess board to go from (1, 1) to (4, 6) doing only knight
-/// moves.
-///
-/// The first version uses an explicit type `Pos` on which the required traits are derived.
-///
-/// ```
-/// use pathfinding::prelude::dijkstra;
-///
-/// #[derive(Clone, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
-/// struct Pos(i32, i32);
-///
-/// impl Pos {
-///   fn successors(&self) -> Vec<(Pos, usize)> {
-///     let &Pos(x, y) = self;
-///     vec![Pos(x+1,y+2), Pos(x+1,y-2), Pos(x-1,y+2), Pos(x-1,y-2),
-///          Pos(x+2,y+1), Pos(x+2,y-1), Pos(x-2,y+1), Pos(x-2,y-1)]
-///          .into_iter().map(|p| (p, 1)).collect()
-///   }
-/// }
-///
-/// static GOAL: Pos = Pos(4, 6);
-/// let result = dijkstra(&Pos(1, 1), |p| p.successors(), |p| *p == GOAL);
-/// assert_eq!(result.expect("no path found").1, 4);
-/// ```
-///
-/// The second version does not declare a `Pos` type, makes use of more closures,
-/// and is thus shorter.
-///
-/// ```
-/// use pathfinding::prelude::dijkstra;
-///
-/// static GOAL: (i32, i32) = (4, 6);
-/// let result = dijkstra(&(1, 1),
-///                       |&(x, y)| vec![(x+1,y+2), (x+1,y-2), (x-1,y+2), (x-1,y-2),
-///                                      (x+2,y+1), (x+2,y-1), (x-2,y+1), (x-2,y-1)]
-///                                  .into_iter().map(|p| (p, 1)),
-///                       |&p| p == GOAL);
-/// assert_eq!(result.expect("no path found").1, 4);
-/// ```
 pub fn dijkstra<N, C, FN, IN, FS>(
     start: &N,
     mut successors: FN,
@@ -109,40 +53,6 @@ where
 /// minimum cost to reach them and a possible optimal parent node
 /// using the [Dijkstra search
 /// algorithm](https://en.wikipedia.org/wiki/Dijkstra's_algorithm).
-///
-/// - `start` is the starting node.
-/// - `successors` returns a list of successors for a given node, along with the cost for moving
-///   from the node to the successor.
-///
-/// The result is a map where every reachable node (not including `start`) is associated with
-/// an optimal parent node and a cost from the start node.
-///
-/// The [`build_path`] function can be used to build a full path from the starting point to one
-/// of the reachable targets.
-///
-/// # Example
-///
-/// We use a graph of integer nodes from 1 to 9, each node leading to its double and the value
-/// after it with a cost of 10 at every step.
-///
-/// ```
-/// use pathfinding::prelude::dijkstra_all;
-///
-/// fn successors(&n: &u32) -> Vec<(u32, usize)> {
-///   if n <= 4 { vec![(n*2, 10), (n*2+1, 10)] } else { vec![] }
-/// }
-///
-/// let reachables = dijkstra_all(&1, successors);
-/// assert_eq!(reachables.len(), 8);
-/// assert_eq!(reachables[&2], (1, 10));  // 1 -> 2
-/// assert_eq!(reachables[&3], (1, 10));  // 1 -> 3
-/// assert_eq!(reachables[&4], (2, 20));  // 1 -> 2 -> 4
-/// assert_eq!(reachables[&5], (2, 20));  // 1 -> 2 -> 5
-/// assert_eq!(reachables[&6], (3, 20));  // 1 -> 3 -> 6
-/// assert_eq!(reachables[&7], (3, 20));  // 1 -> 3 -> 7
-/// assert_eq!(reachables[&8], (4, 30));  // 1 -> 2 -> 4 -> 8
-/// assert_eq!(reachables[&9], (4, 30));  // 1 -> 2 -> 4 -> 9
-/// ```
 pub fn dijkstra_all<N, C, FN, IN>(start: &N, successors: FN) -> HashMap<N, (N, C)>
 where
     N: Eq + Hash + Clone,
@@ -156,19 +66,6 @@ where
 /// Determine some reachable nodes from a starting point as well as the minimum cost to
 /// reach them and a possible optimal parent node
 /// using the [Dijkstra search algorithm](https://en.wikipedia.org/wiki/Dijkstra's_algorithm).
-///
-/// - `start` is the starting node.
-/// - `successors` returns a list of successors for a given node, along with the cost for moving
-///   from the node to the successor.
-/// - `stop` is a function which is called every time a node is examined (including `start`).
-///   A `true` return value will stop the algorithm.
-///
-/// The result is a map where every node examined before the algorithm stopped (not including
-/// `start`) is associated with an optimal parent node and a cost from the start node, as well
-/// as the node which caused the algorithm to stop if any.
-///
-/// The [`build_path`] function can be used to build a full path from the starting point to one
-/// of the reachable targets.
 #[expect(clippy::missing_panics_doc)]
 pub fn dijkstra_partial<N, C, FN, IN, FS>(
     start: &N,
@@ -258,32 +155,6 @@ where
 /// Build a path leading to a target according to a parents map, which must
 /// contain no loop. This function can be used after [`dijkstra_all`] or
 /// [`dijkstra_partial`] to build a path from a starting point to a reachable target.
-///
-/// - `target` is reachable target.
-/// - `parents` is a map containing an optimal parent (and an associated
-///   cost which is ignored here) for every reachable node.
-///
-/// This function returns a vector with a path from the farthest parent up to
-/// `target`, including `target` itself.
-///
-/// # Panics
-///
-/// If the `parents` map contains a loop, this function will attempt to build
-/// a path of infinite length and panic when memory is exhausted.
-///
-/// # Example
-///
-/// We will use a `parents` map to indicate that each integer from 2 to 100
-/// parent is its integer half (2 -> 1, 3 -> 1, 4 -> 2, etc.)
-///
-/// ```
-/// use pathfinding::prelude::build_path;
-///
-/// let parents = (2..=100).map(|n| (n, (n/2, 1))).collect();
-/// assert_eq!(vec![1, 2, 4, 9, 18], build_path(&18, &parents));
-/// assert_eq!(vec![1], build_path(&1, &parents));
-/// assert_eq!(vec![101], build_path(&101, &parents));
-/// ```
 #[expect(clippy::implicit_hasher)]
 pub fn build_path<N, C>(target: &N, parents: &HashMap<N, (N, C)>) -> Vec<N>
 where
@@ -404,9 +275,6 @@ where
 
 /// Visit all nodes that are reachable from a start node. The node
 /// will be visited in order of cost, with the closest nodes first.
-///
-/// The `successors` function receives the current node, and returns
-/// an iterator of successors associated with their move cost.
 pub fn dijkstra_reach<N, C, FN, IN>(start: &N, successors: FN) -> DijkstraReachable<N, C, FN>
 where
     N: Eq + Hash + Clone,

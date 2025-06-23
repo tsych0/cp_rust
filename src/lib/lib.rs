@@ -1,6 +1,7 @@
 pub mod astar;
 pub mod bfs;
 pub mod binary_lifting;
+pub mod btreemultimap;
 pub mod cliques;
 pub mod connected_components;
 pub mod convolution;
@@ -31,6 +32,7 @@ pub mod matrix;
 pub mod maxflow;
 pub mod mincostflow;
 pub mod modint;
+pub mod multimap;
 pub mod noderefs;
 pub mod pathfinding;
 pub mod prim;

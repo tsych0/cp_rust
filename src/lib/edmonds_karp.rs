@@ -22,35 +22,6 @@ pub type Edge<N, C> = ((N, N), C);
 
 /// Compute the maximum flow and the minimal cut of a directed graph using the
 /// [Edmonds Karp algorithm](https://en.wikipedia.org/wiki/Edmonds–Karp_algorithm).
-///
-/// A maximum flow going from `source` to `sink` will be computed, and the various
-/// flow values along with the total will be returned.
-///
-/// - `vertices` is the collection of vertices in the graph.
-/// - `source` is the source node (the origin of the flow).
-/// - `sink` is the sink node (the target of the flow).
-/// - `caps` is an iterator-like object describing the positive capacities between the
-///   nodes.
-///
-/// The output of this function is a tuple containing:
-///
-/// - the various flows corresponding to the solution that has been found as a collection
-///   of [`Edge<N, C>`](Edge)
-/// - the maximum capacity
-/// - the minimum cut corresponding to the solution that has been found as a collection
-///   of [`Edge<N, C>`](Edge)
-///
-/// Note that the capacity type `C` must be signed as the algorithm has to deal with
-/// negative residual capacities.
-///
-/// By creating an [`EdmondsKarp`]() structure, it is possible to adjust the capacities
-/// after computing the maximum flow and rerun the algorithm without starting from
-/// scratch. This function is a helper function that remaps the `N` node type to
-/// appropriate indices.
-///
-/// # Panics
-///
-/// This function panics if `source` or `sink` is not found in `vertices`.
 pub fn edmonds_karp<N, C, IC, EK>(vertices: &[N], source: &N, sink: &N, caps: IC) -> EKFlows<N, C>
 where
     N: Eq + Hash + Copy,

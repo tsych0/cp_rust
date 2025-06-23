@@ -4,6 +4,7 @@ use crate::dfs::dfs_reach;
 use crate::indexmap::IndexSet;
 use crate::pathfinding::constrain;
 use std::collections::BTreeSet;
+use std::convert::TryInto;
 use std::fmt;
 use std::iter::FusedIterator;
 use std::ops::Sub;

@@ -1,4 +1,5 @@
 use crate::indexmap::IndexMap;
+use std::convert::{TryFrom, TryInto};
 use std::hash::Hash;
 
 pub fn reverse_path<N, V, F>(parents: &IndexMap<N, V>, mut parent: F, start: usize) -> Vec<N>

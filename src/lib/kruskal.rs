@@ -26,10 +26,6 @@ fn union(parents: &mut [usize], ranks: &mut [usize], mut a: usize, mut b: usize)
 
 /// Minimal-spanning-tree for nodes with integer indices. The nodes must have
 /// consecutives indices between 0 and `number_of_nodes`-1.
-///
-/// # Panics
-///
-/// This function panics if a node is outside the range [0, `number_of_nodes`-1].
 pub fn kruskal_indices<C>(
     number_of_nodes: usize,
     edges: impl AsRef<[(usize, usize, C)]>,
