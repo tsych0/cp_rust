@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: usize
     ) -> usize {
         let denominations = [100, 20, 10, 5, 1];

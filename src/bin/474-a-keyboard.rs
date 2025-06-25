@@ -9,7 +9,7 @@ use std::collections::HashMap;
 use std::ops::*;
 
 sol! {
-    fn (
+    fn solution(
         dir: char,
         s: String
     ) -> String {

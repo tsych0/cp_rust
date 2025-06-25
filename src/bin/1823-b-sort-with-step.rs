@@ -9,7 +9,7 @@ use cpio::*;
 use std::collections::HashSet;
 
 sol! {
-    fn (
+    fn solution(
         [n, k]: [usize; 2],
         p: [usize]
     ) -> isize {

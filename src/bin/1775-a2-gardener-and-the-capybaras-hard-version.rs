@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         s: [char]
     ) -> Words<String> {
         let n = s.len();

@@ -8,7 +8,7 @@ use cpio::*;
 use std::convert::TryInto;
 
 sol! {
-    fn (
+    fn solution(
         [_n, q]: [usize; 2],
         a: [usize],
         queries: [[usize]]; q

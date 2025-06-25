@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [_, q]: [usize; 2],
         queries: [[String]]; q
     ) -> String {

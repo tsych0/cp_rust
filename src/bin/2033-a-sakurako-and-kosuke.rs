@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: i32
     ) -> String {
         let mut sum = 0;

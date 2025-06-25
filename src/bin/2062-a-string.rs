@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         s: [01]
     ) -> u8 {
         s.into_iter().sum()

@@ -6,9 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
-        n: usize
-    ) -> bool {
+    fn solution(n: usize) -> bool {
         n > 2 && n % 2 == 0
     }
 }

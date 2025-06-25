@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: isize
     ) -> Lines<String> {
         if n % 2 == 0 {

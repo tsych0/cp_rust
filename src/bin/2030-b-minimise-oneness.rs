@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: usize
     ) -> String {
         vec!['0'; n - 1].into_iter().collect::<String>() + "1"

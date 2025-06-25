@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: usize,
         _a: [usize]
     ) -> Lines<String> {

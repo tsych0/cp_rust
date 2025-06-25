@@ -5,10 +5,9 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    fn (
+    fn solution(
         n: usize
     ) -> ListOf<'\0', usize> {
         vec![9]

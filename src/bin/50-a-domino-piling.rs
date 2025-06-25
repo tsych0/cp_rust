@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [m, n]: [u16; 2]
     ) -> u16 {
         (m * n) / 2

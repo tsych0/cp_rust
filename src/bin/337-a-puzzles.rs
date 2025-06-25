@@ -5,12 +5,10 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::convert::TryInto;
-use std::io::Read;
 use std::usize;
 
 sol! {
-    fn (
+    fn solution(
         [n, m]: [usize; 2],
         (mut f): [usize]
     ) -> usize {

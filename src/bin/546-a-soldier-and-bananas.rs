@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [k, n, w]: [isize; 3]
     ) -> isize {
         (k * ((w * (w + 1)) / 2) - n).max(0)

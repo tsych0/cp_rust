@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         x: usize
     ) -> usize {
         if x % 5 == 0 {

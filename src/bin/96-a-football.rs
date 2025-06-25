@@ -8,7 +8,7 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: [01]
     ) -> bool {
         n.into_iter()

@@ -177,7 +177,8 @@ impl<C: Clone> Matrix<C> {
     /// after applying a transforming function to every elements.
     pub fn map<O, F>(self, transform: F) -> Matrix<O>
     where
-        F: FnMut(C) -> O, {
+        F: FnMut(C) -> O,
+    {
         Matrix {
             rows: self.rows,
             columns: self.columns,
@@ -266,7 +267,8 @@ impl<C> Matrix<C> {
     pub fn from_rows<IR, IC>(rows: IR) -> Result<Self, MatrixFormatError>
     where
         IR: IntoIterator<Item = IC>,
-        IC: IntoIterator<Item = C>, {
+        IC: IntoIterator<Item = C>,
+    {
         let mut rows = rows.into_iter();
         if let Some(first_row) = rows.next() {
             let mut data = first_row.into_iter().collect::<Vec<_>>();
@@ -510,7 +512,8 @@ impl<C> Matrix<C> {
         mut predicate: P,
     ) -> BTreeSet<(usize, usize)>
     where
-        P: FnMut((usize, usize)) -> bool, {
+        P: FnMut((usize, usize)) -> bool,
+    {
         bfs_reach(start, |&n| {
             self.neighbours(n, diagonals)
                 .filter(|&n| predicate(n))
@@ -531,7 +534,8 @@ impl<C> Matrix<C> {
         mut predicate: P,
     ) -> BTreeSet<(usize, usize)>
     where
-        P: FnMut((usize, usize)) -> bool, {
+        P: FnMut((usize, usize)) -> bool,
+    {
         dfs_reach(start, |&n| {
             self.neighbours(n, diagonals)
                 .filter(|&n| predicate(n))
@@ -638,7 +642,8 @@ impl<C> DerefMut for Matrix<C> {
 
 impl<C, IC> FromIterator<IC> for Matrix<C>
 where
-    IC: IntoIterator<Item = C>, {
+    IC: IntoIterator<Item = C>,
+{
     fn from_iter<T: IntoIterator<Item = IC>>(iter: T) -> Self {
         match Self::from_rows(iter) {
             Ok(matrix) => matrix,

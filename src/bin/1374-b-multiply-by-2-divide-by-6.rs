@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: usize
     ) -> isize {
         let (two_count, rem) = (0..)

@@ -7,7 +7,7 @@ use cpio::*;
 use std::collections::HashSet;
 
 sol! {
-    fn (
+    fn solution(
         s: String
     ) -> String {
         if s.chars().collect::<HashSet<_>>().len() % 2 == 0 {

@@ -208,7 +208,7 @@ where
 #[macro_export]
 macro_rules! sol {
     (
-        fn (
+        fn $name:ident (
             $(
                $var:tt: $ty:tt $(; $n:expr)?
             ),* $(,)?
@@ -216,9 +216,9 @@ macro_rules! sol {
         $body:block
     ) => {
         fn main() {
-            solve(solution);
+            solve($name);
         }
-        fn solution<R>(input: &mut CPInput<R>) -> $ret
+        fn $name<R>(input: &mut CPInput<R>) -> $ret
         where
             R: std::io::Read, {
             $(
@@ -232,7 +232,7 @@ macro_rules! sol {
 #[macro_export]
 macro_rules! sol_n {
     (
-        fn (
+        fn $name:ident (
             $(
                $var:tt: $ty:tt $(; $n:expr)?
             ),* $(,)?
@@ -240,9 +240,9 @@ macro_rules! sol_n {
         $body:block
     ) => {
         fn main() {
-            solve_n(solution);
+            solve_n($name);
         }
-        fn solution<R>(input: &mut CPInput<R>) -> $ret
+        fn $name<R>(input: &mut CPInput<R>) -> $ret
         where
             R: std::io::Read, {
             $(

@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, k, x]: [isize; 3]
     ) -> isize {
         if k > n || k > x + 1 {

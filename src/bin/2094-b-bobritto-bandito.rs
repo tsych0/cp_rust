@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, m, mut l, mut r]: [isize; 4]
     ) -> Words<isize> {
         if m > n {

@@ -90,12 +90,14 @@ impl<T> Ext for [T] {
 
     fn lower_bound(&self, x: &Self::Item) -> usize
     where
-        T: Ord, {
+        T: Ord,
+    {
         self.lower_bound_by(|y| y.cmp(x))
     }
     fn lower_bound_by<'a, F>(&'a self, mut f: F) -> usize
     where
-        F: FnMut(&'a Self::Item) -> Ordering, {
+        F: FnMut(&'a Self::Item) -> Ordering,
+    {
         let s = self;
         let mut size = s.len();
         if size == 0 {
@@ -115,19 +117,22 @@ impl<T> Ext for [T] {
     fn lower_bound_by_key<'a, K, F>(&'a self, k: &K, mut f: F) -> usize
     where
         F: FnMut(&'a Self::Item) -> K,
-        K: Ord, {
+        K: Ord,
+    {
         self.lower_bound_by(|e| f(e).cmp(k))
     }
 
     fn upper_bound(&self, x: &Self::Item) -> usize
     where
-        T: Ord, {
+        T: Ord,
+    {
         self.upper_bound_by(|y| y.cmp(x))
     }
 
     fn upper_bound_by<'a, F>(&'a self, mut f: F) -> usize
     where
-        F: FnMut(&'a Self::Item) -> Ordering, {
+        F: FnMut(&'a Self::Item) -> Ordering,
+    {
         let s = self;
         let mut size = s.len();
         if size == 0 {
@@ -147,18 +152,21 @@ impl<T> Ext for [T] {
     fn upper_bound_by_key<'a, K, F>(&'a self, k: &K, mut f: F) -> usize
     where
         F: FnMut(&'a Self::Item) -> K,
-        K: Ord, {
+        K: Ord,
+    {
         self.upper_bound_by(|e| f(e).cmp(k))
     }
 
     fn equal_range(&self, x: &Self::Item) -> std::ops::Range<usize>
     where
-        T: Ord, {
+        T: Ord,
+    {
         self.equal_range_by(|y| y.cmp(x))
     }
     fn equal_range_by<'a, F>(&'a self, mut f: F) -> std::ops::Range<usize>
     where
-        F: FnMut(&'a Self::Item) -> Ordering, {
+        F: FnMut(&'a Self::Item) -> Ordering,
+    {
         let s = self;
         let mut size = s.len();
         if size == 0 {
@@ -188,13 +196,15 @@ impl<T> Ext for [T] {
     fn equal_range_by_key<'a, K, F>(&'a self, k: &K, mut f: F) -> std::ops::Range<usize>
     where
         F: FnMut(&'a Self::Item) -> K,
-        K: Ord, {
+        K: Ord,
+    {
         self.equal_range_by(|e| f(e).cmp(k))
     }
 
     fn next_permutation(&mut self) -> bool
     where
-        Self::Item: Ord, {
+        Self::Item: Ord,
+    {
         if self.len() <= 1 {
             return false;
         }
@@ -221,7 +231,8 @@ impl<T> Ext for [T] {
 
     fn prev_permutation(&mut self) -> bool
     where
-        Self::Item: Ord, {
+        Self::Item: Ord,
+    {
         if self.len() <= 1 {
             return false;
         }

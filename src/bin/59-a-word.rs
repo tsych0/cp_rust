@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         s: String
     ) -> String {
         if s.chars().into_iter().filter(|c| c.is_lowercase()).count()

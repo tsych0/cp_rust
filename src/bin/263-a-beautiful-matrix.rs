@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         matrix: [[u8]]; 5
     ) -> i8 {
         for i in 0..5 {

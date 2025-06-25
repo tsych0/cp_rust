@@ -5,10 +5,9 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    fn (
+    fn solution(
         [n, m]: [usize; 2]
     ) -> Lines<Words<usize>> {
         let f: Vec<usize> = [0, 1, 1, 0]

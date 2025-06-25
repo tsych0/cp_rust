@@ -6,8 +6,8 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
-        n: usize,
+    fn solution(
+        _n: usize,
         operations: [String]
     ) -> i32 {
         operations.into_iter().fold(

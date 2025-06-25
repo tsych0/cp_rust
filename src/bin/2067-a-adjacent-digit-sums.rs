@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [x, y]: [usize; 2]
     ) -> bool {
         if x > y {

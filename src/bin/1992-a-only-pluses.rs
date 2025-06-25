@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         nums: [usize]
     ) -> usize {
         let mut nums = nums;

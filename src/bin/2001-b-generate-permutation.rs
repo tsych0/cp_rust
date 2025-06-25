@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: usize
     ) -> Words<isize> {
         if n % 2 == 0 {

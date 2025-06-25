@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [mut n, k]: [usize; 2]
     ) -> usize {
         for _ in 0..k {

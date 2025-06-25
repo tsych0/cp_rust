@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         s: String
     ) -> Lines<String> {
         let n = s.len();

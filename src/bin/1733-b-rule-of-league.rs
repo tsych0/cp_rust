@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, x, y]: [isize; 3]
     ) -> Words<isize> {
         let k = x + y;

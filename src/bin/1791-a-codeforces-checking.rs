@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         c: String
     ) -> bool {
         "codeforces".contains(&c)

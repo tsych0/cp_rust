@@ -8,8 +8,8 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    fn (
-        n: usize,
+    fn solution(
+        _n: usize,
         s: [01]
     ) -> bool {
         let one_count = s.iter().filter(|&&i| i == 1).count();

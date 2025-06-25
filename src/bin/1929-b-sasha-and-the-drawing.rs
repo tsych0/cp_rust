@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, k]: [usize; 2]
     ) -> usize {
         let total_diagonals = 4 * n - 2;

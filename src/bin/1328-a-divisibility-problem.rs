@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [a, b]: [usize; 2]
     ) -> usize {
         if a % b == 0 {

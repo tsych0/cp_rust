@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [a, b]: [usize; 2]
     ) -> bool {
         a % 2 == 0 && (b % 2 == 0 || a >= 2)

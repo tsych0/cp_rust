@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: usize
     ) -> Words<String> {
         for [i, j, k] in [[1, 1, 1], [2, 2, 2], [1, 2, 2], [2, 1, 1]] {

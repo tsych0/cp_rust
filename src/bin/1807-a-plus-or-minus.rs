@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [a, b, c]: [isize; 3]
     ) -> char {
         if a + b == c {

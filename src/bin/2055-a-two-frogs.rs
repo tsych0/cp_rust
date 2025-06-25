@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [_n, a, b]: [i8; 3]
     ) -> bool {
         (a - b).abs() % 2 == 0

@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [x, y, k]: [usize; 3]
     ) -> Lines<Words<usize>> {
         if x >= k && y >= k {

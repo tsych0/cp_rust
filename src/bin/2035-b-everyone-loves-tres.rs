@@ -5,11 +5,10 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 use std::iter::repeat;
 
 sol! {
-    fn (
+    fn solution(
         n: usize
     ) -> String {
         if n % 2 == 0 {

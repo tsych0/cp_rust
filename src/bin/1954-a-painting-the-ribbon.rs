@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, m, k]: [isize; 3]
     ) -> bool {
         k < (n - (n + m - 1) / m)

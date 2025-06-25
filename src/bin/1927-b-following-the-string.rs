@@ -9,7 +9,7 @@ use std::collections::HashMap;
 use std::collections::VecDeque;
 
 sol! {
-    fn (
+    fn solution(
         _n: usize,
         a: [usize]
     ) -> String {

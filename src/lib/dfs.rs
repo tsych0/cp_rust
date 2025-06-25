@@ -8,7 +8,8 @@ where
     N: Clone + Eq + Hash,
     FN: FnMut(&N) -> IN,
     IN: IntoIterator<Item = N>,
-    FS: FnMut(&N) -> bool, {
+    FS: FnMut(&N) -> bool,
+{
     let mut to_visit = vec![start];
     let mut visited: HashSet<N> = HashSet::default();
     let mut parents = HashMap::default();
@@ -21,7 +22,8 @@ where
                 .into_iter()
                 .collect::<Vec<_>>()
                 .into_iter()
-                .rev() {
+                .rev()
+            {
                 if !visited.contains(&next) {
                     parents.insert(next.clone(), node.clone());
                     to_visit.push(next);
@@ -34,7 +36,8 @@ where
 
 fn build_path<N>(mut node: N, parents: &HashMap<N, N>) -> Vec<N>
 where
-    N: Clone + Eq + Hash, {
+    N: Clone + Eq + Hash,
+{
     let mut path = vec![node.clone()];
     while let Some(parent) = parents.get(&node).cloned() {
         path.push(parent.clone());
@@ -50,7 +53,8 @@ pub fn dfs_reach<N, FN, IN>(start: N, successors: FN) -> DfsReachable<N, FN>
 where
     N: Eq + Hash + Clone,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>, {
+    IN: IntoIterator<Item = N>,
+{
     DfsReachable {
         to_see: vec![start],
         visited: HashSet::new(),
@@ -67,7 +71,8 @@ pub struct DfsReachable<N, FN> {
 
 impl<N, FN> DfsReachable<N, FN>
 where
-    N: Eq + Hash, {
+    N: Eq + Hash,
+{
     /// Return a lower bound on the number of remaining reachable
     /// nodes. Not all nodes are necessarily known is advance, and
     /// new reachable nodes may be discovered while using the iterator.
@@ -80,7 +85,8 @@ impl<N, FN, IN> Iterator for DfsReachable<N, FN>
 where
     N: Eq + Hash + Clone,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>, {
+    IN: IntoIterator<Item = N>,
+{
     type Item = N;
 
     fn next(&mut self) -> Option<Self::Item> {
@@ -104,5 +110,6 @@ impl<N, FN, IN> FusedIterator for DfsReachable<N, FN>
 where
     N: Eq + Hash + Clone,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>, {
+    IN: IntoIterator<Item = N>,
+{
 }

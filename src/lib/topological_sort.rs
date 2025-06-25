@@ -9,7 +9,8 @@ pub fn topological_sort<N, FN, IN>(roots: &[N], mut successors: FN) -> Result<Ve
 where
     N: Eq + Hash + Clone,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>, {
+    IN: IntoIterator<Item = N>,
+{
     let mut marked = HashSet::with_capacity(roots.len());
     let mut temp = HashSet::new();
     let mut sorted = VecDeque::with_capacity(roots.len());
@@ -39,7 +40,8 @@ fn visit<N, FN, IN>(
 where
     N: Eq + Hash + Clone,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>, {
+    IN: IntoIterator<Item = N>,
+{
     unmarked.remove(node);
     if marked.contains(node) {
         return Ok(());
@@ -64,7 +66,8 @@ pub fn topological_sort_into_groups<N, FN, IN>(
 where
     N: Eq + Hash + Clone,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>, {
+    IN: IntoIterator<Item = N>,
+{
     if nodes.is_empty() {
         return Ok(Vec::new());
     }
@@ -95,7 +98,8 @@ where
     while !preds_map.is_empty() {
         let mut next_group = Vec::<N>::new();
         for node in &prev_group {
-            for succ in &succs_map[node] { {
+            for succ in &succs_map[node] {
+                {
                     let num_preds = preds_map.get_mut(succ).unwrap(); // Cannot fail
                     *num_preds -= 1;
                     if *num_preds > 0 {

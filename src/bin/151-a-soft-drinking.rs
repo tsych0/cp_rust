@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, k, l, c, d, p, nl, np]: [usize; 8]
     ) -> usize {
         ((k * l) / nl).min(c * d).min(p / np) / n

@@ -7,7 +7,7 @@ use cpio::*;
 use std::collections::HashSet;
 
 sol! {
-    fn (
+    fn solution(
         n: usize,
         a: [usize]
     ) -> String {

@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, k, x]: [usize; 3]
     ) -> bool {
         let l = n - k;

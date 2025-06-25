@@ -7,7 +7,7 @@ use cpio::*;
 use std::collections::HashSet;
 
 sol! {
-    fn (
+    fn solution(
         shoes: [usize]
     ) -> usize {
         4 - shoes.into_iter().collect::<HashSet<_>>().len()

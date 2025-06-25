@@ -5,10 +5,9 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    fn (
+    fn solution(
         [n, k]: [usize; 2]
     ) -> String {
         vec![('a'..).take(k).collect::<String>(); n].concat()

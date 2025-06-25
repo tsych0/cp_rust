@@ -6,11 +6,9 @@ use cp_lib::*;
 // @code begin
 use crate::itertools::Itertools;
 use cpio::*;
-use std::convert::TryInto;
-use std::io::Read;
 
 sol! {
-    fn (
+    fn solution(
         [n, k]: [usize; 2],
         (mut a): [usize]
     ) -> usize {

@@ -9,7 +9,7 @@ use cpio::*;
 use std::collections::HashMap;
 
 sol! {
-    fn (
+    fn solution(
         [_n, k]: [usize; 2],
         s: String
     ) -> bool {

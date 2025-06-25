@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, k]: [usize; 2]
     ) -> Words<usize> {
         let cut_point = n - k;

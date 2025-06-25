@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [x, y, k]: [isize; 3]
     ) -> Lines<Words<isize>> {
         let j = 100000;

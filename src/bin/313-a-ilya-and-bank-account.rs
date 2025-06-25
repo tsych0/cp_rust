@@ -8,7 +8,7 @@ use cpio::*;
 use std::cmp::max;
 
 sol! {
-    fn (
+    fn solution(
         n: isize
     ) -> isize {
         if n >= 0 {

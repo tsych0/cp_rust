@@ -8,7 +8,7 @@ use cpio::*;
 use sieve::Sieve;
 
 sol! {
-    fn (
+    fn solution(
         n: usize
     ) -> Lines<Words<usize>> {
         let sive = Sieve::new(400);

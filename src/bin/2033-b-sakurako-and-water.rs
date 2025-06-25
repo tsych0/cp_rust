@@ -8,7 +8,7 @@ use cpio::*;
 use std::collections::HashMap;
 
 sol! {
-    fn (
+    fn solution(
         n: usize,
         a: [[isize]]; n
     ) -> isize {

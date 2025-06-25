@@ -13,7 +13,8 @@ where
     T: Eq + Hash,
     FN: FnMut(&T) -> IN,
     IN: IntoIterator<Item = T>,
-    FS: FnMut(&T) -> bool, {
+    FS: FnMut(&T) -> bool,
+{
     if let Some(&n) = cache.get(&start) {
         return n;
     }
@@ -39,7 +40,8 @@ where
     T: Eq + Hash,
     FN: FnMut(&T) -> IN,
     IN: IntoIterator<Item = T>,
-    FS: FnMut(&T) -> bool, {
+    FS: FnMut(&T) -> bool,
+{
     cached_count_paths(
         start,
         &mut successors,

@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, m, p, q]: [usize; 4]
     ) -> bool {
         if n % p == 0 && q * (n / p) == m {

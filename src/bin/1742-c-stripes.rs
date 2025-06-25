@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         _s: String,
         s: [[char]]; 8
     ) -> char {

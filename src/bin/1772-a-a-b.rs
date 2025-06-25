@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         s: String
     ) -> usize {
         s.split('+').map(|x| x.parse::<usize>().unwrap()).sum()

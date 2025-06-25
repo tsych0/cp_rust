@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, m, _k]: [usize; 3]
     ) -> Words<usize> {
         vec![

@@ -8,8 +8,8 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    fn (
-        n: usize,
+    fn solution(
+        _n: usize,
         a: [usize]
     ) -> bool {
         let grps = a

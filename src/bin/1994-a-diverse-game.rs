@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, m]: [usize; 2],
         matrix: [[isize]]; n
     ) -> Lines<Words<isize>> {

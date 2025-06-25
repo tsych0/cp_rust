@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, m]: [usize; 2]
     ) -> String {
         if n.min(m) % 2 == 0 {

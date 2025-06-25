@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [_, k]: [u8; 2],
         a: [u8]
     ) -> u8 {

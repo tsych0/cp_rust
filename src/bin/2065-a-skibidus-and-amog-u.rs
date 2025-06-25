@@ -4,10 +4,9 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    fn (
+    fn solution(
         (mut s): String
     ) -> String {
         let len = s.len();

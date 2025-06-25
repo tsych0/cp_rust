@@ -9,7 +9,7 @@ use cpio::*;
 use std::cmp::min;
 
 sol! {
-    fn (
+    fn solution(
         n: usize,
         a: [isize]
     ) -> usize {

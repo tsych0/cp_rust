@@ -7,7 +7,7 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: usize,
         h: [u8]
     ) -> usize {

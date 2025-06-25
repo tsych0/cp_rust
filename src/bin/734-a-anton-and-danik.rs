@@ -6,8 +6,8 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
-        n: usize,
+    fn solution(
+        _n: usize,
         s: String
     ) -> String {
         let anton = s.chars().filter(|&c| c == 'A').count();

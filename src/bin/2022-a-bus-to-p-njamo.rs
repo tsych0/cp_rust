@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [_n, r]: [usize; 2],
         a: [usize]
     ) -> usize {

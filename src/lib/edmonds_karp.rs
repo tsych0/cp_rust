@@ -27,7 +27,8 @@ where
     N: Eq + Hash + Copy,
     C: Zero + Bounded + Signed + Ord + Copy,
     IC: IntoIterator<Item = Edge<N, C>>,
-    EK: EdmondsKarp<C>, {
+    EK: EdmondsKarp<C>,
+{
     // Build a correspondence between N and 0..vertices.len() so that we can
     // work with matrices more easily.
     let reverse = vertices.iter().collect::<IndexSet<_>>();
@@ -65,7 +66,8 @@ pub fn edmonds_karp_dense<N, C, IC>(vertices: &[N], source: &N, sink: &N, caps: 
 where
     N: Eq + Hash + Copy,
     C: Zero + Bounded + Signed + Ord + Copy,
-    IC: IntoIterator<Item = Edge<N, C>>, {
+    IC: IntoIterator<Item = Edge<N, C>>,
+{
     edmonds_karp::<N, C, IC, DenseCapacity<C>>(vertices, source, sink, caps)
 }
 
@@ -79,7 +81,8 @@ pub fn edmonds_karp_sparse<N, C, IC>(
 where
     N: Eq + Hash + Copy,
     C: Zero + Bounded + Signed + Ord + Copy,
-    IC: IntoIterator<Item = Edge<N, C>>, {
+    IC: IntoIterator<Item = Edge<N, C>>,
+{
     edmonds_karp::<N, C, IC, SparseCapacity<C>>(vertices, source, sink, caps)
 }
 
@@ -114,7 +117,8 @@ pub trait EdmondsKarp<C: Copy + Zero + Signed + Ord + Bounded> {
     #[must_use]
     fn from_vec(source: usize, sink: usize, capacities: Vec<C>) -> Self
     where
-        Self: Sized, {
+        Self: Sized,
+    {
         Self::from_matrix(source, sink, Matrix::square_from_vec(capacities).unwrap())
     }
 
@@ -223,7 +227,8 @@ trait EdmondsKarpInternal<C> {
 impl<C, T> EdmondsKarpInternal<C> for T
 where
     C: Copy + Zero + Signed + Ord + Bounded,
-    T: EdmondsKarp<C> + ?Sized, {
+    T: EdmondsKarp<C> + ?Sized,
+{
     /// Internal: update flows until maximum-flow / minimum-cut is reached.
     fn update_flows(&mut self) -> BTreeSet<usize> {
         let size = self.size();

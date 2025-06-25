@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         n: isize
     ) -> Words<isize> {
         let res = if n == 1 {

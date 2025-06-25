@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [n, m, k]: [usize; 3]
     ) -> usize {
         n.min(k) * m.min(k)

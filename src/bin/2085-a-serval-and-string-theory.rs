@@ -8,7 +8,7 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    fn (
+    fn solution(
         [_, k]: [usize; 2],
         s: String
     ) -> bool {

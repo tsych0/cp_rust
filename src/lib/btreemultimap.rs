@@ -126,7 +126,8 @@ pub struct BTreeMultiMap<K, V> {
 
 impl<K, V> BTreeMultiMap<K, V>
 where
-    K: Ord, {
+    K: Ord,
+{
     /// Creates an empty BTreeMultiMap
     pub fn new() -> BTreeMultiMap<K, V> {
         BTreeMultiMap {
@@ -137,7 +138,8 @@ where
 
 impl<K, V> BTreeMultiMap<K, V>
 where
-    K: Ord, {
+    K: Ord,
+{
     /// Inserts a key-value pair into the btreemultimap. If the key does exist in
     /// the map then the value is pushed to that key's vector. If the key doesn't
     /// exist is the map a new vector with the given value is inserted.
@@ -171,7 +173,8 @@ where
     /// doesn't exist is the map a new vector collected from the given values is inserted.
     pub fn insert_many_from_slice(&mut self, k: K, v: &[V])
     where
-        V: Clone, {
+        V: Clone,
+    {
         match self.entry(k) {
             Entry::Occupied(mut entry) => {
                 entry.get_vec_mut().extend_from_slice(v);
@@ -186,7 +189,8 @@ where
     pub fn contains_key<Q: ?Sized>(&self, k: &Q) -> bool
     where
         K: Borrow<Q>,
-        Q: Ord, {
+        Q: Ord,
+    {
         self.inner.contains_key(k)
     }
 
@@ -200,7 +204,8 @@ where
     pub fn remove<Q: ?Sized>(&mut self, k: &Q) -> Option<Vec<V>>
     where
         K: Borrow<Q>,
-        Q: Ord, {
+        Q: Ord,
+    {
         self.inner.remove(k)
     }
 
@@ -209,7 +214,8 @@ where
     pub fn get<Q: ?Sized>(&self, k: &Q) -> Option<&V>
     where
         K: Borrow<Q>,
-        Q: Ord, {
+        Q: Ord,
+    {
         self.inner.get(k).and_then(|a| a.iter().next())
     }
 
@@ -218,7 +224,8 @@ where
     pub fn get_mut<Q: ?Sized>(&mut self, k: &Q) -> Option<&mut V>
     where
         K: Borrow<Q>,
-        Q: Ord, {
+        Q: Ord,
+    {
         self.inner.get_mut(k).and_then(|a| a.iter_mut().next())
     }
 
@@ -226,7 +233,8 @@ where
     pub fn get_vec<Q: ?Sized>(&self, k: &Q) -> Option<&Vec<V>>
     where
         K: Borrow<Q>,
-        Q: Ord, {
+        Q: Ord,
+    {
         self.inner.get(k)
     }
 
@@ -234,7 +242,8 @@ where
     pub fn get_key_values<Q: ?Sized>(&self, k: &Q) -> Option<(&K, &Vec<V>)>
     where
         K: Borrow<Q>,
-        Q: Ord, {
+        Q: Ord,
+    {
         self.inner.get_key_value(k)
     }
 
@@ -242,7 +251,8 @@ where
     pub fn get_vec_mut<Q: ?Sized>(&mut self, k: &Q) -> Option<&mut Vec<V>>
     where
         K: Borrow<Q>,
-        Q: Ord, {
+        Q: Ord,
+    {
         self.inner.get_mut(k)
     }
 
@@ -250,7 +260,8 @@ where
     pub fn is_vec<Q: ?Sized>(&self, k: &Q) -> bool
     where
         K: Borrow<Q>,
-        Q: Ord, {
+        Q: Ord,
+    {
         match self.get_vec(k) {
             Some(val) => val.len() > 1,
             None => false,
@@ -310,7 +321,8 @@ where
     /// is other words, remove all pairs `(k, v)` such that `f(&k,&mut v)` returns `false`.
     pub fn retain<F>(&mut self, mut f: F)
     where
-        F: FnMut(&K, &V) -> bool, {
+        F: FnMut(&K, &V) -> bool,
+    {
         self.inner.retain(|key, vector| {
             vector.retain(|value| f(key, value));
             !vector.is_empty()
@@ -327,7 +339,8 @@ where
     where
         T: Ord,
         K: Borrow<T>,
-        R: RangeBounds<T>, {
+        R: RangeBounds<T>,
+    {
         MultiRange {
             vec: None,
             inner: self.inner.range(range),
@@ -344,7 +357,8 @@ where
     where
         T: Ord,
         K: Borrow<T>,
-        R: RangeBounds<T>, {
+        R: RangeBounds<T>,
+    {
         MultiRangeMut {
             vec: None,
             inner: self.inner.range_mut(range),
@@ -498,7 +512,8 @@ impl<'a, K, V> DoubleEndedIterator for MultiRangeMut<'a, K, V> {
 impl<'a, K, V, Q: ?Sized> Index<&'a Q> for BTreeMultiMap<K, V>
 where
     K: Ord + Borrow<Q>,
-    Q: Ord, {
+    Q: Ord,
+{
     type Output = V;
 
     fn index(&self, index: &Q) -> &V {
@@ -512,7 +527,8 @@ where
 impl<K, V> Debug for BTreeMultiMap<K, V>
 where
     K: Ord + Debug,
-    V: Debug, {
+    V: Debug,
+{
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_map().entries(self.iter()).finish()
     }
@@ -521,7 +537,8 @@ where
 impl<K, V> PartialEq for BTreeMultiMap<K, V>
 where
     K: Ord,
-    V: PartialEq, {
+    V: PartialEq,
+{
     fn eq(&self, other: &BTreeMultiMap<K, V>) -> bool {
         if self.len() != other.len() {
             return false;
@@ -536,12 +553,14 @@ where
 impl<K, V> Eq for BTreeMultiMap<K, V>
 where
     K: Ord,
-    V: Eq, {
+    V: Eq,
+{
 }
 
 impl<K, V> Default for BTreeMultiMap<K, V>
 where
-    K: Ord, {
+    K: Ord,
+{
     fn default() -> BTreeMultiMap<K, V> {
         BTreeMultiMap {
             inner: Default::default(),
@@ -551,7 +570,8 @@ where
 
 impl<K, V> FromIterator<(K, V)> for BTreeMultiMap<K, V>
 where
-    K: Ord, {
+    K: Ord,
+{
     fn from_iter<T: IntoIterator<Item = (K, V)>>(iterable: T) -> BTreeMultiMap<K, V> {
         let iter = iterable.into_iter();
 
@@ -566,7 +586,8 @@ where
 
 impl<'a, K, V> IntoIterator for &'a BTreeMultiMap<K, V>
 where
-    K: Ord, {
+    K: Ord,
+{
     type Item = (&'a K, &'a V);
     type IntoIter = MultiIter<'a, K, V>;
 
@@ -577,7 +598,8 @@ where
 
 impl<'a, K, V> IntoIterator for &'a mut BTreeMultiMap<K, V>
 where
-    K: Ord, {
+    K: Ord,
+{
     type Item = (&'a K, &'a mut V);
     type IntoIter = MultiIterMut<'a, K, V>;
 
@@ -588,7 +610,8 @@ where
 
 impl<K, V> IntoIterator for BTreeMultiMap<K, V>
 where
-    K: Ord, {
+    K: Ord,
+{
     type Item = (K, Vec<V>);
     type IntoIter = IntoIter<K, Vec<V>>;
 
@@ -599,7 +622,8 @@ where
 
 impl<K, V> Extend<(K, V)> for BTreeMultiMap<K, V>
 where
-    K: Ord, {
+    K: Ord,
+{
     fn extend<T: IntoIterator<Item = (K, V)>>(&mut self, iter: T) {
         for (k, v) in iter {
             self.insert(k, v);
@@ -610,7 +634,8 @@ where
 impl<'a, K, V> Extend<(&'a K, &'a V)> for BTreeMultiMap<K, V>
 where
     K: Ord + Copy,
-    V: Copy, {
+    V: Copy,
+{
     fn extend<T: IntoIterator<Item = (&'a K, &'a V)>>(&mut self, iter: T) {
         self.extend(iter.into_iter().map(|(&key, &value)| (key, value)));
     }
@@ -618,7 +643,8 @@ where
 
 impl<K, V> Extend<(K, Vec<V>)> for BTreeMultiMap<K, V>
 where
-    K: Ord, {
+    K: Ord,
+{
     fn extend<T: IntoIterator<Item = (K, Vec<V>)>>(&mut self, iter: T) {
         for (k, values) in iter {
             match self.entry(k) {
@@ -636,7 +662,8 @@ where
 impl<'a, K, V> Extend<(&'a K, &'a Vec<V>)> for BTreeMultiMap<K, V>
 where
     K: Ord + Copy,
-    V: Copy, {
+    V: Copy,
+{
     fn extend<T: IntoIterator<Item = (&'a K, &'a Vec<V>)>>(&mut self, iter: T) {
         self.extend(
             iter.into_iter()
