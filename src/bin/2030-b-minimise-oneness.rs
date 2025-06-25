@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize
-    ) -> String
-    {
+    fn (
+        n: usize
+    ) -> String {
         vec!['0'; n - 1].into_iter().collect::<String>() + "1"
     }
 }

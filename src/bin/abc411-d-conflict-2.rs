@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [_, q] is [usize; 2],
-        queries is [[String]]; q
-    ) -> String
-    {
+    fn (
+        [_, q]: [usize; 2],
+        queries: [[String]]; q
+    ) -> String {
         let mut res = vec![];
         let mut current_pc: usize = 0;
 

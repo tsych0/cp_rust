@@ -7,12 +7,11 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [xa, ya] is [usize; 2],
-        [xb, yb] is [usize; 2],
-        [xc, yc] is [usize; 2]
-    ) -> usize
-    {
+    fn (
+        [xa, ya]: [usize; 2],
+        [xb, yb]: [usize; 2],
+        [xc, yc]: [usize; 2]
+    ) -> usize {
         let mut res = 0;
         if xa > xb && xa > xc || xa < xb && xa < xc {
             res += xa.abs_diff(xb).min(xa.abs_diff(xc));

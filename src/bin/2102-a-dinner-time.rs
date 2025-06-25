@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, m, p, q] is [usize; 4]
-    ) -> bool
-    {
+    fn (
+        [n, m, p, q]: [usize; 4]
+    ) -> bool {
         if n % p == 0 && q * (n / p) == m {
             true
         } else {

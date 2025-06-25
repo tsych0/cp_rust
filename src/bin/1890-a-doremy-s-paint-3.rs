@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> bool
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> bool {
         let grps = a
             .into_iter()
             .sorted()

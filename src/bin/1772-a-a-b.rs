@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        s is String
-    ) -> usize
-    {
+    fn (
+        s: String
+    ) -> usize {
         s.split('+').map(|x| x.parse::<usize>().unwrap()).sum()
     }
 }

@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        abs is [[usize]]; n
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        abs: [[usize]]; n
+    ) -> usize {
         abs.into_iter()
             .fold((0, 0), |(curr, cap), ab| {
                 let curr = curr - ab[0] + ab[1];

@@ -8,10 +8,9 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        a: [usize]
+    ) -> usize {
         a.into_iter().sorted().skip(1).next().unwrap()
     }
 }

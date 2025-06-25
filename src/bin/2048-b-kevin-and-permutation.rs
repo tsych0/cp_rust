@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, k] is [usize; 2]
-    ) -> Words<usize>
-    {
+    fn (
+        [n, k]: [usize; 2]
+    ) -> Words<usize> {
         let mut res = vec![0; n];
         let mut taken = 1;
         for i in (1..=n).map(|j| k * j).take_while(|&j| j <= n) {

@@ -8,9 +8,9 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (        s is String
-    ) -> usize
-    {
+    fn (
+        s: String
+    ) -> usize {
         s.chars()
                .filter(|x| ![',', ' ', '{', '}'].contains(x))
                .unique()

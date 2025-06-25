@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, x] is [usize; 2]
-    ) -> Words<usize>
-    {
+    fn (
+        [n, x]: [usize; 2]
+    ) -> Words<usize> {
         let mut r: Vec<usize> = (0..n).filter(|&i| i != x).collect();
         if x < n {
             r.push(x);

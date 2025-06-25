@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        s is String
-    ) -> bool
-    {
+    fn (
+        s: String
+    ) -> bool {
         s.to_uppercase() == "YES"
     }
 }

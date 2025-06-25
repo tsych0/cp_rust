@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [_n, r] is [usize; 2],
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        [_n, r]: [usize; 2],
+        a: [usize]
+    ) -> usize {
         let rows_used: usize = a.iter().map(|ai| ai / 2).sum();
         let people_left: usize = a.iter().map(|ai| ai % 2).sum();
         let rows_left = r - rows_used;

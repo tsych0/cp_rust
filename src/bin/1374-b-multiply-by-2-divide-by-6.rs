@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize
-    ) -> isize
-    {
+    fn (
+        n: usize
+    ) -> isize {
         let (two_count, rem) = (0..)
             .try_fold(n, |acc, i| {
                 if acc % 2 == 0 {

@@ -9,11 +9,10 @@ use std::convert::TryInto;
 use std::io::Read;
 
 sol! {
-    (
-        [n, k] is [usize; 2],
-        (mut c) is [usize]
-    ) -> usize
-    {
+    fn (
+        [n, k]: [usize; 2],
+        (mut c): [usize]
+    ) -> usize {
         c.sort();
         let max_group_size = c
             .into_iter()

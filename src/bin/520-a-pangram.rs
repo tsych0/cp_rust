@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        _n is usize,
-        s is String
-    ) -> bool
-    {
+    fn (
+        _n: usize,
+        s: String
+    ) -> bool {
         s.to_lowercase().chars().unique().count() == 26
     }
 }

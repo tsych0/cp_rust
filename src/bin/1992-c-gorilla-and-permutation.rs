@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, m, _k] is [usize; 3]
-    ) -> Words<usize>
-    {
+    fn (
+        [n, m, _k]: [usize; 3]
+    ) -> Words<usize> {
         vec![
             (m + 1..=n).rev().collect::<Vec<_>>(),
             (1..=m).collect::<Vec<_>>(),

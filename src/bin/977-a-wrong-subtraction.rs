@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [mut n, k] is [usize; 2]
-    ) -> usize
-    {
+    fn (
+        [mut n, k]: [usize; 2]
+    ) -> usize {
         for _ in 0..k {
             if n % 10 == 0 {
                 n /= 10;

@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [_, k] is [u8; 2],
-        a is [u8]
-    ) -> u8
-    {
+    fn (
+        [_, k]: [u8; 2],
+        a: [u8]
+    ) -> u8 {
         let mut current_rank = 0;
         let mut prev = 0;
         for ai in a.into_iter() {

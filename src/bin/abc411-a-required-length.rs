@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        s is String,
-        n is usize
-    ) -> bool
-    {
+    fn (
+        s: String,
+        n: usize
+    ) -> bool {
         s.len() >= n
     }
 }

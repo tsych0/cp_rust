@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        [x, y] is [usize; 2]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        [x, y]: [usize; 2]
+    ) -> usize {
         n.div_ceil(x.min(y))
     }
 }

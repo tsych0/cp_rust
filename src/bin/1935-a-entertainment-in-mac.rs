@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        s is String
-    ) -> String
-    {
+    fn (
+        n: usize,
+        s: String
+    ) -> String {
         let s_rev: String = s.chars().rev().collect();
 
         if s > s_rev {

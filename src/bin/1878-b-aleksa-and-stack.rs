@@ -7,9 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (        n is usize
-    ) -> Words<usize>
-    {
+    fn (
+        n: usize
+    ) -> Words<usize> {
         (1..=n).map(|i| 2 * i - 1).collect()
     }
 }

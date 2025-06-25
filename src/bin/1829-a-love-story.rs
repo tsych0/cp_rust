@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        s is String
-    ) -> usize
-    {
+    fn (
+        s: String
+    ) -> usize {
         s.chars()
              .zip("codeforces".to_string().chars())
              .filter(|(a, b)| a != b)

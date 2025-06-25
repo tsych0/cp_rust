@@ -10,11 +10,10 @@ use std::io::Read;
 use std::usize;
 
 sol! {
-    (
-        [n, m] is [usize; 2],
-        (mut f) is [usize]
-    ) -> usize
-    {
+    fn (
+        [n, m]: [usize; 2],
+        (mut f): [usize]
+    ) -> usize {
         f.sort();
         let mut res = usize::MAX;
         for i in 0..m - n + 1 {

@@ -7,10 +7,9 @@ use cpio::*;
 use std::io::Read;
 
 sol! {
-    (
-        (mut s) is String
-    ) -> String
-    {
+    fn (
+        (mut s): String
+    ) -> String {
         let len = s.len();
         s.replace_range(len - 2.., "i");
         s

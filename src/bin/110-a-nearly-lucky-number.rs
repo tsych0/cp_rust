@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is String
-    ) -> bool
-    {
+    fn (
+        n: String
+    ) -> bool {
         n.chars()
             .filter(|&c| c == '4' || c == '7')
             .count()

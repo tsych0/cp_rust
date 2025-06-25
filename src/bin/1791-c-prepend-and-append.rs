@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        s is [01]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        s: [01]
+    ) -> usize {
         let (mut i, mut j) = (0, n - 1);
         while i < j {
             if s[i] + s[j] == 1 {

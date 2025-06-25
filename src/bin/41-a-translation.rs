@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        s is String,
-        t is String
-    ) -> bool
-    {
+    fn (
+        s: String,
+        t: String
+    ) -> bool {
         s.chars().rev().collect::<String>() == t
     }
 }

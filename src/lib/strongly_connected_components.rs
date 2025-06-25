@@ -3,8 +3,7 @@ use std::hash::Hash;
 
 struct Params<N, FN>
 where
-    N: Hash + Eq,
-{
+    N: Hash + Eq, {
     preorders: HashMap<N, Option<usize>>,
     c: usize,
     successors: FN,
@@ -18,8 +17,7 @@ impl<N, FN, IN> Params<N, FN>
 where
     N: Clone + Hash + Eq,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>,
-{
+    IN: IntoIterator<Item = N>, {
     fn new(nodes: &[N], successors: FN) -> Self {
         Self {
             preorders: nodes
@@ -40,8 +38,7 @@ fn recurse_onto<N, FN, IN>(v: &N, params: &mut Params<N, FN>)
 where
     N: Clone + Hash + Eq,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>,
-{
+    IN: IntoIterator<Item = N>, {
     params.preorders.insert(v.clone(), Some(params.c));
     params.c += 1;
     params.s.push(v.clone());
@@ -77,8 +74,7 @@ pub fn strongly_connected_components_from<N, FN, IN>(start: &N, successors: FN) 
 where
     N: Clone + Hash + Eq,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>,
-{
+    IN: IntoIterator<Item = N>, {
     let mut params = Params::new(&[], successors);
     recurse_onto(start, &mut params);
     params.scc
@@ -90,8 +86,7 @@ pub fn strongly_connected_component<N, FN, IN>(node: &N, successors: FN) -> Vec<
 where
     N: Clone + Hash + Eq,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>,
-{
+    IN: IntoIterator<Item = N>, {
     // The unwrap() cannot fail as there will always be at least one group.
     strongly_connected_components_from(node, successors)
         .pop()
@@ -103,8 +98,7 @@ pub fn strongly_connected_components<N, FN, IN>(nodes: &[N], successors: FN) -> 
 where
     N: Clone + Hash + Eq,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>,
-{
+    IN: IntoIterator<Item = N>, {
     let mut params = Params::new(nodes, successors);
     while let Some(node) = params.preorders.keys().find(|_| true).cloned() {
         recurse_onto(&node, &mut params);

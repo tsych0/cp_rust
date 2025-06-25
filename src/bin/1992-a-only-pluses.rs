@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        nums is [usize]
-    ) -> usize
-    {
+    fn (
+        nums: [usize]
+    ) -> usize {
         let mut nums = nums;
         for _ in 0..5 {
             let mut min_idx = 0;

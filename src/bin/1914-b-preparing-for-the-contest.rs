@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, k] is [usize; 2]
-    ) -> Words<usize>
-    {
+    fn (
+        [n, k]: [usize; 2]
+    ) -> Words<usize> {
         let cut_point = n - k;
 
         [

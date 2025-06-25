@@ -8,10 +8,9 @@ use cpio::*;
 use std::io::Read;
 
 sol! {
-    (
-        [n, k] is [usize; 2]
-    ) -> String
-    {
+    fn (
+        [n, k]: [usize; 2]
+    ) -> String {
         vec![('a'..).take(k).collect::<String>(); n].concat()
     }
 }

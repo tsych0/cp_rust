@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        pq is [[usize]]; n
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        pq: [[usize]]; n
+    ) -> usize {
         pq.into_iter().filter(|pqi| pqi[1] - pqi[0] >= 2).count()
     }
 }

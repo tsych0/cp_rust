@@ -6,8 +6,7 @@ use std::iter;
 
 impl<Cap> MfGraph<Cap>
 where
-    Cap: Integral,
-{
+    Cap: Integral, {
     pub fn new(n: usize) -> MfGraph<Cap> {
         MfGraph {
             _n: n,
@@ -44,8 +43,7 @@ pub struct Edge<Cap: Integral> {
 
 impl<Cap> MfGraph<Cap>
 where
-    Cap: Integral,
-{
+    Cap: Integral, {
     pub fn get_edge(&self, i: usize) -> Edge<Cap> {
         let m = self.pos.len();
         assert!(i < m);
@@ -155,8 +153,7 @@ struct FlowCalculator<'a, Cap> {
 
 impl<Cap> FlowCalculator<'_, Cap>
 where
-    Cap: Integral,
-{
+    Cap: Integral, {
     fn bfs(&mut self) {
         self.level.iter_mut().for_each(|e| *e = -1);
         self.level[self.s] = 0;

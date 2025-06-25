@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [l, r] is [usize; 2]
-    ) -> usize
-    {
+    fn (
+        [l, r]: [usize; 2]
+    ) -> usize {
         if r - l < 100 {
             (l..=r).map(|i| (luckiness(i), i)).max().unwrap().1
         } else {

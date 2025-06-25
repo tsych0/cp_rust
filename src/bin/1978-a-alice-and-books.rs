@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> usize {
         a.get(0..n - 1).unwrap().iter().max().unwrap() + a.last().unwrap()
     }
 }

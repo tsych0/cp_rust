@@ -7,9 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (        s is String
-    ) -> String
-    {
+    fn (
+        s: String
+    ) -> String {
         s.split("WUB")
             .filter(|c| !c.is_empty())
             .collect::<Vec<_>>()

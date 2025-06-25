@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        s is String
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        s: String
+    ) -> usize {
         s.chars().group_by(|&c| c).map(|g| g.len()).max().unwrap() + n % 2
     }
 }

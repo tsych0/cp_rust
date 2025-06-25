@@ -17,8 +17,7 @@ pub struct MinCostFlowGraph<T> {
 
 impl<T> MinCostFlowGraph<T>
 where
-    T: Integral + std::ops::Neg<Output = T>,
-{
+    T: Integral + std::ops::Neg<Output = T>, {
     pub fn new(n: usize) -> Self {
         Self {
             pos: vec![],

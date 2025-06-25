@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [a, b] is [usize; 2]
-    ) -> bool
-    {
+    fn (
+        [a, b]: [usize; 2]
+    ) -> bool {
         a % 2 == 0 && (b % 2 == 0 || a >= 2)
     }
 }

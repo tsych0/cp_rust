@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, m, _, _] is [usize; 4]
-    ) -> Words<usize>
-    {
+    fn (
+        [n, m, _, _]: [usize; 4]
+    ) -> Words<usize> {
         ListOf(vec![1, 1, n, m])
     }
 }

@@ -10,11 +10,10 @@ use std::convert::TryInto;
 use std::io::Read;
 
 sol! {
-    (
-        [n, k] is [usize; 2],
-        (mut a) is [usize]
-    ) -> usize
-    {
+    fn (
+        [n, k]: [usize; 2],
+        (mut a): [usize]
+    ) -> usize {
         a.sort();
         let mut r = vec![0; n];
         for i in 1..n {

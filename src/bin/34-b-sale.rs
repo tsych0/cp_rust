@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        [n, m] is [usize; 2],
-        a is [isize]
-    ) -> isize
-    {
+    fn (
+        [_n, m]: [usize; 2],
+        a: [isize]
+    ) -> isize {
         -a.into_iter()
             .filter(|&i| i < 0)
             .sorted()

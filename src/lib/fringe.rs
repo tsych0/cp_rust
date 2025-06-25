@@ -22,8 +22,7 @@ where
     FN: FnMut(&N) -> IN,
     IN: IntoIterator<Item = (N, C)>,
     FH: FnMut(&N) -> C,
-    FS: FnMut(&N) -> bool,
-{
+    FS: FnMut(&N) -> bool, {
     let mut now = VecDeque::new();
     let mut later = VecDeque::new();
     let mut parents: IndexMap<N, (usize, C)> = IndexMap::new();

@@ -5,14 +5,12 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    (
-        n is usize,
-        a is [isize]
-    ) -> isize
-    {
+    fn (
+        n: usize,
+        a: [isize]
+    ) -> isize {
         a[n - 1] - a[n - 2] + a.into_iter().take(n - 2).sum::<isize>()
     }
 }

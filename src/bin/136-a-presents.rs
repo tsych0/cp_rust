@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        p is [usize]
-    ) -> Words<usize>
-    {
+    fn (
+        n: usize,
+        p: [usize]
+    ) -> Words<usize> {
         let mut res = vec![0; n];
         for i in 0..n {
             res[p[i] - 1] = i + 1;

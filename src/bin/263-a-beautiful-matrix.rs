@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        matrix is [[u8]]; 5
-    ) -> i8
-    {
+    fn (
+        matrix: [[u8]]; 5
+    ) -> i8 {
         for i in 0..5 {
             for j in 0..5 {
                 if matrix[i][j] == 1 {

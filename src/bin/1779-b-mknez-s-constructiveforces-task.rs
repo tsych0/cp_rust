@@ -5,13 +5,11 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    (
-        n is isize
-    ) -> Lines<String>
-    {
+    fn (
+        n: isize
+    ) -> Lines<String> {
         if n % 2 == 0 {
             vec![
                 "YES".into(),

@@ -7,12 +7,11 @@ use cpio::*;
 use std::collections::HashSet;
 
 sol! {
-    (
-        _n is usize,
-        a is [usize],
-        b is [usize]
-    ) -> bool
-    {
+    fn (
+        _n: usize,
+        a: [usize],
+        b: [usize]
+    ) -> bool {
         a.into_iter().collect::<HashSet<_>>().len() + b.into_iter().collect::<HashSet<_>>().len() > 3
     }
 }

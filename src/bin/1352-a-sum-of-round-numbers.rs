@@ -8,10 +8,9 @@ use cpio::*;
 use std::io::Read;
 
 sol! {
-    (
-        (mut n) is usize
-    ) -> Lines<Words<usize>>
-    {
+    fn (
+        (mut n): usize
+    ) -> Lines<Words<usize>> {
         let mut mask = 1;
         let mut res = vec![];
         while n > 0 {

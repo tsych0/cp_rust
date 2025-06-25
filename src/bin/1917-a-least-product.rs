@@ -7,14 +7,12 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [isize]
-    ) -> String
-    {
+    fn (
+        n: usize,
+        a: [isize]
+    ) -> String {
         if a.iter().filter(|&&ai| ai < 0).count() % 2 == 0
-            && a.iter().filter(|&&ai| ai == 0).count() == 0
-        {
+            && a.iter().filter(|&&ai| ai == 0).count() == 0 {
             "1\n1 0".into()
         } else {
             "0".into()

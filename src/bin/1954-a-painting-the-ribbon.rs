@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, m, k] is [isize; 3]
-    ) -> bool
-    {
+    fn (
+        [n, m, k]: [isize; 3]
+    ) -> bool {
         k < (n - (n + m - 1) / m)
     }
 }

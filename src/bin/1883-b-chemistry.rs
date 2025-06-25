@@ -9,11 +9,10 @@ use cpio::*;
 use std::collections::HashMap;
 
 sol! {
-    (
-        [_n, k] is [usize; 2],
-        s is String
-    ) -> bool
-    {
+    fn (
+        [_n, k]: [usize; 2],
+        s: String
+    ) -> bool {
         let count: HashMap<char, usize> = s
             .chars()
             .sorted()

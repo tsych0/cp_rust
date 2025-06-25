@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [x, y, k] is [isize; 3]
-    ) -> Lines<Words<isize>>
-    {
+    fn (
+        [x, y, k]: [isize; 3]
+    ) -> Lines<Words<isize>> {
         let j = 100000;
         let mut res = (1..(k / 2) + 1)
             .map(|i| [vec![i * j, i * j], vec![-i * j, -i * j]])

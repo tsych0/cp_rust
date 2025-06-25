@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        s is String
-    ) -> String
-    {
+    fn (
+        s: String
+    ) -> String {
         let mut c = s.chars();
         format!(
             "{}{}",

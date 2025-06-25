@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, a, b] is [usize; 3],
-    ) -> Words<isize>
-    {
+    fn (
+        [n, a, b]: [usize; 3],
+    ) -> Words<isize> {
         let mut res = vec![0; n];
         res[0] = a;
         res[n - 1] = b;
@@ -17,8 +16,7 @@ sol! {
             res[i + 1] = c;
         }
         if res[0..n / 2].into_iter().min().unwrap() == &a
-            && res[n / 2..n].into_iter().max().unwrap() == &b
-        {
+            && res[n / 2..n].into_iter().max().unwrap() == &b {
             ListOf(res.into_iter().map(|x| x as isize).collect())
         } else {
             ListOf(vec![-1])

@@ -8,10 +8,9 @@ use cpio::*;
 use std::cmp::max;
 
 sol! {
-    (
-        [n, m] is [usize; 2]
-    ) -> usize
-    {
+    fn (
+        [n, m]: [usize; 2]
+    ) -> usize {
         max(n, m)
     }
 }

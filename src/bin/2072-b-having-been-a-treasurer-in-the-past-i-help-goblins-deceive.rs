@@ -7,10 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (        _n is usize,
-        s is String
-    ) -> usize
-    {
+    fn (
+        _n: usize,
+        s: String
+    ) -> usize {
         let a = s.chars().filter(|&c| c == '_').count();
         let b = s.chars().filter(|&c| c == '-').count();
         ((b + 1) / 2) * (b / 2) * a

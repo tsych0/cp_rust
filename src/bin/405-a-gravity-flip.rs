@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> Words<usize>
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> Words<usize> {
         a.into_iter().sorted().collect()
     }
 }

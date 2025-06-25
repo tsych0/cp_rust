@@ -6,9 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (        [m, n] is [u16; 2]
-    ) -> u16
-    {
+    fn (
+        [m, n]: [u16; 2]
+    ) -> u16 {
         (m * n) / 2
     }
 }

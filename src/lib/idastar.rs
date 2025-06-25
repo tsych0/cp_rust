@@ -16,8 +16,7 @@ where
     FN: FnMut(&N) -> IN,
     IN: IntoIterator<Item = (N, C)>,
     FH: FnMut(&N) -> C,
-    FS: FnMut(&N) -> bool,
-{
+    FS: FnMut(&N) -> bool, {
     let mut path = IndexSet::from_iter([start.clone()].into_iter());
 
     std::iter::repeat(())
@@ -52,8 +51,7 @@ where
     FN: FnMut(&N) -> IN,
     IN: IntoIterator<Item = (N, C)>,
     FH: FnMut(&N) -> C,
-    FS: FnMut(&N) -> bool,
-{
+    FS: FnMut(&N) -> bool, {
     let neighbs = {
         let start = path.get_index(path.len() - 1).unwrap();
         let f = cost + heuristic(start);

@@ -8,12 +8,11 @@ use cpio::*;
 use std::cmp::min;
 
 sol! {
-    (
-        n is usize,
-        a is [usize],
-        b is [usize]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        a: [usize],
+        b: [usize]
+    ) -> usize {
         let (a_sum, a_min) = (a.iter().sum::<usize>(), a.iter().min().unwrap());
         let (b_sum, b_min) = (b.iter().sum::<usize>(), b.iter().min().unwrap());
         min(a_sum + b_min * n, b_sum + a_min * n)

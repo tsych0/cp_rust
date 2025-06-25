@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, k] is [usize; 2]
-    ) -> usize
-    {
+    fn (
+        [n, k]: [usize; 2]
+    ) -> usize {
         let total_diagonals = 4 * n - 2;
         let diff = total_diagonals - k;
         if diff < 2 {

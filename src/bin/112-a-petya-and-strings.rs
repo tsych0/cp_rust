@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        a is String,
-        b is String
-    ) -> i8
-    {
+    fn (
+        a: String,
+        b: String
+    ) -> i8 {
         use std::cmp::Ordering::*;
         match a.to_lowercase().cmp(&b.to_lowercase()) {
             Greater => 1,

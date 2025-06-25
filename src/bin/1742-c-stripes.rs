@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        _s is String,
-        s is [[char]]; 8
-    ) -> char
-    {
+    fn (
+        _s: String,
+        s: [[char]]; 8
+    ) -> char {
         'l: for i in 0..8 {
             for j in 0..8 {
                 if s[i][j] != 'R' {

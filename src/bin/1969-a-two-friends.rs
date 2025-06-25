@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        p is [usize]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        p: [usize]
+    ) -> usize {
         for i in 0..n {
             if i == p[p[i] - 1] - 1 {
                 return 2;

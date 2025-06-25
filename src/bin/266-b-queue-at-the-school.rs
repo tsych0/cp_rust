@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [_, t] is [usize; 2],
-        s is String
-    ) -> String
-    {
+    fn (
+        [_, t]: [usize; 2],
+        s: String
+    ) -> String {
         let mut s = s.chars().collect::<Vec<_>>();
         for _ in 0..t {
             s = transform(&s)

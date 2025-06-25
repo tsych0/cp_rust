@@ -140,8 +140,7 @@ pub struct MultiMap<K, V, S = RandomState> {
 
 impl<K, V> MultiMap<K, V>
 where
-    K: Eq + Hash,
-{
+    K: Eq + Hash, {
     /// Creates an empty MultiMap
     ///
     /// # Examples
@@ -176,8 +175,7 @@ where
 impl<K, V, S> MultiMap<K, V, S>
 where
     K: Eq + Hash,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     /// Creates an empty MultiMap which will use the given hash builder to hash keys.
     ///
     /// # Examples
@@ -276,8 +274,7 @@ where
     /// ```
     pub fn insert_many_from_slice(&mut self, k: K, v: &[V])
     where
-        V: Clone,
-    {
+        V: Clone, {
         match self.entry(k) {
             Entry::Occupied(mut entry) => {
                 entry.get_vec_mut().extend_from_slice(v);
@@ -306,8 +303,7 @@ where
     pub fn contains_key<Q>(&self, k: &Q) -> bool
     where
         K: Borrow<Q>,
-        Q: Eq + Hash + ?Sized,
-    {
+        Q: Eq + Hash + ?Sized, {
         self.inner.contains_key(k)
     }
 
@@ -348,8 +344,7 @@ where
     pub fn remove<Q>(&mut self, k: &Q) -> Option<Vec<V>>
     where
         K: Borrow<Q>,
-        Q: Eq + Hash + ?Sized,
-    {
+        Q: Eq + Hash + ?Sized, {
         self.inner.remove(k)
     }
 
@@ -372,8 +367,7 @@ where
     pub fn get<Q>(&self, k: &Q) -> Option<&V>
     where
         K: Borrow<Q>,
-        Q: Eq + Hash + ?Sized,
-    {
+        Q: Eq + Hash + ?Sized, {
         self.inner.get(k)?.first()
     }
 
@@ -399,8 +393,7 @@ where
     pub fn get_mut<Q>(&mut self, k: &Q) -> Option<&mut V>
     where
         K: Borrow<Q>,
-        Q: Eq + Hash + ?Sized,
-    {
+        Q: Eq + Hash + ?Sized, {
         self.inner.get_mut(k)?.get_mut(0)
     }
 
@@ -422,8 +415,7 @@ where
     pub fn get_vec<Q>(&self, k: &Q) -> Option<&Vec<V>>
     where
         K: Borrow<Q>,
-        Q: Eq + Hash + ?Sized,
-    {
+        Q: Eq + Hash + ?Sized, {
         self.inner.get(k)
     }
 
@@ -449,8 +441,7 @@ where
     pub fn get_vec_mut<Q>(&mut self, k: &Q) -> Option<&mut Vec<V>>
     where
         K: Borrow<Q>,
-        Q: Eq + Hash + ?Sized,
-    {
+        Q: Eq + Hash + ?Sized, {
         self.inner.get_mut(k)
     }
 
@@ -476,8 +467,7 @@ where
     pub fn is_vec<Q>(&self, k: &Q) -> bool
     where
         K: Borrow<Q>,
-        Q: Eq + Hash + ?Sized,
-    {
+        Q: Eq + Hash + ?Sized, {
         match self.get_vec(k) {
             Some(val) => val.len() > 1,
             None => false,
@@ -760,8 +750,7 @@ where
     /// is other words, remove all pairs `(k, v)` such that `f(&k,&mut v)` returns `false`.
     pub fn retain<F>(&mut self, mut f: F)
     where
-        F: FnMut(&K, &V) -> bool,
-    {
+        F: FnMut(&K, &V) -> bool, {
         for (key, vector) in &mut self.inner {
             vector.retain(|value| f(key, value));
         }
@@ -773,8 +762,7 @@ impl<K, V, S, Q> Index<&Q> for MultiMap<K, V, S>
 where
     K: Eq + Hash + Borrow<Q>,
     Q: Eq + Hash + ?Sized,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     type Output = V;
 
     fn index(&self, index: &Q) -> &V {
@@ -790,8 +778,7 @@ impl<K, V, S> Debug for MultiMap<K, V, S>
 where
     K: Eq + Hash + Debug,
     V: Debug,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         f.debug_map().entries(self.iter_all()).finish()
     }
@@ -801,8 +788,7 @@ impl<K, V, S> PartialEq for MultiMap<K, V, S>
 where
     K: Eq + Hash,
     V: PartialEq,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     fn eq(&self, other: &MultiMap<K, V, S>) -> bool {
         if self.len() != other.len() {
             return false;
@@ -817,15 +803,13 @@ impl<K, V, S> Eq for MultiMap<K, V, S>
 where
     K: Eq + Hash,
     V: Eq,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
 }
 
 impl<K, V, S> Default for MultiMap<K, V, S>
 where
     K: Eq + Hash,
-    S: BuildHasher + Default,
-{
+    S: BuildHasher + Default, {
     fn default() -> MultiMap<K, V, S> {
         MultiMap {
             inner: Default::default(),
@@ -836,8 +820,7 @@ where
 impl<K, V, S> FromIterator<(K, V)> for MultiMap<K, V, S>
 where
     K: Eq + Hash,
-    S: BuildHasher + Default,
-{
+    S: BuildHasher + Default, {
     fn from_iter<T: IntoIterator<Item = (K, V)>>(iterable: T) -> MultiMap<K, V, S> {
         let iter = iterable.into_iter();
         let hint = iter.size_hint().0;
@@ -855,8 +838,7 @@ impl<K, V, S> FromIterator<(K, Vec<V>)> for MultiMap<K, V, S>
 where
     K: Eq + Hash,
     V: Clone,
-    S: BuildHasher + Default,
-{
+    S: BuildHasher + Default, {
     fn from_iter<T: IntoIterator<Item = (K, Vec<V>)>>(iterable: T) -> MultiMap<K, V, S> {
         let iter = iterable.into_iter();
         let hint = iter.size_hint().0;
@@ -873,8 +855,7 @@ where
 impl<'a, K, V, S> IntoIterator for &'a MultiMap<K, V, S>
 where
     K: Eq + Hash,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     type Item = (&'a K, &'a Vec<V>);
     type IntoIter = IterAll<'a, K, Vec<V>>;
 
@@ -886,8 +867,7 @@ where
 impl<'a, K, V, S> IntoIterator for &'a mut MultiMap<K, V, S>
 where
     K: Eq + Hash,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     type Item = (&'a K, &'a mut Vec<V>);
     type IntoIter = IterAllMut<'a, K, Vec<V>>;
 
@@ -899,8 +879,7 @@ where
 impl<K, V, S> IntoIterator for MultiMap<K, V, S>
 where
     K: Eq + Hash,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     type Item = (K, Vec<V>);
     type IntoIter = IntoIter<K, Vec<V>>;
 
@@ -912,8 +891,7 @@ where
 impl<K, V, S> Extend<(K, V)> for MultiMap<K, V, S>
 where
     K: Eq + Hash,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     fn extend<T: IntoIterator<Item = (K, V)>>(&mut self, iter: T) {
         for (k, v) in iter {
             self.insert(k, v);
@@ -925,8 +903,7 @@ impl<'a, K, V, S> Extend<(&'a K, &'a V)> for MultiMap<K, V, S>
 where
     K: Eq + Hash + Copy,
     V: Copy,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     fn extend<T: IntoIterator<Item = (&'a K, &'a V)>>(&mut self, iter: T) {
         self.extend(iter.into_iter().map(|(&key, &value)| (key, value)));
     }
@@ -935,8 +912,7 @@ where
 impl<K, V, S> Extend<(K, Vec<V>)> for MultiMap<K, V, S>
 where
     K: Eq + Hash,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     fn extend<T: IntoIterator<Item = (K, Vec<V>)>>(&mut self, iter: T) {
         for (k, values) in iter {
             match self.entry(k) {
@@ -955,8 +931,7 @@ impl<'a, K, V, S> Extend<(&'a K, &'a Vec<V>)> for MultiMap<K, V, S>
 where
     K: Eq + Hash + Copy,
     V: Copy,
-    S: BuildHasher,
-{
+    S: BuildHasher, {
     fn extend<T: IntoIterator<Item = (&'a K, &'a Vec<V>)>>(&mut self, iter: T) {
         self.extend(
             iter.into_iter()
@@ -1020,8 +995,7 @@ macro_rules! multimap{
     (@replace_with_unit $_t:tt) => { () };
     (@count $($key:expr),*) => { <[()]>::len(&[$($crate::multimap! { @replace_with_unit $key }),*]) };
 
-    ($($key:expr => $value:expr),* $(,)?)=>{
-        {
+    ($($key:expr => $value:expr),* $(,)?)=>{ {
             let mut map = $crate::MultiMap::with_capacity($crate::multimap! { @count $($key),* });
             $(
                 map.insert($key,$value);

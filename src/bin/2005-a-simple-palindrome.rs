@@ -6,13 +6,11 @@ use cp_lib::*;
 // @code begin
 use crate::itertools::Itertools;
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    (
-        n is usize
-    ) -> String
-    {
+    fn (
+        n: usize
+    ) -> String {
         let vowels = ['a', 'e', 'i', 'o', 'u'];
         vowels.into_iter().cycle().take(n).sorted().collect()
     }

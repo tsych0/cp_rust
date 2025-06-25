@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        s is [char]
-    ) -> Words<String>
-    {
+    fn (
+        s: [char]
+    ) -> Words<String> {
         let n = s.len();
         // let a = s.chars().take_while(|&c| c == 'a').collect::<String>();
 

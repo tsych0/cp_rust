@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, m] is [usize; 2]
-    ) -> String
-    {
+    fn (
+        [n, m]: [usize; 2]
+    ) -> String {
         if n.min(m) % 2 == 0 {
             "Malvika"
         } else {

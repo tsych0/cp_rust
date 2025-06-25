@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> usize {
         let mut r = vec![0; n];
         for i in 1..n {
             if a[i] < a[i - 1] {

@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize
-    ) -> usize
-    {
+    fn (
+        n: usize
+    ) -> usize {
         (1..).take_while(|i| n % i == 0).count()
     }
 }

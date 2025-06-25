@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, k] is [usize; 2]
-    ) -> usize
-    {
+    fn (
+        [n, k]: [usize; 2]
+    ) -> usize {
         let odd_count = (n + 1) / 2;
         if k <= odd_count {
             2 * k - 1

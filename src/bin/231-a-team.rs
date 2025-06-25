@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        confidence is [[u16]]; n
-    ) -> u16
-    {
+    fn (
+        n: usize,
+        confidence: [[u16]]; n
+    ) -> u16 {
         confidence
             .into_iter()
             .map(|v| v.into_iter().sum::<u16>() / 2)

@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, m] is [usize; 2],
-        matrix is [[isize]]; n
-    ) -> Lines<Words<isize>>
-    {
+    fn (
+        [n, m]: [usize; 2],
+        matrix: [[isize]]; n
+    ) -> Lines<Words<isize>> {
         let mut matrix = matrix;
         if n != 1 {
              let x = matrix.pop().unwrap();

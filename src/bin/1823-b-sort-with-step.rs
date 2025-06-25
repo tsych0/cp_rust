@@ -9,11 +9,10 @@ use cpio::*;
 use std::collections::HashSet;
 
 sol! {
-    (
-        [n, k] is [usize; 2],
-        p is [usize]
-    ) -> isize
-    {
+    fn (
+        [n, k]: [usize; 2],
+        p: [usize]
+    ) -> isize {
         let x = p
             .into_iter()
             .enumerate()

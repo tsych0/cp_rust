@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is String
-    ) -> Words<usize>
-    {
+    fn (
+        n: usize,
+        a: String
+    ) -> Words<usize> {
         let mut res = vec![];
         let (mut front, mut back) = (1, n);
         for a_i in a.trim().chars().rev() {

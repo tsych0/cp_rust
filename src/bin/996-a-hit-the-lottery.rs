@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize
-    ) -> usize
-    {
+    fn (
+        n: usize
+    ) -> usize {
         let denominations = [100, 20, 10, 5, 1];
         denominations
             .into_iter()

@@ -8,8 +8,9 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (        [_, k] is [usize; 2],
-        s is String
+    fn (
+        [_, k]: [usize; 2],
+        s: String
     ) -> bool {
         if s < s.chars().rev().collect() {
             true

@@ -208,9 +208,9 @@ where
 #[macro_export]
 macro_rules! sol {
     (
-        (
+        fn (
             $(
-               $var:tt is $ty:tt $(; $n:expr)?
+               $var:tt: $ty:tt $(; $n:expr)?
             ),* $(,)?
         ) -> $ret:ty
         $body:block
@@ -220,8 +220,7 @@ macro_rules! sol {
         }
         fn solution<R>(input: &mut CPInput<R>) -> $ret
         where
-            R: std::io::Read,
-        {
+            R: std::io::Read, {
             $(
                 read_value!(input, $var, $ty $(; $n)?);
             )*
@@ -233,9 +232,9 @@ macro_rules! sol {
 #[macro_export]
 macro_rules! sol_n {
     (
-        (
+        fn (
             $(
-               $var:tt is $ty:tt $(; $n:expr)?
+               $var:tt: $ty:tt $(; $n:expr)?
             ),* $(,)?
         ) -> $ret:ty
         $body:block
@@ -245,8 +244,7 @@ macro_rules! sol_n {
         }
         fn solution<R>(input: &mut CPInput<R>) -> $ret
         where
-            R: std::io::Read,
-        {
+            R: std::io::Read, {
             $(
                 read_value!(input, $var, $ty $(; $n)?);
             )*

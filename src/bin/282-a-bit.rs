@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        operations is [String]
-    ) -> i32
-    {
+    fn (
+        n: usize,
+        operations: [String]
+    ) -> i32 {
         operations.into_iter().fold(
             0,
             |acc, op| {

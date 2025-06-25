@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize
-    ) -> bool
-    {
+    fn (
+        n: usize
+    ) -> bool {
         n / 2020 >= n % 2020
     }
 }

@@ -7,11 +7,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        h is [u8]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        h: [u8]
+    ) -> usize {
         n - h
               .into_iter()
               .group_by(|&n| n)

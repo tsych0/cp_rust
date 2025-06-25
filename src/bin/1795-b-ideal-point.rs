@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, k] is [usize; 2],
-        lrs is [[usize]]; n
-    ) -> bool
-    {
+    fn (
+        [n, k]: [usize; 2],
+        lrs: [[usize]]; n
+    ) -> bool {
         for lr in &lrs {
             if lr[0] == k && lr[0] == lr[1] {
                 return true;

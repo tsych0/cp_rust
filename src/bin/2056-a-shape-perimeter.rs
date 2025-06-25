@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, m] is [u16; 2],
-        xys is [[u16]]; n as usize
-    ) -> u16
-    {
+    fn (
+        [n, m]: [u16; 2],
+        xys: [[u16]]; n as usize
+    ) -> u16 {
         (4 * m)
             + xys
                 .into_iter()

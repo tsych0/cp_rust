@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        x is usize
-    ) -> usize
-    {
+    fn (
+        x: usize
+    ) -> usize {
         if x % 5 == 0 {
             x / 5
         } else {

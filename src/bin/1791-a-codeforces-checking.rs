@@ -4,14 +4,11 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-#[allow(unused)]
-use std::convert::TryInto;
 
 sol! {
-    (
-        c is String
-    ) -> bool
-    {
+    fn (
+        c: String
+    ) -> bool {
         "codeforces".contains(&c)
     }
 }

@@ -6,12 +6,11 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (        s is String
-    ) -> String
-    {
+    fn (
+        s: String
+    ) -> String {
         if s.chars().into_iter().filter(|c| c.is_lowercase()).count()
-            < s.chars().into_iter().filter(|c| c.is_uppercase()).count()
-        {
+            < s.chars().into_iter().filter(|c| c.is_uppercase()).count() {
             s.to_uppercase()
         } else {
             s.to_lowercase()

@@ -6,9 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (        addition is String
-    ) -> String
-    {
+    fn (
+        addition: String
+    ) -> String {
         let mut nums = addition.split('+').collect::<Vec<_>>();
         nums.sort();
         nums.join("+")

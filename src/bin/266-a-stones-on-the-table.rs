@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        _ is u8,
-        stones is String
-    ) -> u8
-    {
+    fn (
+        _: u8,
+        stones: String
+    ) -> u8 {
         stones
             .chars()
             .fold(('X', 0), |acc, stone| {

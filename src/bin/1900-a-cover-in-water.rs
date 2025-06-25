@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        _n is usize,
-        s is [char]
-    ) -> usize
-    {
+    fn (
+        _n: usize,
+        s: [char]
+    ) -> usize {
         let dry_areas = s
             .into_iter()
             .group_by(|&c| c)

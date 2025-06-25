@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, k] is [usize; 2],
-        s is String
-    ) -> bool
-    {
+    fn (
+        [n, k]: [usize; 2],
+        s: String
+    ) -> bool {
         let s_rev = s.chars().rev().collect::<String>();
         n > 2 * k && s[..k] == s_rev[..k] && s[n - k..] == s_rev[n - k..]
     }

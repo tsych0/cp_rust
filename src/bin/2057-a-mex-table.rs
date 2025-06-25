@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, m] is [usize; 2]
-    ) -> usize
-    {
+    fn (
+        [n, m]: [usize; 2]
+    ) -> usize {
         usize::max(n, m) + 1
     }
 }

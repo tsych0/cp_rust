@@ -4,13 +4,11 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    (
-        n is usize
-    ) -> Words<isize>
-    {
+    fn (
+        n: usize
+    ) -> Words<isize> {
         if n % 2 == 0 {
             vec![-1].into()
         } else {

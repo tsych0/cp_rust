@@ -3,8 +3,7 @@
 pub fn floyd<T, FS>(start: T, successor: FS) -> (usize, T, usize)
 where
     T: Clone + PartialEq,
-    FS: Fn(T) -> T,
-{
+    FS: Fn(T) -> T, {
     let mut tortoise = successor(start.clone());
     let mut hare = successor(successor(start.clone()));
     while tortoise != hare {
@@ -28,8 +27,7 @@ where
 pub fn brent<T, FS>(start: T, successor: FS) -> (usize, T, usize)
 where
     T: Clone + PartialEq,
-    FS: Fn(T) -> T,
-{
+    FS: Fn(T) -> T, {
     let mut power = 1;
     let mut lam = 1;
     let mut tortoise = start.clone();

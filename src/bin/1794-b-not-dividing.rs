@@ -5,14 +5,12 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    (
-        n is usize,
-        (mut a) is [usize]
-    ) -> Words<usize>
-    {
+    fn (
+        n: usize,
+        (mut a): [usize]
+    ) -> Words<usize> {
         for i in 0..n {
             if a[i] == 1 {
                 a[i] = 2;

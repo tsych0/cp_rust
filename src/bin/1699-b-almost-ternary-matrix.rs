@@ -8,10 +8,9 @@ use cpio::*;
 use std::io::Read;
 
 sol! {
-    (
-        [n, m] is [usize; 2]
-    ) -> Lines<Words<usize>>
-    {
+    fn (
+        [n, m]: [usize; 2]
+    ) -> Lines<Words<usize>> {
         let f: Vec<usize> = [0, 1, 1, 0]
             .into_iter()
             .cycle()

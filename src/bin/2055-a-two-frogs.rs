@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [_n, a, b] is [i8; 3]
-    ) -> bool
-    {
+    fn (
+        [_n, a, b]: [i8; 3]
+    ) -> bool {
         (a - b).abs() % 2 == 0
     }
 }

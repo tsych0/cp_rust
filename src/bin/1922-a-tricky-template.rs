@@ -7,13 +7,12 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is String,
-        b is String,
-        c is String,
-    ) -> bool
-    {
+    fn (
+        n: usize,
+        a: String,
+        b: String,
+        c: String,
+    ) -> bool {
         let mut a = a.chars().into_iter();
         let mut b = b.chars().into_iter();
         let mut c = c.chars().into_iter();

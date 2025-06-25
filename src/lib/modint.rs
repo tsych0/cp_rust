@@ -692,8 +692,7 @@ macro_rules! impl_folding {
             #[inline]
             fn $method<S>(iter: S) -> Self
             where
-                S: Iterator<Item = Self>,
-            {
+                S: Iterator<Item = Self>, {
                 iter.fold($unit, $op)
             }
         }
@@ -702,8 +701,7 @@ macro_rules! impl_folding {
             #[inline]
             fn $method<S>(iter: S) -> Self
             where
-                S: Iterator<Item = &'a Self>,
-            {
+                S: Iterator<Item = &'a Self>, {
                 iter.fold($unit, $op)
             }
         }

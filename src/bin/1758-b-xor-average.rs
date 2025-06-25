@@ -7,9 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (        n is usize
-    ) -> Words<usize>
-    {
+    fn (
+        n: usize
+    ) -> Words<usize> {
         if n % 2 == 0 {
             ListOf(vec![vec![1, 3], vec![2; n - 2]].concat())
         } else {

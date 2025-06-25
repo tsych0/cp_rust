@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, m, mut l, mut r] is [isize; 4]
-    ) -> Words<isize>
-    {
+    fn (
+        [n, m, mut l, mut r]: [isize; 4]
+    ) -> Words<isize> {
         if m > n {
             r += m - n;
         } else {

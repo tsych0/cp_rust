@@ -8,11 +8,10 @@ use cpio::*;
 use std::io::Read;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> usize {
         let zero_count = a
             .iter()
             .take(n - 1)

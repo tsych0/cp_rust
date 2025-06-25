@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        _n is usize,
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        _n: usize,
+        a: [usize]
+    ) -> usize {
         a.iter().max().unwrap() - a.iter().min().unwrap()
     }
 }

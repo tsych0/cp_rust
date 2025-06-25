@@ -8,11 +8,10 @@ use cpio::*;
 use std::io::Read;
 
 sol! {
-    (
-        n is usize,
-        b is [isize]
-    ) -> isize
-    {
+    fn (
+        n: usize,
+        b: [isize]
+    ) -> isize {
         let mut max_result = 0;
         let left = b
             .iter()

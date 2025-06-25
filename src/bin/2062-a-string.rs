@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        s is [01]
-    ) -> u8
-    {
+    fn (
+        s: [01]
+    ) -> u8 {
         s.into_iter().sum()
     }
 }

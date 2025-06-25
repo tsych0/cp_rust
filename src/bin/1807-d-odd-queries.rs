@@ -8,12 +8,11 @@ use cpio::*;
 use std::convert::TryInto;
 
 sol! {
-    (
-        [_n, q] is [usize; 2],
-        a is [usize],
-        queries is [[usize]]; q
-    ) -> Lines<bool>
-    {
+    fn (
+        [_n, q]: [usize; 2],
+        a: [usize],
+        queries: [[usize]]; q
+    ) -> Lines<bool> {
         let (a_partial_sum, a_sum) = a.into_iter().fold((vec![0], 0), |(mut acc, acc_sum), i| {
             acc.push(acc_sum + i);
             (acc, acc_sum + i)

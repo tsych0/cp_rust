@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, x, y] is [isize; 3]
-    ) -> Words<isize>
-    {
+    fn (
+        [n, x, y]: [isize; 3]
+    ) -> Words<isize> {
         let k = x + y;
         if x != 0 && y != 0 || x + y == 0 || ((n - 1) % k != 0) {
             ListOf(vec![-1])

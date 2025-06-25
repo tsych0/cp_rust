@@ -8,10 +8,9 @@ use cpio::*;
 use std::io::Read;
 
 sol! {
-    (
-        n is usize
-    ) -> ListOf<'\0', usize>
-    {
+    fn (
+        n: usize
+    ) -> ListOf<'\0', usize> {
         vec![9]
               .into_iter()
               .chain((1..n).map(|i| (i + 7) % 10))

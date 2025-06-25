@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [a, b, _n] is [usize; 3],
-        x is [usize]
-    ) -> usize
-    {
+    fn (
+        [a, b, _n]: [usize; 3],
+        x: [usize]
+    ) -> usize {
         x.into_iter().map(|xi| xi.min(a - 1)).sum::<usize>() + b
     }
 }

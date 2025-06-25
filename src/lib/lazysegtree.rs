@@ -176,7 +176,6 @@ impl<F: MapMonoid> LazySegtree<F> {
                 self.push((r - 1) >> i);
             }
         }
-
         {
             let l2 = l;
             let r2 = r;

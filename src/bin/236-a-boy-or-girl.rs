@@ -7,9 +7,9 @@ use cpio::*;
 use std::collections::HashSet;
 
 sol! {
-    (        s is String
-    ) -> String
-    {
+    fn (
+        s: String
+    ) -> String {
         if s.chars().collect::<HashSet<_>>().len() % 2 == 0 {
             "CHAT WITH HER!".into()
         } else {

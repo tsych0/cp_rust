@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> u8
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> u8 {
         if a == (1..=n).collect::<Vec<_>>() {
             0
         } else if a[0] == 1 || a[n - 1] == n {

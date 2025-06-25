@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [mut a, mut b] is [usize; 2]
-    ) -> usize
-    {
+    fn (
+        [mut a, mut b]: [usize; 2]
+    ) -> usize {
         for i in 1.. {
             a *= 3;
             b *= 2;

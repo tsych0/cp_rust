@@ -5,8 +5,7 @@ where
     N: Eq,
     FN: FnMut(&N) -> IN,
     IN: IntoIterator<Item = N>,
-    FS: FnMut(&N) -> bool,
-{
+    FS: FnMut(&N) -> bool, {
     let mut path = vec![start];
 
     let mut current_max_depth: usize = 1;
@@ -37,8 +36,7 @@ where
     N: Eq,
     FN: FnMut(&N) -> IN,
     IN: IntoIterator<Item = N>,
-    FS: FnMut(&N) -> bool,
-{
+    FS: FnMut(&N) -> bool, {
     if depth == 0 {
         Path::NoneAtThisDepth
     } else if success(path.last().unwrap()) {

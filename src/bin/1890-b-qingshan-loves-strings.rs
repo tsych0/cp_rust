@@ -8,18 +8,16 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        [_n, _k] is [usize; 2],
-        s is [01],
-        t is [01]
-    ) -> bool
-    {
+    fn (
+        [_n, _k]: [usize; 2],
+        s: [01],
+        t: [01]
+    ) -> bool {
         if s.iter().group_by(|&c| c).filter(|g| g.len() > 1).count() == 0 {
             true
         } else {
             if t.iter().group_by(|&c| c).filter(|g| g.len() > 1).count() > 0
-                || t.first().unwrap() != t.last().unwrap()
-            {
+                || t.first().unwrap() != t.last().unwrap() {
                 false
             } else {
                 let inserter = t.first().unwrap();

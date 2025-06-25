@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, k, x] is [isize; 3]
-    ) -> isize
-    {
+    fn (
+        [n, k, x]: [isize; 3]
+    ) -> isize {
         if k > n || k > x + 1 {
             return -1;
         }

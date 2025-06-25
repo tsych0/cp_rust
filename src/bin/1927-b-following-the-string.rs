@@ -9,11 +9,10 @@ use std::collections::HashMap;
 use std::collections::VecDeque;
 
 sol! {
-    (
-        _n is usize,
-        a is [usize]
-    ) -> String
-    {
+    fn (
+        _n: usize,
+        a: [usize]
+    ) -> String {
         let mut trace = HashMap::<usize, VecDeque<char>>::new();
         trace.insert(
             0,

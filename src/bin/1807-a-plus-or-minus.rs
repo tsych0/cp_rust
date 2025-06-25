@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [a, b, c] is [isize; 3]
-    ) -> char
-    {
+    fn (
+        [a, b, c]: [isize; 3]
+    ) -> char {
         if a + b == c {
             '+'
         } else {

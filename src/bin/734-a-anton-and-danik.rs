@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        s is String
-    ) -> String
-    {
+    fn (
+        n: usize,
+        s: String
+    ) -> String {
         let anton = s.chars().filter(|&c| c == 'A').count();
         let danik = s.chars().filter(|&c| c == 'D').count();
         if anton > danik {

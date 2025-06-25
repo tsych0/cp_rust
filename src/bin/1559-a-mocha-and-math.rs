@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        _n is usize,
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        _n: usize,
+        a: [usize]
+    ) -> usize {
         a.into_iter().fold(usize::MAX, |acc, ai| acc & ai)
     }
 }

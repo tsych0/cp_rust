@@ -28,8 +28,7 @@ where
     for<'it> &'it It2: IntoIterator<Item = &'it N>,
     C1: FromIterator<N>,
     C2: FromIterator<C1>,
-    C3: FromIterator<(N, usize)>,
-{
+    C3: FromIterator<(N, usize)>, {
     /// Separate components of an undirected graph into disjoint sets.
     pub fn separate_components(groups: &[It]) -> (HashMap<&N, usize>, Vec<usize>) {
         let mut table = (0..groups.len()).collect::<Vec<_>>();
@@ -73,8 +72,7 @@ where
         for (i, n) in gindices
             .into_iter()
             .enumerate()
-            .filter(|&(_, n)| n != usize::MAX)
-        {
+            .filter(|&(_, n)| n != usize::MAX) {
             let set = gb.entry(n).or_default();
             for e in groups[i].clone() {
                 set.insert(e);
@@ -87,8 +85,7 @@ where
     pub fn connected_components<FN, IN>(starts: &[N], mut neighbours: FN) -> C2
     where
         FN: FnMut(&N) -> IN,
-        IN: IntoIterator<Item = N>,
-    {
+        IN: IntoIterator<Item = N>, {
         ConnectedComponents::<N, Vec<N>, It2, C1, C2, C3>::components(
             &starts
                 .iter()
@@ -124,16 +121,14 @@ fn find(table: &mut [usize], mut x: usize) -> usize {
 /// Separate components of an undirected graph into disjoint sets.
 pub fn separate_components<N>(groups: &[Vec<N>]) -> (HashMap<&N, usize>, Vec<usize>)
 where
-    N: Hash + Eq + Clone,
-{
+    N: Hash + Eq + Clone, {
     ConnectedComponents::<N>::separate_components(groups)
 }
 
 /// Separate components of an undirected graph into disjoint sets.
 pub fn components<N>(groups: &[Vec<N>]) -> Vec<HashSet<N>>
 where
-    N: Clone + Hash + Eq,
-{
+    N: Clone + Hash + Eq, {
     ConnectedComponents::<N>::components(groups)
 }
 
@@ -142,8 +137,7 @@ pub fn connected_components<N, FN, IN>(starts: &[N], neighbours: FN) -> Vec<Hash
 where
     N: Clone + Hash + Eq,
     FN: FnMut(&N) -> IN,
-    IN: IntoIterator<Item = N>,
-{
+    IN: IntoIterator<Item = N>, {
     ConnectedComponents::<N>::connected_components(starts, neighbours)
 }
 
@@ -151,7 +145,6 @@ where
 #[expect(clippy::implicit_hasher)]
 pub fn component_index<N>(components: &[HashSet<N>]) -> HashMap<N, usize>
 where
-    N: Clone + Hash + Eq,
-{
+    N: Clone + Hash + Eq, {
     ConnectedComponents::<N>::component_index(components)
 }

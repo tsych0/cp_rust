@@ -9,10 +9,9 @@ use std::io::Read;
 use std::iter::repeat;
 
 sol! {
-    (
-        n is usize
-    ) -> String
-    {
+    fn (
+        n: usize
+    ) -> String {
         if n % 2 == 0 {
             repeat('3').take(n - 2).collect::<String>() + "66"
         } else if n >= 5 {

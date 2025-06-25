@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [_n, k] is [usize; 2],
-        b is [usize]
-        ) -> String
-    {
+    fn (
+        [_n, k]: [usize; 2],
+        b: [usize]
+        ) -> String {
         let b_prod = b.iter().fold(1, |acc, bi| acc * bi);
         if 2023 % b_prod == 0 {
             format!(

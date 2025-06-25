@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> u8
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> u8 {
         if a.iter().filter(|&&i| i == 0).count() > (n + 1) / 2 {
             if a.into_iter().max().unwrap() == 1 {
                 2

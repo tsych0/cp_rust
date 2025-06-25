@@ -8,10 +8,9 @@ use cpio::*;
 use std::io::Read;
 
 sol! {
-    (
-       (mut n) is usize
-    ) -> bool
-    {
+    fn (
+       (mut n): usize
+    ) -> bool {
         while n % 2 == 0 {
             n /= 2
         }

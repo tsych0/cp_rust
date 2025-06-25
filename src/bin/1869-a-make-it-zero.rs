@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        _a is [usize]
-    ) -> Lines<String>
-    {
+    fn (
+        n: usize,
+        _a: [usize]
+    ) -> Lines<String> {
         vec![
              "4".into(),
              format!("1 {n}"),

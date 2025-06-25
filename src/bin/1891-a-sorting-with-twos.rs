@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> bool
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> bool {
         (1..=n.ilog2())
             .map(|i| 2usize.pow(i)..2usize.pow(i + 1).min(n))
             .map(|range| a.get(range).unwrap())

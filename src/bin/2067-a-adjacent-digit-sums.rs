@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [x, y] is [usize; 2]
-    ) -> bool
-    {
+    fn (
+        [x, y]: [usize; 2]
+    ) -> bool {
         if x > y {
             (x - y + 1) % 9 == 0
         } else {

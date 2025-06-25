@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, h] is [usize; 2],
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        [n, h]: [usize; 2],
+        a: [usize]
+    ) -> usize {
         n + a.into_iter().filter(|&ai| ai > h).count()
     }
 }

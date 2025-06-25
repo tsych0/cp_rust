@@ -9,11 +9,10 @@ use cpio::*;
 use std::cmp::min;
 
 sol! {
-    (
-        n is usize,
-        a is [isize]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        a: [isize]
+    ) -> usize {
         let mut max_occ = a
             .into_iter()
             .sorted()

@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is u8
-    ) -> Words<u8>
-    {
+    fn (
+        n: u8
+    ) -> Words<u8> {
         (0..n).map(|i| 2 * i + 1).collect()
     }
 }

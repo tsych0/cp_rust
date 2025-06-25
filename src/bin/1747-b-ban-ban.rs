@@ -5,12 +5,11 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    (        n is usize
-    ) -> Lines<Words<usize>>
-    {
+    fn (
+        n: usize
+    ) -> Lines<Words<usize>> {
         let count = (n + 1) / 2;
         let s = "BAN".repeat(n);
         let b = s

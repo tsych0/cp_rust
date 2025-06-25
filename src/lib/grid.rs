@@ -319,8 +319,7 @@ impl Grid {
         mut predicate: P,
     ) -> BTreeSet<(usize, usize)>
     where
-        P: FnMut((usize, usize)) -> bool,
-    {
+        P: FnMut((usize, usize)) -> bool, {
         bfs_reach(start, |&n| {
             self.neighbours(n)
                 .into_iter()
@@ -341,8 +340,7 @@ impl Grid {
         mut predicate: P,
     ) -> BTreeSet<(usize, usize)>
     where
-        P: FnMut((usize, usize)) -> bool,
-    {
+        P: FnMut((usize, usize)) -> bool, {
         dfs_reach(start, |&n| {
             self.neighbours(n)
                 .into_iter()
@@ -377,8 +375,7 @@ impl Grid {
     /// between them.
     pub fn from_coordinates<T>(points: &[(T, T)]) -> Option<Self>
     where
-        T: Ord + Sub<Output = T> + Copy + Default + TryInto<usize>,
-    {
+        T: Ord + Sub<Output = T> + Copy + Default + TryInto<usize>, {
         let (min_x, min_y) = (
             points
                 .iter()
@@ -413,8 +410,7 @@ impl Grid {
 impl FromIterator<(usize, usize)> for Grid {
     fn from_iter<T>(iter: T) -> Self
     where
-        T: IntoIterator<Item = (usize, usize)>,
-    {
+        T: IntoIterator<Item = (usize, usize)>, {
         let vertices: IndexSet<(usize, usize)> = iter.into_iter().collect();
         let mut width = 0;
         let mut height = 0;

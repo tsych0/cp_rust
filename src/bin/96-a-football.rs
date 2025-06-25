@@ -8,10 +8,9 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        n is [01]
-    ) -> bool
-    {
+    fn (
+        n: [01]
+    ) -> bool {
         n.into_iter()
             .group_by(|&p| p)
             .map(|g| g.len())

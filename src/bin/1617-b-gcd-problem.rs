@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize
-    ) -> Words<usize>
-    {
+    fn (
+        n: usize
+    ) -> Words<usize> {
         let res = if n % 2 == 0 {
             vec![n / 2 - 1, n / 2, 1]
         } else {

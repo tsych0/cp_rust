@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> bool
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> bool {
         let one_count = a.iter().filter(|&&i| i == 1).count();
         let other_sum = a.iter().filter(|&&i| i != 1).sum::<usize>();
         let remaining_idx = n - one_count;

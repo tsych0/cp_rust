@@ -6,8 +6,8 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [a, b] is [usize; 2]
+    fn (
+        [a, b]: [usize; 2]
     ) -> usize {
         if b < 2 {
             return 0;

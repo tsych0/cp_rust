@@ -8,11 +8,10 @@ use cpio::*;
 use std::collections::HashMap;
 
 sol! {
-    (
-        n is usize,
-        a is [[isize]]; n
-    ) -> isize
-    {
+    fn (
+        n: usize,
+        a: [[isize]]; n
+    ) -> isize {
         let mut values: HashMap<isize, isize> = HashMap::new();
 
         for i in 0..n {

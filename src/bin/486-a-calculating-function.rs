@@ -6,9 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (        n is isize
-    ) -> isize
-    {
+    fn (
+        n: isize
+    ) -> isize {
         if n % 2 == 0 {
             (n + 1) / 2
         } else {

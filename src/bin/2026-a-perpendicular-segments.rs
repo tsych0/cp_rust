@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [x, y, k] is [usize; 3]
-    ) -> Lines<Words<usize>>
-    {
+    fn (
+        [x, y, k]: [usize; 3]
+    ) -> Lines<Words<usize>> {
         if x >= k && y >= k {
             vec![vec![0, 0, x, 0].into(), vec![0, 0, 0, y].into()]
         } else {

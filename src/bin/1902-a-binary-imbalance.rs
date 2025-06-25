@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        s is [01]
-    ) -> bool
-    {
+    fn (
+        n: usize,
+        s: [01]
+    ) -> bool {
         let s = s.into_iter().unique().collect::<Vec<_>>();
         s != vec![1]
     }

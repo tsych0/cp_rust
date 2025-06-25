@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is isize
-    ) -> Words<isize>
-    {
+    fn (
+        n: isize
+    ) -> Words<isize> {
         let res = if n == 1 {
             vec![1]
         } else if n % 2 == 1 {

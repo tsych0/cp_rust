@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        _n is usize,
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        _n: usize,
+        a: [usize]
+    ) -> usize {
         a.into_iter()
              .group_by(|&ai| ai)
              .filter(|g| g[0] == 0)

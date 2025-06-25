@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, k, x] is [usize; 3]
-    ) -> bool
-    {
+    fn (
+        [n, k, x]: [usize; 3]
+    ) -> bool {
         let l = n - k;
           let full_sum = (n * (n + 1)) / 2;
           let half_sum = (k * (k + 1)) / 2;

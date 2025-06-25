@@ -9,11 +9,10 @@ use std::collections::HashMap;
 use std::ops::*;
 
 sol! {
-    (
-        dir is char,
-        s is String
-    ) -> String
-    {
+    fn (
+        dir: char,
+        s: String
+    ) -> String {
         let keyboard = vec!["qwertyuiop", "asdfghjkl;", "zxcvbnm,./"];
         let char_map: HashMap<char, (usize, usize)> = keyboard
             .clone()

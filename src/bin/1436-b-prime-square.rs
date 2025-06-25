@@ -8,10 +8,9 @@ use cpio::*;
 use sieve::Sieve;
 
 sol! {
-    (
-        n is usize
-    ) -> Lines<Words<usize>>
-    {
+    fn (
+        n: usize
+    ) -> Lines<Words<usize>> {
         let sive = Sieve::new(400);
         let next_prime = (n..)
             .find(|&i| sive.is_prime(i) && !sive.is_prime(i - n + 1))

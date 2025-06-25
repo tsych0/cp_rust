@@ -6,9 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (        n is i16
-    ) -> Words<i16>
-    {
+    fn (
+        n: i16
+    ) -> Words<i16> {
         if n % 2 == 0 {
             ListOf(vec![-1])
         } else {

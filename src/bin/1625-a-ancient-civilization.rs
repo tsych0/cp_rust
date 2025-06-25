@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        [n, l] is [usize; 2],
-        x is [usize]
-    ) -> usize
-    {
+    fn (
+        [n, l]: [usize; 2],
+        x: [usize]
+    ) -> usize {
         let mut x_bin: Vec<Vec<u8>> = vec![];
            for xi in x {
                let mut xi_bin = vec![0; l];

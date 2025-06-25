@@ -6,10 +6,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is i32
-    ) -> String
-    {
+    fn (
+        n: i32
+    ) -> String {
         let mut sum = 0;
         for i in 1.. {
             sum += (-1 as i32).pow(i as u32) * (2 * i - 1);

@@ -6,11 +6,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> f64
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> f64 {
         a.into_iter().sum::<usize>() as f64 / n as f64
     }
 }

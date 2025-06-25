@@ -7,11 +7,10 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> usize {
         let (_, max_idx) = a
             .iter()
             .zip(0..n)

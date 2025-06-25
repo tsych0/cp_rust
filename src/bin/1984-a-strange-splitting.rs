@@ -7,11 +7,10 @@ use cpio::*;
 use std::collections::HashSet;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> String
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> String {
         let last_nums = a.get(1..n).unwrap().iter().collect::<HashSet<_>>();
         if last_nums.len() != 1 {
             "YES\n".to_string() + "R" + &vec!["B"; n - 1].into_iter().collect::<String>()

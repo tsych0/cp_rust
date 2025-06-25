@@ -7,10 +7,9 @@ use cp_lib::*;
 use cpio::*;
 
 sol! {
-    (
-        s is String
-    ) -> Lines<String>
-    {
+    fn (
+        s: String
+    ) -> Lines<String> {
         let n = s.len();
         let r = vec!["()".repeat(n), "(".repeat(n) + &")".repeat(n)];
         match r.into_iter().find(|ri| !ri.contains(&s)) {

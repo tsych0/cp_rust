@@ -8,11 +8,10 @@ use crate::itertools::Itertools;
 use cpio::*;
 
 sol! {
-    (
-        n is usize,
-        a is [usize]
-    ) -> usize
-    {
+    fn (
+        n: usize,
+        a: [usize]
+    ) -> usize {
         let total: usize = a.iter().sum();
         let mut sum = 0;
         for (i, ai) in a.into_iter().sorted_by(|a, &b| b.cmp(a)).enumerate() {
