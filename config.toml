@@ -33,7 +33,7 @@ modifier = '''
 {{!-- Base code block --}}
 {{{code}}}
 
-{{!-- Iterate over each library in lib_files --}}
+{{!-- Iterate over each library is lib_files --}}
 {{#each lib_files}}
 mod {{{@key}}} {
     {{{this}}}

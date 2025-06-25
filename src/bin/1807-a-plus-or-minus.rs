@@ -8,19 +8,16 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> char
-where
-    R: Read,
-{
-    let [a, b, c]: [isize; 3] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    if a + b == c {
-        '+'
-    } else {
-        '-'
+sol! {
+    (
+        [a, b, c] is [isize; 3]
+    ) -> char
+    {
+        if a + b == c {
+            '+'
+        } else {
+            '-'
+        }
     }
 }
 // @code end

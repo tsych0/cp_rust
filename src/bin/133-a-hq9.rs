@@ -5,17 +5,13 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let s: String = input.read_line(parse).unwrap();
-    s.contains(&['H', 'Q', '9'])
+sol! {
+    (
+        s is String
+    ) -> bool
+    {
+        s.contains(&['H', 'Q', '9'])
+    }
 }
 // @code end

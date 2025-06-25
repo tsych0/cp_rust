@@ -7,23 +7,21 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        _a is [usize]
+    ) -> Lines<String>
+    {
+        vec![
+             "4".into(),
+             format!("1 {n}"),
+             format!("{} {n}", 1 + n % 2),
+             format!("1 2"),
+             format!("1 2"),
+         ]
+         .into()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> Lines<String>
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let _a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    vec![
-        "4".into(),
-        format!("1 {n}"),
-        format!("{} {n}", 1 + n % 2),
-        format!("1 2"),
-        format!("1 2"),
-    ]
-    .into()
-}
 // @code end

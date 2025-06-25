@@ -10,34 +10,32 @@ use std::collections::HashSet;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
+sol! {
+    (
+        [n, k] is [usize; 2],
+        p is [usize]
+    ) -> isize
+    {
+        let x = p
+            .into_iter()
+            .enumerate()
+            .sorted_by_key(|(i, _)| i % k)
+            .group_by(|(i, _)| i % k)
+            .map(|g| g.into_iter().map(|(_, j)| j).collect::<HashSet<_>>());
+        let y = (1..=n)
+            .enumerate()
+            .sorted_by_key(|(i, _)| i % k)
+            .group_by(|(i, _)| i % k)
+            .map(|g| g.into_iter().map(|(_, j)| j).collect::<HashSet<_>>());
 
-fn solution<R>(input: &mut CPInput<R>) -> isize
-where
-    R: Read,
-{
-    let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let p: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let x = p
-        .into_iter()
-        .enumerate()
-        .sorted_by_key(|(i, _)| i % k)
-        .group_by(|(i, _)| i % k)
-        .map(|g| g.into_iter().map(|(_, j)| j).collect::<HashSet<_>>());
-    let y = (1..=n)
-        .enumerate()
-        .sorted_by_key(|(i, _)| i % k)
-        .group_by(|(i, _)| i % k)
-        .map(|g| g.into_iter().map(|(_, j)| j).collect::<HashSet<_>>());
+        let faults = x.zip(y).map(|(xi, yi)| xi.difference(&yi).count()).sum();
 
-    let faults = x.zip(y).map(|(xi, yi)| xi.difference(&yi).count()).sum();
-
-    match faults {
-        0 => 0,
-        2 => 1,
-        _ => -1,
+        match faults {
+            0 => 0,
+            2 => 1,
+            _ => -1,
+        }
     }
 }
+
 // @code end

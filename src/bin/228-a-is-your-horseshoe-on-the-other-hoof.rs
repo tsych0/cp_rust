@@ -4,17 +4,15 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::{collections::HashSet, io::Read};
+use std::collections::HashSet;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        shoes is [usize]
+    ) -> usize
+    {
+        4 - shoes.into_iter().collect::<HashSet<_>>().len()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let shoes: Vec<usize> = input.read_line(parse_vec).unwrap();
-    4 - shoes.into_iter().collect::<HashSet<_>>().len()
-}
 // @code end

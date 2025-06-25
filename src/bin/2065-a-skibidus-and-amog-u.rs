@@ -3,20 +3,18 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve_n;
+use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        (mut s) is String
+    ) -> String
+    {
+        let len = s.len();
+        s.replace_range(len - 2.., "i");
+        s
+    }
 }
 
-fn solution<R>(input: &mut cpio::CPInput<R>) -> String
-where
-    R: Read,
-{
-    let mut s: String = input.read_line(cpio::parse).unwrap();
-    let len = s.len();
-    s.replace_range(len - 2.., "i");
-    s
-}
 // @code end

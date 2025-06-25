@@ -4,11 +4,20 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::convert::TryInto;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        [_, t] is [usize; 2],
+        s is String
+    ) -> String
+    {
+        let mut s = s.chars().collect::<Vec<_>>();
+        for _ in 0..t {
+            s = transform(&s)
+        }
+
+        s.into_iter().collect()
+    }
 }
 
 fn transform(queue: &[char]) -> Vec<char> {
@@ -25,19 +34,5 @@ fn transform(queue: &[char]) -> Vec<char> {
         }
         [] => Vec::new(), // Handle empty slice case
     }
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> String
-where
-    R: Read,
-{
-    let [_, t]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let s: String = input.read_line(parse).unwrap();
-    let mut s = s.chars().collect::<Vec<_>>();
-    for _ in 0..t {
-        s = transform(&s)
-    }
-
-    s.into_iter().collect()
 }
 // @code end

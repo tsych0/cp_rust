@@ -7,22 +7,20 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        [mut a, mut b] is [usize; 2]
+    ) -> usize
+    {
+        for i in 1.. {
+            a *= 3;
+            b *= 2;
+            if a > b {
+                return i;
+            }
+        }
+        0
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [mut a, mut b]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    for i in 1.. {
-        a *= 3;
-        b *= 2;
-        if a > b {
-            return i;
-        }
-    }
-    0
-}
 // @code end

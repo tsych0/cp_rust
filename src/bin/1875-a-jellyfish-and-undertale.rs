@@ -8,16 +8,14 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [a, b, _n] is [usize; 3],
+        x is [usize]
+    ) -> usize
+    {
+        x.into_iter().map(|xi| xi.min(a - 1)).sum::<usize>() + b
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [a, b, _n]: [usize; 3] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let x: Vec<usize> = input.read_line(parse_vec).unwrap();
-    x.into_iter().map(|xi| xi.min(a - 1)).sum::<usize>() + b
-}
 // @code end

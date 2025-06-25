@@ -6,15 +6,13 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize
+    ) -> Words<usize>
+    {
+        (1..=n).collect()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    (1..=n).collect()
-}
 // @code end

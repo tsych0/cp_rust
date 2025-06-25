@@ -4,18 +4,15 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        n is usize,
+        a is [usize]
+    ) -> f64
+    {
+        a.into_iter().sum::<usize>() as f64 / n as f64
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> f64
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    a.into_iter().sum::<usize>() as f64 / n as f64
-}
 // @code end

@@ -86,7 +86,7 @@ where
         let n_ = self._n;
         assert!(s < n_);
         assert!(t < n_);
-        // By the definition of max flow in appendix.html, this function should return 0
+        // By the definition of max flow is appendix.html, this function should return 0
         // when the same vertices are provided.  On the other hand, it is reasonable to
         // return infinity-like value too, which is what the original implementation
         // (and this implementation without the following assertion) does.

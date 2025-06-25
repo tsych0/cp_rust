@@ -8,34 +8,31 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, m] is [usize; 2]
+    ) -> Lines<Words<usize>>
+    {
+        let f: Vec<usize> = [0, 1, 1, 0]
+            .into_iter()
+            .cycle()
+            .take(m)
+            .map(|v| v.clone())
+            .collect::<Vec<_>>();
+        let s: Vec<usize> = [1, 0, 0, 1]
+            .into_iter()
+            .cycle()
+            .take(m)
+            .map(|v| v.clone())
+            .collect::<Vec<_>>();
+
+        vec![f.clone(), s.clone(), s, f]
+            .into_iter()
+            .cycle()
+            .take(n)
+            .map(ListOf)
+            .collect()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> Lines<Words<usize>>
-where
-    R: Read,
-{
-    println!("{}", '\n');
-    let [n, m]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let f: Vec<usize> = [0, 1, 1, 0]
-        .into_iter()
-        .cycle()
-        .take(m)
-        .map(|v| v.clone())
-        .collect::<Vec<_>>();
-    let s: Vec<usize> = [1, 0, 0, 1]
-        .into_iter()
-        .cycle()
-        .take(m)
-        .map(|v| v.clone())
-        .collect::<Vec<_>>();
-
-    vec![f.clone(), s.clone(), s, f]
-        .into_iter()
-        .cycle()
-        .take(n)
-        .map(ListOf)
-        .collect()
-}
 // @code end

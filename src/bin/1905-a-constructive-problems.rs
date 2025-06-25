@@ -9,15 +9,13 @@ use std::cmp::max;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, m] is [usize; 2]
+    ) -> usize
+    {
+        max(n, m)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [n, m]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    max(n, m)
-}
 // @code end

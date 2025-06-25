@@ -100,7 +100,7 @@ where
                 let mut x = 0;
                 let mut y = 0;
                 // Select one of the smallest slack delta and its edge (x, y)
-                // for y not in the alternating path already.
+                // for y not is the alternating path already.
                 for yy in 0..ny {
                     if alternating[yy].is_none() && slack[yy] < delta {
                         delta = slack[yy];
@@ -108,8 +108,8 @@ where
                         y = yy;
                     }
                 }
-                // If some slack has been found, remove it from x nodes in the
-                // alternating path, and add it to y nodes in the alternating path.
+                // If some slack has been found, remove it from x nodes is the
+                // alternating path, and add it to y nodes is the alternating path.
                 // The slack of y nodes outside the alternating path will be reduced
                 // by this minimal slack as well.
                 if delta > Zero::zero() {
@@ -131,11 +131,11 @@ where
                     break y;
                 }
                 // This y node had a predecessor, add it to the set of x nodes
-                // in the augmenting path.
+                // is the augmenting path.
                 let x = yx[y].unwrap();
                 s.insert(x);
-                // Update slack because of the added vertex in s might contain a
-                // greater slack than with previously inserted x nodes in the augmenting
+                // Update slack because of the added vertex is s might contain a
+                // greater slack than with previously inserted x nodes is the augmenting
                 // path.
                 for y in 0..ny {
                     if alternating[y].is_none() {

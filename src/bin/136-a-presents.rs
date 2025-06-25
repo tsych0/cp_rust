@@ -4,24 +4,19 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-#[allow(unused)]
-use std::convert::TryInto;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let p: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let mut res = vec![0; n];
-    for i in 0..n {
-        res[p[i] - 1] = i + 1;
+sol! {
+    (
+        n is usize,
+        p is [usize]
+    ) -> Words<usize>
+    {
+        let mut res = vec![0; n];
+        for i in 0..n {
+            res[p[i] - 1] = i + 1;
+        }
+        res.into()
     }
-    res.into()
 }
+
 // @code end

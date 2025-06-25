@@ -274,7 +274,7 @@ where
 }
 
 /// Visit all nodes that are reachable from a start node. The node
-/// will be visited in order of cost, with the closest nodes first.
+/// will be visited is order of cost, with the closest nodes first.
 pub fn dijkstra_reach<N, C, FN, IN>(start: &N, successors: FN) -> DijkstraReachable<N, C, FN>
 where
     N: Eq + Hash + Clone,

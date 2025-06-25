@@ -7,31 +7,28 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
+sol! {
+    (
+        n is usize,
+        s is String
+    ) -> String
+    {
+        let s_rev: String = s.chars().rev().collect();
 
-fn solution<R>(input: &mut CPInput<R>) -> String
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let s: String = input.read_line(parse).unwrap();
-
-    let s_rev: String = s.chars().rev().collect();
-
-    if s > s_rev {
-        if n % 2 == 0 {
-            format!("{s_rev}{s}")
+        if s > s_rev {
+            if n % 2 == 0 {
+                format!("{s_rev}{s}")
+            } else {
+                s_rev
+            }
         } else {
-            s_rev
-        }
-    } else {
-        if n % 2 == 0 {
-            s
-        } else {
-            format!("{s}{s_rev}")
+            if n % 2 == 0 {
+                s
+            } else {
+                format!("{s}{s_rev}")
+            }
         }
     }
 }
+
 // @code end

@@ -6,26 +6,22 @@ use cp_lib::*;
 // @code begin
 use crate::itertools::Itertools;
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let total: usize = a.iter().sum();
-    let mut sum = 0;
-    for (i, ai) in a.into_iter().sorted_by(|a, &b| b.cmp(a)).enumerate() {
-        if 2 * sum > total {
-            return i;
+sol! {
+    (
+        n is usize,
+        a is [usize]
+    ) -> usize
+    {
+        let total: usize = a.iter().sum();
+        let mut sum = 0;
+        for (i, ai) in a.into_iter().sorted_by(|a, &b| b.cmp(a)).enumerate() {
+            if 2 * sum > total {
+                return i;
+            }
+            sum += ai;
         }
-        sum += ai;
+        n
     }
-    n
 }
 // @code end

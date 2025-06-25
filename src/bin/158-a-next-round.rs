@@ -3,40 +3,31 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve;
-use std::convert::TryInto;
-use std::io::Read;
+use cpio::*;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut cpio::CPInput<R>) -> u8
-where
-    R: Read,
-{
-    let [_n, k]: [u8; 2] = input
-        .read_line(cpio::parse_vec)
-        .unwrap()
-        .try_into()
-        .unwrap();
-    let a: Vec<u8> = input.read_line(cpio::parse_vec).unwrap();
-    let mut current_rank = 0;
-    let mut prev = 0;
-    for ai in a.into_iter() {
-        if ai == 0 {
-            break;
-        }
-        if ai == prev {
-            current_rank += 1;
-        } else {
-            if current_rank >= k {
+sol! {
+    (
+        [_, k] is [u8; 2],
+        a is [u8]
+    ) -> u8
+    {
+        let mut current_rank = 0;
+        let mut prev = 0;
+        for ai in a.into_iter() {
+            if ai == 0 {
                 break;
             }
-            current_rank += 1;
+            if ai == prev {
+                current_rank += 1;
+            } else {
+                if current_rank >= k {
+                    break;
+                }
+                current_rank += 1;
+            }
+            prev = ai;
         }
-        prev = ai;
+        current_rank
     }
-    current_rank
 }
 // @code end

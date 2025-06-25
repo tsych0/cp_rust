@@ -8,16 +8,14 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        s is String
+    ) -> usize
+    {
+        s.chars().group_by(|&c| c).map(|g| g.len()).max().unwrap() + n % 2
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let s: String = input.read_line(parse).unwrap();
-    s.chars().group_by(|&c| c).map(|g| g.len()).max().unwrap() + n % 2
-}
 // @code end

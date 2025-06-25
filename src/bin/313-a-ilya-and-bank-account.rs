@@ -8,20 +8,18 @@ use cpio::*;
 use std::cmp::max;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> isize
-where
-    R: Read,
-{
-    let n: isize = input.read_line(parse).unwrap();
-    if n >= 0 {
-        n
-    } else {
-        let l = n % 10;
-        max((n / 100) * 10 + l, n / 10)
+sol! {
+    (
+        n is isize
+    ) -> isize
+    {
+        if n >= 0 {
+            n
+        } else {
+            let l = n % 10;
+            max((n / 100) * 10 + l, n / 10)
+        }
     }
 }
+
 // @code end

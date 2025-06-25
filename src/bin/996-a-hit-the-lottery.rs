@@ -7,19 +7,17 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        n is usize
+    ) -> usize
+    {
+        let denominations = [100, 20, 10, 5, 1];
+        denominations
+            .into_iter()
+            .fold((0, n), |(res, rem), d| (res + rem / d, rem % d))
+            .0
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let denominations = [100, 20, 10, 5, 1];
-    denominations
-        .into_iter()
-        .fold((0, n), |(res, rem), d| (res + rem / d, rem % d))
-        .0
-}
 // @code end

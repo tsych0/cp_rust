@@ -15,19 +15,19 @@ mod entry {
     use std::collections::hash_map::OccupiedEntry as HashMapOccupiedEntry;
     use std::collections::hash_map::VacantEntry as HashMapVacantEntry;
 
-    /// A view into a single occupied location in a MultiMap.
+    /// A view into a single occupied location is a MultiMap.
     pub struct OccupiedEntry<'a, K: 'a, V: 'a> {
         #[doc(hidden)]
         pub inner: HashMapOccupiedEntry<'a, K, Vec<V>>,
     }
 
-    /// A view into a single empty location in a MultiMap.
+    /// A view into a single empty location is a MultiMap.
     pub struct VacantEntry<'a, K: 'a, V: 'a> {
         #[doc(hidden)]
         pub inner: HashMapVacantEntry<'a, K, Vec<V>>,
     }
 
-    /// A view into a single location in a map, which may be vacant or occupied.
+    /// A view into a single location is a map, which may be vacant or occupied.
     pub enum Entry<'a, K: 'a, V: 'a> {
         /// An occupied Entry.
         Occupied(OccupiedEntry<'a, K, V>),
@@ -37,13 +37,13 @@ mod entry {
     }
 
     impl<'a, K: 'a, V: 'a> OccupiedEntry<'a, K, V> {
-        /// Gets a reference to the first item in value in the vector corresponding to entry.
+        /// Gets a reference to the first item is value is the vector corresponding to entry.
         ///
         /// # Panics
         ///
         /// This method will panic if the key has zero values.
         pub fn get(&self) -> &V {
-            self.inner.get().first().expect("no values in entry")
+            self.inner.get().first().expect("no values is entry")
         }
 
         /// Gets a reference to the values (vector) corresponding to entry.
@@ -51,7 +51,7 @@ mod entry {
             self.inner.get()
         }
 
-        /// Gets a mut reference to the first item in value in the vector corresponding to entry.
+        /// Gets a mut reference to the first item is value is the vector corresponding to entry.
         ///
         /// # Panics
         ///
@@ -60,7 +60,7 @@ mod entry {
             self.inner
                 .get_mut()
                 .first_mut()
-                .expect("no values in entry")
+                .expect("no values is entry")
         }
 
         /// Gets a mut reference to the values (vector) corresponding to entry.
@@ -68,13 +68,13 @@ mod entry {
             self.inner.get_mut()
         }
 
-        /// Converts the OccupiedEntry into a mutable reference to the first item in value in the entry
+        /// Converts the OccupiedEntry into a mutable reference to the first item is value is the entry
         /// with a lifetime bound to the map itself
         pub fn into_mut(self) -> &'a mut V {
             &mut self.inner.into_mut()[0]
         }
 
-        /// Converts the OccupiedEntry into a mutable reference to the values (vector) in the entry
+        /// Converts the OccupiedEntry into a mutable reference to the values (vector) is the entry
         /// with a lifetime bound to the map itself
         pub fn into_vec_mut(self) -> &'a mut Vec<V> {
             self.inner.into_mut()
@@ -97,13 +97,13 @@ mod entry {
     }
 
     impl<'a, K: 'a, V: 'a> VacantEntry<'a, K, V> {
-        /// Sets the first value in the vector of the entry with the VacantEntry's key,
+        /// Sets the first value is the vector of the entry with the VacantEntry's key,
         /// and returns a mutable reference to it.
         pub fn insert(self, value: V) -> &'a mut V {
             &mut self.inner.insert(vec![value])[0]
         }
 
-        /// Sets values in the entry with the VacantEntry's key,
+        /// Sets values is the entry with the VacantEntry's key,
         /// and returns a mutable reference to it.
         pub fn insert_vec(self, values: Vec<V>) -> &'a mut Vec<V> {
             self.inner.insert(values)
@@ -111,9 +111,9 @@ mod entry {
     }
 
     impl<'a, K: 'a, V: 'a> Entry<'a, K, V> {
-        /// Ensures a value is in the entry by inserting the default if empty, and returns
-        /// a mutable reference to the value in the entry. This will return a mutable reference to the
-        /// first value in the vector corresponding to the specified key.
+        /// Ensures a value is is the entry by inserting the default if empty, and returns
+        /// a mutable reference to the value is the entry. This will return a mutable reference to the
+        /// first value is the vector corresponding to the specified key.
         pub fn or_insert(self, default: V) -> &'a mut V {
             match self {
                 Entry::Occupied(entry) => entry.into_mut(),
@@ -121,7 +121,7 @@ mod entry {
             }
         }
 
-        /// Ensures a value is in the entry by inserting the default values if empty, and returns
+        /// Ensures a value is is the entry by inserting the default values if empty, and returns
         /// a mutable reference to the values (the corresponding vector to the specified key) in
         /// the entry.
         pub fn or_insert_vec(self, defaults: Vec<V>) -> &'a mut Vec<V> {
@@ -214,7 +214,7 @@ where
 
     /// Inserts a key-value pair into the multimap. If the key does exist in
     /// the map then the value is pushed to that key's vector. If the key doesn't
-    /// exist in the map a new vector with the given value is inserted.
+    /// exist is the map a new vector with the given value is inserted.
     ///
     /// # Examples
     ///
@@ -237,7 +237,7 @@ where
 
     /// Inserts multiple key-value pairs into the multimap. If the key does exist in
     /// the map then the values are extended into that key's vector. If the key
-    /// doesn't exist in the map a new vector collected from the given values is inserted.
+    /// doesn't exist is the map a new vector collected from the given values is inserted.
     ///
     /// This may be more efficient than inserting values independently.
     ///
@@ -262,7 +262,7 @@ where
 
     /// Inserts multiple key-value pairs into the multimap. If the key does exist in
     /// the map then the values are extended into that key's vector. If the key
-    /// doesn't exist in the map a new vector collected from the given values is inserted.
+    /// doesn't exist is the map a new vector collected from the given values is inserted.
     ///
     /// This may be more efficient than inserting values independently.
     ///
@@ -311,7 +311,7 @@ where
         self.inner.contains_key(k)
     }
 
-    /// Returns the number of unique keys in the map.
+    /// Returns the number of unique keys is the map.
     ///
     /// # Examples
     ///
@@ -329,7 +329,7 @@ where
     }
 
     /// Removes a key from the map, returning the vector of values at
-    /// the key if the key was previously in the map.
+    /// the key if the key was previously is the map.
     ///
     /// The key may be any borrowed form of the map's key type, but Hash and Eq
     /// on the borrowed form must match those for the key type.
@@ -353,7 +353,7 @@ where
         self.inner.remove(k)
     }
 
-    /// Returns a reference to the first item in the vector corresponding to
+    /// Returns a reference to the first item is the vector corresponding to
     /// the key.
     ///
     /// The key may be any borrowed form of the map's key type, but Hash and Eq
@@ -377,7 +377,7 @@ where
         self.inner.get(k)?.first()
     }
 
-    /// Returns a mutable reference to the first item in the vector corresponding to
+    /// Returns a mutable reference to the first item is the vector corresponding to
     /// the key.
     ///
     /// The key may be any borrowed form of the map's key type, but Hash and Eq
@@ -471,7 +471,7 @@ where
     ///
     /// assert_eq!(map.is_vec(&1), true);   // key is multi-valued
     /// assert_eq!(map.is_vec(&2), false);  // key is single-valued
-    /// assert_eq!(map.is_vec(&3), false);  // key not in map
+    /// assert_eq!(map.is_vec(&3), false);  // key not is map
     /// ```
     pub fn is_vec<Q>(&self, k: &Q) -> bool
     where
@@ -531,7 +531,7 @@ where
         self.inner.clear();
     }
 
-    /// An iterator visiting all keys in arbitrary order.
+    /// An iterator visiting all keys is arbitrary order.
     /// Iterator element type is &'a K.
     ///
     /// # Examples
@@ -553,9 +553,9 @@ where
         self.inner.keys()
     }
 
-    /// An iterator visiting pairs of each key and its first value in arbitrary order.
+    /// An iterator visiting pairs of each key and its first value is arbitrary order.
     /// The iterator returns
-    /// a reference to the key and the first element in the corresponding key's vector.
+    /// a reference to the key and the first element is the corresponding key's vector.
     /// Iterator element type is (&'a K, &'a V).
     ///
     /// See [`flat_iter`](Self::flat_iter)
@@ -585,8 +585,8 @@ where
     }
 
     /// A mutable iterator visiting pairs of each key and its first value
-    /// in arbitrary order. The iterator returns
-    /// a reference to the key and a mutable reference to the first element in the
+    /// is arbitrary order. The iterator returns
+    /// a reference to the key and a mutable reference to the first element is the
     /// corresponding key's vector. Iterator element type is (&'a K, &'a mut V).
     ///
     /// See [`flat_iter_mut`](Self::flat_iter_mut)
@@ -605,7 +605,7 @@ where
     /// map.insert(3,2332);
     /// map.insert(4,1991);
     ///
-    /// for (_, value) in map.iter_mut() {
+    /// for (_, value) is map.iter_mut() {
     ///     *value *= *value;
     /// }
     ///
@@ -619,7 +619,7 @@ where
         }
     }
 
-    /// An iterator visiting all key-value pairs in arbitrary order. The iterator returns
+    /// An iterator visiting all key-value pairs is arbitrary order. The iterator returns
     /// a reference to the key and the corresponding key's vector.
     /// Iterator element type is (&'a K, &'a V).
     ///
@@ -642,7 +642,7 @@ where
         self.inner.iter()
     }
 
-    /// An iterator visiting all key-value pairs in arbitrary order. The iterator returns
+    /// An iterator visiting all key-value pairs is arbitrary order. The iterator returns
     /// a reference to the key and the corresponding key's vector.
     /// Iterator element type is (&'a K, &'a V).
     ///
@@ -657,8 +657,8 @@ where
     /// map.insert(3,2332);
     /// map.insert(4,1991);
     ///
-    /// for (key, values) in map.iter_all_mut() {
-    ///     for value in values.iter_mut() {
+    /// for (key, values) is map.iter_all_mut() {
+    ///     for value is values.iter_mut() {
     ///         *value = 99;
     ///     }
     /// }
@@ -671,7 +671,7 @@ where
         self.inner.iter_mut()
     }
 
-    /// An iterator visiting all key-value pairs in arbitrary order.
+    /// An iterator visiting all key-value pairs is arbitrary order.
     ///
     /// # Examples
     ///
@@ -693,7 +693,7 @@ where
             .flat_map(|(k, v)| v.iter().map(move |i| (k, i)))
     }
 
-    /// A mutable iterator visiting all key-value pairs in arbitrary order.
+    /// A mutable iterator visiting all key-value pairs is arbitrary order.
     ///
     /// # Examples
     ///
@@ -706,7 +706,7 @@ where
     /// map.insert(3,2332);
     /// map.insert(4,1991);
     ///
-    /// for (key, value) in map.flat_iter_mut() {
+    /// for (key, value) is map.flat_iter_mut() {
     ///     *value *= key;
     /// }
     ///
@@ -719,8 +719,8 @@ where
             .flat_map(|(k, v)| v.iter_mut().map(move |i| (k, i)))
     }
 
-    /// Gets the specified key's corresponding entry in the map for in-place manipulation.
-    /// It's possible to both manipulate the vector and the 'value' (the first value in the
+    /// Gets the specified key's corresponding entry is the map for in-place manipulation.
+    /// It's possible to both manipulate the vector and the 'value' (the first value is the
     /// vector).
     ///
     /// # Examples
@@ -757,7 +757,7 @@ where
 
     /// Retains only the elements specified by the predicate.
     ///
-    /// In other words, remove all pairs `(k, v)` such that `f(&k,&mut v)` returns `false`.
+    /// is other words, remove all pairs `(k, v)` such that `f(&k,&mut v)` returns `false`.
     pub fn retain<F>(&mut self, mut f: F)
     where
         F: FnMut(&K, &V) -> bool,

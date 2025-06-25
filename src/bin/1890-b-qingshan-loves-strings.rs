@@ -9,31 +9,29 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let [_n, _k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let s: Vec<u8> = input.read_line(parse_binary).unwrap();
-    let t: Vec<u8> = input.read_line(parse_binary).unwrap();
-    if s.iter().group_by(|&c| c).filter(|g| g.len() > 1).count() == 0 {
-        true
-    } else {
-        if t.iter().group_by(|&c| c).filter(|g| g.len() > 1).count() > 0
-            || t.first().unwrap() != t.last().unwrap()
-        {
-            false
+sol! {
+    (
+        [_n, _k] is [usize; 2],
+        s is [01],
+        t is [01]
+    ) -> bool
+    {
+        if s.iter().group_by(|&c| c).filter(|g| g.len() > 1).count() == 0 {
+            true
         } else {
-            let inserter = t.first().unwrap();
-            s.iter()
-                .group_by(|&c| c)
-                .filter(|g| g.len() > 1)
-                .all(|g| g[0] != inserter)
+            if t.iter().group_by(|&c| c).filter(|g| g.len() > 1).count() > 0
+                || t.first().unwrap() != t.last().unwrap()
+            {
+                false
+            } else {
+                let inserter = t.first().unwrap();
+                s.iter()
+                    .group_by(|&c| c)
+                    .filter(|g| g.len() > 1)
+                    .all(|g| g[0] != inserter)
+            }
         }
     }
 }
+
 // @code end

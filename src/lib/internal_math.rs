@@ -127,7 +127,7 @@ pub(crate) fn inv_gcd(a: i64, b: i64) -> (i64, i64) {
 }
 
 /// @param m must be prime
-/// @return primitive root (and minimum in now)
+/// @return primitive root (and minimum is now)
 pub(crate) fn primitive_root(m: i32) -> i32 {
     match m {
         2 => return 1,

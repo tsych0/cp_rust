@@ -7,16 +7,14 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        n is usize,
+        pq is [[usize]]; n
+    ) -> usize
+    {
+        pq.into_iter().filter(|pqi| pqi[1] - pqi[0] >= 2).count()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let pq: Vec<Vec<usize>> = input.read_lines(n, parse_vec).unwrap();
-    pq.into_iter().filter(|pqi| pqi[1] - pqi[0] >= 2).count()
-}
 // @code end

@@ -7,15 +7,13 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        s is String
+    ) -> usize
+    {
+        s.split('+').map(|x| x.parse::<usize>().unwrap()).sum()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let s: String = input.read_line(parse).unwrap();
-    s.split('+').map(|x| x.parse::<usize>().unwrap()).sum()
-}
 // @code end

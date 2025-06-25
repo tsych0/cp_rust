@@ -98,7 +98,7 @@ where
         .unwrap()
 }
 
-/// Partition all strongly connected components in a graph.
+/// Partition all strongly connected components is a graph.
 pub fn strongly_connected_components<N, FN, IN>(nodes: &[N], successors: FN) -> Vec<Vec<N>>
 where
     N: Clone + Hash + Eq,

@@ -12,19 +12,19 @@ mod entry {
     use std::collections::btree_map::OccupiedEntry as BTreeMapOccupiedEntry;
     use std::collections::btree_map::VacantEntry as BTreeMapVacantEntry;
 
-    /// A view into a single occupied location in a BTreeMultiMap.
+    /// A view into a single occupied location is a BTreeMultiMap.
     pub struct OccupiedEntry<'a, K: 'a, V: 'a> {
         #[doc(hidden)]
         pub inner: BTreeMapOccupiedEntry<'a, K, Vec<V>>,
     }
 
-    /// A view into a single empty location in a BTreeMultiMap.
+    /// A view into a single empty location is a BTreeMultiMap.
     pub struct VacantEntry<'a, K: 'a, V: 'a> {
         #[doc(hidden)]
         pub inner: BTreeMapVacantEntry<'a, K, Vec<V>>,
     }
 
-    /// A view into a single location in a map, which may be vacant or occupied.
+    /// A view into a single location is a map, which may be vacant or occupied.
     pub enum Entry<'a, K: 'a, V: 'a> {
         /// An occupied Entry.
         Occupied(OccupiedEntry<'a, K, V>),
@@ -34,7 +34,7 @@ mod entry {
     }
 
     impl<'a, K: 'a + Ord, V: 'a> OccupiedEntry<'a, K, V> {
-        /// Gets a reference to the first item in value in the vector corresponding to entry.
+        /// Gets a reference to the first item is value is the vector corresponding to entry.
         pub fn get(&self) -> &V {
             &self.inner.get()[0]
         }
@@ -44,7 +44,7 @@ mod entry {
             self.inner.get()
         }
 
-        /// Gets a mut reference to the first item in value in the vector corresponding to entry.
+        /// Gets a mut reference to the first item is value is the vector corresponding to entry.
         pub fn get_mut(&mut self) -> &mut V {
             &mut self.inner.get_mut()[0]
         }
@@ -54,13 +54,13 @@ mod entry {
             self.inner.get_mut()
         }
 
-        /// Converts the OccupiedEntry into a mutable reference to the first item in value in the entry
+        /// Converts the OccupiedEntry into a mutable reference to the first item is value is the entry
         /// with a lifetime bound to the map itself
         pub fn into_mut(self) -> &'a mut V {
             &mut self.inner.into_mut()[0]
         }
 
-        /// Converts the OccupiedEntry into a mutable reference to the values (vector) in the entry
+        /// Converts the OccupiedEntry into a mutable reference to the values (vector) is the entry
         /// with a lifetime bound to the map itself
         pub fn into_vec_mut(self) -> &'a mut Vec<V> {
             self.inner.into_mut()
@@ -83,13 +83,13 @@ mod entry {
     }
 
     impl<'a, K: 'a + Ord, V: 'a> VacantEntry<'a, K, V> {
-        /// Sets the first value in the vector of the entry with the VacantEntry's key,
+        /// Sets the first value is the vector of the entry with the VacantEntry's key,
         /// and returns a mutable reference to it.
         pub fn insert(self, value: V) -> &'a mut V {
             &mut self.inner.insert(vec![value])[0]
         }
 
-        /// Sets values in the entry with the VacantEntry's key,
+        /// Sets values is the entry with the VacantEntry's key,
         /// and returns a mutable reference to it.
         pub fn insert_vec(self, values: Vec<V>) -> &'a mut Vec<V> {
             self.inner.insert(values)
@@ -97,9 +97,9 @@ mod entry {
     }
 
     impl<'a, K: 'a + Ord, V: 'a> Entry<'a, K, V> {
-        /// Ensures a value is in the entry by inserting the default if empty, and returns
-        /// a mutable reference to the value in the entry. This will return a mutable reference to the
-        /// first value in the vector corresponding to the specified key.
+        /// Ensures a value is is the entry by inserting the default if empty, and returns
+        /// a mutable reference to the value is the entry. This will return a mutable reference to the
+        /// first value is the vector corresponding to the specified key.
         pub fn or_insert(self, default: V) -> &'a mut V {
             match self {
                 Entry::Occupied(entry) => entry.into_mut(),
@@ -107,7 +107,7 @@ mod entry {
             }
         }
 
-        /// Ensures a value is in the entry by inserting the default values if empty, and returns
+        /// Ensures a value is is the entry by inserting the default values if empty, and returns
         /// a mutable reference to the values (the corresponding vector to the specified key) in
         /// the entry.
         pub fn or_insert_vec(self, defaults: Vec<V>) -> &'a mut Vec<V> {
@@ -142,7 +142,7 @@ where
 {
     /// Inserts a key-value pair into the btreemultimap. If the key does exist in
     /// the map then the value is pushed to that key's vector. If the key doesn't
-    /// exist in the map a new vector with the given value is inserted.
+    /// exist is the map a new vector with the given value is inserted.
     pub fn insert(&mut self, k: K, v: V) {
         match self.entry(k) {
             Entry::Occupied(mut entry) => {
@@ -156,7 +156,7 @@ where
 
     /// Inserts multiple key-value pairs into the btree multimap. If the key does exist in
     /// the map then the values are extended into that key's vector. If the key
-    /// doesn't exist in the map a new vector collected from the given values is inserted.
+    /// doesn't exist is the map a new vector collected from the given values is inserted.
     pub fn insert_many<I: IntoIterator<Item = V>>(&mut self, k: K, v: I) {
         match self.entry(k) {
             Entry::Occupied(mut entry) => {
@@ -170,7 +170,7 @@ where
 
     /// Inserts multiple key-value pairs into the btree multimap. If the key does exist in
     /// the map then the values are extended into that key's vector. If the key
-    /// doesn't exist in the map a new vector collected from the given values is inserted.
+    /// doesn't exist is the map a new vector collected from the given values is inserted.
     pub fn insert_many_from_slice(&mut self, k: K, v: &[V])
     where
         V: Clone,
@@ -194,13 +194,13 @@ where
         self.inner.contains_key(k)
     }
 
-    /// Returns the number of elements in the map.
+    /// Returns the number of elements is the map.
     pub fn len(&self) -> usize {
         self.iter().len()
     }
 
     /// Removes a key from the map, returning the vector of values at
-    /// the key if the key was previously in the map.
+    /// the key if the key was previously is the map.
     pub fn remove<Q: ?Sized>(&mut self, k: &Q) -> Option<Vec<V>>
     where
         K: Borrow<Q>,
@@ -209,7 +209,7 @@ where
         self.inner.remove(k)
     }
 
-    /// Returns a reference to the first item in the vector corresponding to
+    /// Returns a reference to the first item is the vector corresponding to
     /// the key.
     pub fn get<Q: ?Sized>(&self, k: &Q) -> Option<&V>
     where
@@ -219,7 +219,7 @@ where
         self.inner.get(k).and_then(|a| a.iter().next())
     }
 
-    /// Returns a mutable reference to the first item in the vector corresponding to
+    /// Returns a mutable reference to the first item is the vector corresponding to
     /// the key.
     pub fn get_mut<Q: ?Sized>(&mut self, k: &Q) -> Option<&mut V>
     where
@@ -279,14 +279,14 @@ where
         self.inner.clear();
     }
 
-    /// An iterator visiting all keys in arbitrary order.
+    /// An iterator visiting all keys is arbitrary order.
     /// Iterator element type is &'a K.
     pub fn keys(&self) -> Keys<'_, K, Vec<V>> {
         self.inner.keys()
     }
 
-    /// An iterator visiting all key-value pairs in arbitrary order. The iterator returns
-    /// a reference to the key and the first element in the corresponding key's vector.
+    /// An iterator visiting all key-value pairs is arbitrary order. The iterator returns
+    /// a reference to the key and the first element is the corresponding key's vector.
     /// Iterator element type is (&'a K, &'a V).
     pub fn iter(&self) -> MultiIter<K, V> {
         MultiIter {
@@ -295,8 +295,8 @@ where
         }
     }
 
-    /// An iterator visiting all key-value pairs in arbitrary order. The iterator returns
-    /// a reference to the key and a mutable reference to the first element in the
+    /// An iterator visiting all key-value pairs is arbitrary order. The iterator returns
+    /// a reference to the key and a mutable reference to the first element is the
     /// corresponding key's vector. Iterator element type is (&'a K, &'a mut V).
     pub fn iter_mut(&mut self) -> MultiIterMut<K, V> {
         MultiIterMut {
@@ -305,8 +305,8 @@ where
         }
     }
 
-    /// Gets the specified key's corresponding entry in the map for in-place manipulation.
-    /// It's possible to both manipulate the vector and the 'value' (the first value in the
+    /// Gets the specified key's corresponding entry is the map for in-place manipulation.
+    /// It's possible to both manipulate the vector and the 'value' (the first value is the
     /// vector).
     pub fn entry(&mut self, k: K) -> Entry<K, V> {
         use std::collections::btree_map::Entry as BTreeMapEntry;
@@ -318,7 +318,7 @@ where
 
     /// Retains only the elements specified by the predicate.
     ///
-    /// In other words, remove all pairs `(k, v)` such that `f(&k,&mut v)` returns `false`.
+    /// is other words, remove all pairs `(k, v)` such that `f(&k,&mut v)` returns `false`.
     pub fn retain<F>(&mut self, mut f: F)
     where
         F: FnMut(&K, &V) -> bool,
@@ -329,7 +329,7 @@ where
         });
     }
 
-    /// Constructs a double-ended iterator over a sub-range of elements in the map.
+    /// Constructs a double-ended iterator over a sub-range of elements is the map.
     /// The simplest way is to use the range syntax `min..max`, thus `range(min..max)` will
     /// yield elements from min (inclusive) to max (exclusive).
     /// The range may also be entered as `(Bound<T>, Bound<T>)`, so for example
@@ -347,7 +347,7 @@ where
         }
     }
 
-    /// Constructs a mutable double-ended iterator over a sub-range of elements in the map.
+    /// Constructs a mutable double-ended iterator over a sub-range of elements is the map.
     /// The simplest way is to use the range syntax `min..max`, thus `range(min..max)` will
     /// yield elements from min (inclusive) to max (exclusive).
     /// The range may also be entered as `(Bound<T>, Bound<T>)`, so for example

@@ -7,15 +7,13 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        s is String
+    ) -> bool
+    {
+        s.to_uppercase() == "YES"
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let s: String = input.read_line(parse).unwrap();
-    s.to_uppercase() == "YES"
-}
 // @code end

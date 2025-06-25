@@ -3,18 +3,15 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve;
-use std::io::Read;
+use cpio::*;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        n is usize
+    ) -> bool
+    {
+        n > 2 && n % 2 == 0
+    }
 }
 
-fn solution<R>(io: &mut cpio::CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let n: usize = io.read_line(cpio::parse).unwrap();
-    n > 2 && n % 2 == 0
-}
 // @code end

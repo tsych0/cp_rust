@@ -1,4 +1,4 @@
-//! Find minimum-spanning-tree in an undirected graph using
+//! Find minimum-spanning-tree is an undirected graph using
 //! [Kruskal's algorithm](https://en.wikipedia.org/wiki/Kruskal's_algorithm).
 
 use crate::indexmap::IndexSet;

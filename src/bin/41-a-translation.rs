@@ -4,18 +4,14 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let s: String = input.read_line(parse).unwrap();
-    let t: String = input.read_line(parse).unwrap();
-    s.chars().rev().collect::<String>() == t
+sol! {
+    (
+        s is String,
+        t is String
+    ) -> bool
+    {
+        s.chars().rev().collect::<String>() == t
+    }
 }
 // @code end

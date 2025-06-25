@@ -3,20 +3,17 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve;
+use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (        addition is String
+    ) -> String
+    {
+        let mut nums = addition.split('+').collect::<Vec<_>>();
+        nums.sort();
+        nums.join("+")
+    }
 }
 
-fn solution<R>(input: &mut cpio::CPInput<R>) -> String
-where
-    R: Read,
-{
-    let addition: String = input.read_line(cpio::parse).unwrap();
-    let mut nums = addition.split('+').collect::<Vec<_>>();
-    nums.sort();
-    nums.join("+")
-}
 // @code end

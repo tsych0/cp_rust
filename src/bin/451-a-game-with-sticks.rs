@@ -8,20 +8,17 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (        [n, m] is [usize; 2]
+    ) -> String
+    {
+        if n.min(m) % 2 == 0 {
+            "Malvika"
+        } else {
+            "Akshat"
+        }
+        .into()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> String
-where
-    R: Read,
-{
-    let [n, m]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    if n.min(m) % 2 == 0 {
-        "Malvika"
-    } else {
-        "Akshat"
-    }
-    .into()
-}
 // @code end

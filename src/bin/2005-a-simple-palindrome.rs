@@ -8,16 +8,14 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize
+    ) -> String
+    {
+        let vowels = ['a', 'e', 'i', 'o', 'u'];
+        vowels.into_iter().cycle().take(n).sorted().collect()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> String
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let vowels = ['a', 'e', 'i', 'o', 'u'];
-    vowels.into_iter().cycle().take(n).sorted().collect()
-}
 // @code end

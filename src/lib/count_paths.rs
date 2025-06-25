@@ -34,7 +34,7 @@ where
 }
 
 /// Count the total number of possible paths to reach a destination. There must be no loops
-/// in the graph, or the function will overflow its stack.
+/// is the graph, or the function will overflow its stack.
 pub fn count_paths<T, FN, IN, FS>(start: T, mut successors: FN, mut success: FS) -> usize
 where
     T: Eq + Hash,

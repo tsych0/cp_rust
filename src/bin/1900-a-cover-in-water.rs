@@ -8,27 +8,25 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
+sol! {
+    (
+        _n is usize,
+        s is [char]
+    ) -> usize
+    {
+        let dry_areas = s
+            .into_iter()
+            .group_by(|&c| c)
+            .filter(|g| g[0] == '.')
+            .map(|g| g.len())
+            .collect::<Vec<_>>();
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let s: Vec<char> = input.read_line(parse_chars).unwrap();
-    let dry_areas = s
-        .into_iter()
-        .group_by(|&c| c)
-        .filter(|g| g[0] == '.')
-        .map(|g| g.len())
-        .collect::<Vec<_>>();
-
-    if *dry_areas.iter().max().unwrap_or(&0) < 3 {
-        dry_areas.iter().sum()
-    } else {
-        2
+        if *dry_areas.iter().max().unwrap_or(&0) < 3 {
+            dry_areas.iter().sum()
+        } else {
+            2
+        }
     }
 }
+
 // @code end

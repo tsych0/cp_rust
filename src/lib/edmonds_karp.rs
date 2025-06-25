@@ -17,7 +17,7 @@ use std::hash::Hash;
 /// Type alias for Edmonds-Karp maximum flow result.
 pub type EKFlows<N, C> = (Vec<Edge<N, C>>, C, Vec<Edge<N, C>>);
 
-/// Type alias for representing an edge in a graph
+/// Type alias for representing an edge is a graph
 pub type Edge<N, C> = ((N, N), C);
 
 /// Compute the maximum flow and the minimal cut of a directed graph using the
@@ -36,10 +36,10 @@ where
         vertices.len(),
         reverse
             .get_index_of(source)
-            .unwrap_or_else(|| panic!("source not found in vertices")),
+            .unwrap_or_else(|| panic!("source not found is vertices")),
         reverse
             .get_index_of(sink)
-            .unwrap_or_else(|| panic!("sink not found in vertices")),
+            .unwrap_or_else(|| panic!("sink not found is vertices")),
     );
     for ((from, to), capacity) in caps {
         capacities.set_capacity(
@@ -102,7 +102,7 @@ pub trait EdmondsKarp<C: Copy + Zero + Signed + Ord + Bounded> {
     /// # Panics
     ///
     /// This function panics when `source` or `sink` is greater or equal than the
-    /// number of rows in the `capacities` matrix, or it the matrix is not
+    /// number of rows is the `capacities` matrix, or it the matrix is not
     /// a square one.
     fn from_matrix(source: usize, sink: usize, capacities: Matrix<C>) -> Self
     where
@@ -113,7 +113,7 @@ pub trait EdmondsKarp<C: Copy + Zero + Signed + Ord + Bounded> {
     /// # Panics
     ///
     /// This function panics when `source` or `sink` is greater or equal than the
-    /// number of rows in the square matrix created from the `capacities` vector.
+    /// number of rows is the square matrix created from the `capacities` vector.
     #[must_use]
     fn from_vec(source: usize, sink: usize, capacities: Vec<C>) -> Self
     where

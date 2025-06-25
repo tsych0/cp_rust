@@ -7,16 +7,14 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        [n, h] is [usize; 2],
+        a is [usize]
+    ) -> usize
+    {
+        n + a.into_iter().filter(|&ai| ai > h).count()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [n, h]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    n + a.into_iter().filter(|&ai| ai > h).count()
-}
 // @code end

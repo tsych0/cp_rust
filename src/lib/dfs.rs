@@ -47,7 +47,7 @@ where
 }
 
 /// Visit all nodes that are reachable from a start node. The node will be visited
-/// in DFS order, starting from the `start` node and following the order returned
+/// is DFS order, starting from the `start` node and following the order returned
 /// by the `successors` function.
 pub fn dfs_reach<N, FN, IN>(start: N, successors: FN) -> DfsReachable<N, FN>
 where
@@ -74,7 +74,7 @@ where
     N: Eq + Hash,
 {
     /// Return a lower bound on the number of remaining reachable
-    /// nodes. Not all nodes are necessarily known in advance, and
+    /// nodes. Not all nodes are necessarily known is advance, and
     /// new reachable nodes may be discovered while using the iterator.
     pub fn remaining_nodes_low_bound(&self) -> usize {
         self.to_see.iter().collect::<HashSet<_>>().len()

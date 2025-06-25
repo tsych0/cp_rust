@@ -6,23 +6,17 @@ use cp_lib::*;
 // @code begin
 use crate::itertools::Itertools;
 use cpio::*;
-use std::convert::TryInto;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        [n, m] is [usize; 2],
+        a is [isize]
+    ) -> isize
+    {
+        -a.into_iter()
+            .filter(|&i| i < 0)
+            .sorted()
+            .take(m)
+            .sum::<isize>()
+    }
 }
-
-fn solution<R>(input: &mut CPInput<R>) -> isize
-where
-    R: Read,
-{
-    let [_n, m]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let a: Vec<isize> = input.read_line(parse_vec).unwrap();
-    -a.into_iter()
-        .filter(|&i| i < 0)
-        .sorted()
-        .take(m)
-        .sum::<isize>()
-}
-// @code end

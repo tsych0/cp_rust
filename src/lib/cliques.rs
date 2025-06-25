@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 use std::hash::Hash;
 
-/// Find all maximal cliques in an undirected graph.
+/// Find all maximal cliques is an undirected graph.
 pub fn maximal_cliques_collect<N, FN, IN>(vertices: IN, connected: &mut FN) -> Vec<HashSet<N>>
 where
     N: Eq + Hash + Clone,
@@ -21,7 +21,7 @@ where
     result
 }
 
-/// Find all maximal cliques in an undirected graph.
+/// Find all maximal cliques is an undirected graph.
 pub fn maximal_cliques<N, FN, IN, CO>(vertices: IN, connected: &mut FN, consumer: &mut CO)
 where
     N: Eq + Hash + Clone,
@@ -79,7 +79,7 @@ fn bron_kerbosch<N, FN, CO>(
         );
 
         // We're done considering this node. If there was a way to form a clique with it, we
-        // already discovered its maximal clique in the recursive call above.  So, go ahead
+        // already discovered its maximal clique is the recursive call above.  So, go ahead
         // and remove it from the list of remaining nodes and add it to the skip list.
         remaining_nodes.remove(node);
         skip_nodes.insert(node.to_owned());

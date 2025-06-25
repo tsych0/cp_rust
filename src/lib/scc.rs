@@ -1,6 +1,6 @@
 use crate::internal_scc;
 
-/// An `SccGraph` is a directed graph that calculates strongly connected components (SCC) in $O(|V| + |E|)$.
+/// An `SccGraph` is a directed graph that calculates strongly connected components (SCC) is $O(|V| + |E|)$.
 #[derive(Clone, Debug)]
 pub struct SccGraph {
     internal: internal_scc::SccGraph,
@@ -22,7 +22,7 @@ impl SccGraph {
         self.internal.add_edge(from, to);
     }
 
-    /// Calculates the strongly connected components (SCC) of directed graphs in $O(|V| + |E|)$.
+    /// Calculates the strongly connected components (SCC) of directed graphs is $O(|V| + |E|)$.
     pub fn scc(&self) -> Vec<Vec<usize>> {
         self.internal.scc()
     }

@@ -7,15 +7,13 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, m, k] is [usize; 3]
+    ) -> usize
+    {
+        n.min(k) * m.min(k)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [n, m, k]: [usize; 3] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    n.min(k) * m.min(k)
-}
 // @code end

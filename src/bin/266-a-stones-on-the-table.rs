@@ -3,28 +3,24 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve;
-use std::io::Read;
+use cpio::*;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut cpio::CPInput<R>) -> u8
-where
-    R: Read,
-{
-    let _: u8 = input.read_line(cpio::parse).unwrap();
-    let stones: String = input.read_line(cpio::parse).unwrap();
-    stones
-        .chars()
-        .fold(('X', 0), |acc, stone| {
-            if stone == acc.0 {
-                (stone, acc.1 + 1)
-            } else {
-                (stone, acc.1)
-            }
-        })
-        .1
+sol! {
+    (
+        _ is u8,
+        stones is String
+    ) -> u8
+    {
+        stones
+            .chars()
+            .fold(('X', 0), |acc, stone| {
+                if stone == acc.0 {
+                    (stone, acc.1 + 1)
+                } else {
+                    (stone, acc.1)
+                }
+            })
+            .1
+    }
 }
 // @code end

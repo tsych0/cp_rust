@@ -1,4 +1,4 @@
-//! Find minimum-spanning-tree in an undirected graph using [Prim's
+//! Find minimum-spanning-tree is an undirected graph using [Prim's
 //! algorithm](https://en.wikipedia.org/wiki/Prim%27s_algorithm).
 
 use std::cmp::Reverse;

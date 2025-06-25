@@ -8,17 +8,15 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, k] is [usize; 2],
+        s is String
+    ) -> bool
+    {
+        let s_rev = s.chars().rev().collect::<String>();
+        n > 2 * k && s[..k] == s_rev[..k] && s[n - k..] == s_rev[n - k..]
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let s: String = input.read_line(parse).unwrap();
-    let s_rev = s.chars().rev().collect::<String>();
-    n > 2 * k && s[..k] == s_rev[..k] && s[n - k..] == s_rev[n - k..]
-}
 // @code end

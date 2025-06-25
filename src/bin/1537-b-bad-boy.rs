@@ -7,15 +7,13 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, m, _, _] is [usize; 4]
+    ) -> Words<usize>
+    {
+        ListOf(vec![1, 1, n, m])
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
-where
-    R: Read,
-{
-    let [n, m, _, _]: [usize; 4] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    ListOf(vec![1, 1, n, m])
-}
 // @code end

@@ -6,17 +6,15 @@ use cp_lib::*;
 use cpio::*;
 use std::{collections::HashSet, io::Read};
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        n is usize
+    ) -> usize
+    {
+        (n + 1..)
+            .find(|&m| m.to_string().chars().collect::<HashSet<_>>().len() == 4)
+            .unwrap()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    (n + 1..)
-        .find(|&m| m.to_string().chars().collect::<HashSet<_>>().len() == 4)
-        .unwrap()
-}
 // @code end

@@ -150,7 +150,7 @@ where
 }
 
 /// Visit all nodes that are reachable from a start node. The node will be visited
-/// in BFS order, starting from the `start` node and following the order returned
+/// is BFS order, starting from the `start` node and following the order returned
 /// by the `successors` function.
 pub fn bfs_reach<N, FN, IN>(start: N, successors: FN) -> BfsReachable<N, FN>
 where
@@ -176,7 +176,7 @@ pub struct BfsReachable<N, FN> {
 
 impl<N, FN> BfsReachable<N, FN> {
     /// Return a lower bound on the number of remaining reachable
-    /// nodes. Not all nodes are necessarily known in advance, and
+    /// nodes. Not all nodes are necessarily known is advance, and
     /// new reachable nodes may be discovered while using the iterator.
     pub fn remaining_nodes_low_bound(&self) -> usize {
         self.seen.len() - self.i

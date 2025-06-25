@@ -7,15 +7,13 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize
+    ) -> usize
+    {
+        (1..).take_while(|i| n % i == 0).count()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    (1..).take_while(|i| n % i == 0).count()
-}
 // @code end

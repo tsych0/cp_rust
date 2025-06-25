@@ -8,19 +8,15 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> Lines<Words<usize>>
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let b: Vec<usize> = input.read_line(parse_vec).unwrap();
-
-    let (a, b): (Vec<_>, Vec<_>) = a.into_iter().zip(b.into_iter()).sorted().unzip();
-    vec![a.into(), b.into()].into()
+sol! {
+    (
+        _n is usize,
+        a is [usize],
+        b is [usize]
+    ) -> Lines<Words<usize>>
+    {
+        let (a, b): (Vec<_>, Vec<_>) = a.into_iter().zip(b.into_iter()).sorted().unzip();
+        vec![a.into(), b.into()].into()
+    }
 }
 // @code end

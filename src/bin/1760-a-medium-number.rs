@@ -8,15 +8,13 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        a is [usize]
+    ) -> usize
+    {
+        a.into_iter().sorted().skip(1).next().unwrap()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    a.into_iter().sorted().skip(1).next().unwrap()
-}
 // @code end

@@ -8,15 +8,13 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        c is String
+    ) -> bool
+    {
+        "codeforces".contains(&c)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let c: String = input.read_line(parse).unwrap();
-    "codeforces".contains(&c)
-}
 // @code end

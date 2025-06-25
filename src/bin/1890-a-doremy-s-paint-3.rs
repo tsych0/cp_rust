@@ -8,22 +8,20 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        a is [usize]
+    ) -> bool
+    {
+        let grps = a
+            .into_iter()
+            .sorted()
+            .group_by(|&c| c)
+            .map(|g| g.len())
+            .collect::<Vec<_>>();
+        grps.len() == 1 || (grps.len() == 2 && grps[0].abs_diff(grps[1]) < 2)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let grps = a
-        .into_iter()
-        .sorted()
-        .group_by(|&c| c)
-        .map(|g| g.len())
-        .collect::<Vec<_>>();
-    grps.len() == 1 || (grps.len() == 2 && grps[0].abs_diff(grps[1]) < 2)
-}
 // @code end

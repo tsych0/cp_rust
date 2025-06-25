@@ -7,18 +7,16 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        s is String
+    ) -> usize
+    {
+        s.chars()
+             .zip("codeforces".to_string().chars())
+             .filter(|(a, b)| a != b)
+             .count()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let s: String = input.read_line(parse).unwrap();
-    s.chars()
-        .zip("codeforces".to_string().chars())
-        .filter(|(a, b)| a != b)
-        .count()
-}
 // @code end

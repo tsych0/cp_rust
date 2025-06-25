@@ -8,17 +8,15 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        s is [01]
+    ) -> bool
+    {
+        let s = s.into_iter().unique().collect::<Vec<_>>();
+        s != vec![1]
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let s: Vec<u8> = input.read_line(parse_binary).unwrap();
-    let s = s.into_iter().unique().collect::<Vec<_>>();
-    s != vec![1]
-}
 // @code end

@@ -3,23 +3,17 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve_n;
+use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, m] is [usize; 2]
+    ) -> usize
+    {
+        usize::max(n, m) + 1
+    }
 }
 
-fn solution<R>(input: &mut cpio::CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [n, m]: [usize; 2] = input
-        .read_line(cpio::parse_vec)
-        .unwrap()
-        .try_into()
-        .unwrap();
-    usize::max(n, m) + 1
-}
 // @code end

@@ -6,25 +6,23 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let res = if n % 2 == 0 {
-        vec![n / 2 - 1, n / 2, 1]
-    } else {
-        if n % 4 == 1 {
-            vec![n / 2 - 1, n / 2 + 1, 1]
+sol! {
+    (
+        n is usize
+    ) -> Words<usize>
+    {
+        let res = if n % 2 == 0 {
+            vec![n / 2 - 1, n / 2, 1]
         } else {
-            vec![n / 2 - 2, n / 2 + 2, 1]
-        }
-    };
+            if n % 4 == 1 {
+                vec![n / 2 - 1, n / 2 + 1, 1]
+            } else {
+                vec![n / 2 - 2, n / 2 + 2, 1]
+            }
+        };
 
-    ListOf(res)
+        ListOf(res)
+    }
 }
+
 // @code end

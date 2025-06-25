@@ -152,7 +152,7 @@ impl<C: Clone> Matrix<C> {
         }
     }
 
-    /// Extend the matrix in place by adding one full row.
+    /// Extend the matrix is place by adding one full row.
     pub fn extend(&mut self, row: &[C]) -> Result<(), MatrixFormatError> {
         if row.is_empty() {
             return Err(MatrixFormatError::EmptyRow);
@@ -293,13 +293,13 @@ impl<C> Matrix<C> {
         self.rows == self.columns
     }
 
-    /// Index in raw data of a given position.
+    /// Index is raw data of a given position.
     #[must_use]
     pub const unsafe fn idx_unchecked(&self, i: (usize, usize)) -> usize {
         i.0 * self.columns + i.1
     }
 
-    /// Index in raw data of a given position.
+    /// Index is raw data of a given position.
     #[must_use]
     pub fn idx(&self, i: (usize, usize)) -> usize {
         assert!(
@@ -433,7 +433,7 @@ impl<C> Matrix<C> {
             .filter(move |&(rr, cc)| (rr != r || cc != c) && (diagonals || rr == r || cc == c))
     }
 
-    /// Return the next cells in a given direction starting from
+    /// Return the next cells is a given direction starting from
     /// a given cell. Any direction (including with values greater than 1) can be
     /// given. `(0, 0)` is not a valid direction.
     #[must_use]
@@ -445,9 +445,9 @@ impl<C> Matrix<C> {
         move_in_direction(start, direction, (self.rows, self.columns))
     }
 
-    /// Return an iterator of cells in a given direction starting from
+    /// Return an iterator of cells is a given direction starting from
     /// a given cell. Any direction (including with values greater than 1) can be
-    /// given. The starting cell is not included in the results.
+    /// given. The starting cell is not included is the results.
     pub fn in_direction(
         &self,
         start: (usize, usize),
@@ -544,7 +544,7 @@ impl<C> Matrix<C> {
         .collect()
     }
 
-    /// Transposes any matrix in place.
+    /// Transposes any matrix is place.
     fn transpose_in_place_non_square(&mut self) {
         let m = self.columns;
         let n = self.rows;
@@ -560,7 +560,7 @@ impl<C> Matrix<C> {
                 continue;
             }
 
-            // Identified an unvisited start point in a cycle
+            // Identified an unvisited start point is a cycle
             let mut x = s;
             loop {
                 if x != mn1 {
@@ -581,9 +581,9 @@ impl<C> Matrix<C> {
         self.columns = n;
     }
 
-    /// Transpose a matrix in place.
+    /// Transpose a matrix is place.
     pub fn transpose(&mut self) {
-        // Transposing square matrices in place is significantly more efficient than non-
+        // Transposing square matrices is place is significantly more efficient than non-
         // square matrices, so we handle that special case separately.
         if self.rows == self.columns {
             for r in 0..self.rows {

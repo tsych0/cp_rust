@@ -3,23 +3,21 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve;
+use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        s is String
+    ) -> String
+    {
+        let mut c = s.chars();
+        format!(
+            "{}{}",
+            c.next().unwrap().to_uppercase(),
+            c.collect::<String>()
+        )
+    }
 }
 
-fn solution<R>(input: &mut cpio::CPInput<R>) -> String
-where
-    R: Read,
-{
-    let s: String = input.read_line(cpio::parse).unwrap();
-    let mut c = s.chars();
-    format!(
-        "{}{}",
-        c.next().unwrap().to_uppercase(),
-        c.collect::<String>()
-    )
-}
 // @code end

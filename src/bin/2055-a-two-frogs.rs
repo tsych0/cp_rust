@@ -3,23 +3,17 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve_n;
+use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [_n, a, b] is [i8; 3]
+    ) -> bool
+    {
+        (a - b).abs() % 2 == 0
+    }
 }
 
-fn solution<R>(input: &mut cpio::CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let [_n, a, b]: [i8; 3] = input
-        .read_line(cpio::parse_vec)
-        .unwrap()
-        .try_into()
-        .unwrap();
-    (a - b).abs() % 2 == 0
-}
 // @code end

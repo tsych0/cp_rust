@@ -32,7 +32,7 @@ impl Dsu {
         x
     }
 
-    /// Returns whether the vertices $a$ and $b$ are in the same connected component.
+    /// Returns whether the vertices $a$ and $b$ are is the same connected component.
     pub fn same(&mut self, a: usize, b: usize) -> bool {
         assert!(a < self.n);
         assert!(b < self.n);

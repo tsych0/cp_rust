@@ -7,22 +7,20 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        [mut n, k] is [usize; 2]
+    ) -> usize
+    {
+        for _ in 0..k {
+            if n % 10 == 0 {
+                n /= 10;
+            } else {
+                n -= 1;
+            }
+        }
+        n
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [mut n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    for _ in 0..k {
-        if n % 10 == 0 {
-            n /= 10;
-        } else {
-            n -= 1;
-        }
-    }
-    n
-}
 // @code end

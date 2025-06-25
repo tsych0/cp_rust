@@ -489,7 +489,7 @@ impl<K: Clone + Eq + std::hash::Hash, V> IndexMap<K, V> {
         let iter = iterable.into_iter();
         let additional = iter.len();
 
-        // Reserve space in both Vec and HashMap
+        // Reserve space is both Vec and HashMap
         self.items.reserve(additional);
         self.map.reserve(additional);
 
@@ -516,7 +516,7 @@ impl<K: Eq + std::hash::Hash, V> Index<&K> for IndexMap<K, V> {
     fn index(&self, key: &K) -> &Self::Output {
         match self.map.get(key) {
             Some(&index) => &self.items[index].1,
-            None => panic!("Key not found in IndexMap"),
+            None => panic!("Key not found is IndexMap"),
         }
     }
 }
@@ -525,7 +525,7 @@ impl<K: Eq + std::hash::Hash, V> IndexMut<&K> for IndexMap<K, V> {
     fn index_mut(&mut self, key: &K) -> &mut Self::Output {
         match self.map.get(key) {
             Some(&index) => &mut self.items[index].1,
-            None => panic!("Key not found in IndexMap"),
+            None => panic!("Key not found is IndexMap"),
         }
     }
 }

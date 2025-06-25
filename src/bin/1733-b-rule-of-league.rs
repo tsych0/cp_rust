@@ -8,27 +8,24 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> Words<isize>
-where
-    R: Read,
-{
-    let [n, x, y]: [isize; 3] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-
-    let k = x + y;
-    if x != 0 && y != 0 || x + y == 0 || ((n - 1) % k != 0) {
-        ListOf(vec![-1])
-    } else {
-        ListOf(
-            vec![
-                vec![1; k as usize],
-                (k..n - 1).map(|j| 2 + (j / k) * k).collect(),
-            ]
-            .concat(),
-        )
+sol! {
+    (
+        [n, x, y] is [isize; 3]
+    ) -> Words<isize>
+    {
+        let k = x + y;
+        if x != 0 && y != 0 || x + y == 0 || ((n - 1) % k != 0) {
+            ListOf(vec![-1])
+        } else {
+            ListOf(
+                vec![
+                    vec![1; k as usize],
+                    (k..n - 1).map(|j| 2 + (j / k) * k).collect(),
+                ]
+                .concat(),
+            )
+        }
     }
 }
+
 // @code end

@@ -8,21 +8,19 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let total_diagonals = 4 * n - 2;
-    let diff = total_diagonals - k;
-    if diff < 2 {
-        (2 * n) - diff
-    } else {
-        (2 * n) - 2 - (diff - 2) / 2
+sol! {
+    (
+        [n, k] is [usize; 2]
+    ) -> usize
+    {
+        let total_diagonals = 4 * n - 2;
+        let diff = total_diagonals - k;
+        if diff < 2 {
+            (2 * n) - diff
+        } else {
+            (2 * n) - 2 - (diff - 2) / 2
+        }
     }
 }
+
 // @code end

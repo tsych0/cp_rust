@@ -9,21 +9,19 @@ use std::convert::TryInto;
 use std::io::Read;
 use std::usize;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        [n, m] is [usize; 2],
+        (mut f) is [usize]
+    ) -> usize
+    {
+        f.sort();
+        let mut res = usize::MAX;
+        for i in 0..m - n + 1 {
+            res = res.min(f[i + n - 1] - f[i])
+        }
+        res
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [n, m]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let mut f: Vec<usize> = input.read_line(parse_vec).unwrap();
-    f.sort();
-    let mut res = usize::MAX;
-    for i in 0..m - n + 1 {
-        res = res.min(f[i + n - 1] - f[i])
-    }
-    res
-}
 // @code end

@@ -7,30 +7,28 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
+sol! {
+    (
+        n is usize,
+        a is String,
+        b is String,
+        c is String,
+    ) -> bool
+    {
+        let mut a = a.chars().into_iter();
+        let mut b = b.chars().into_iter();
+        let mut c = c.chars().into_iter();
+        for _ in 0..n {
+            let ai = a.next().unwrap();
+            let bi = b.next().unwrap();
+            let ci = c.next().unwrap();
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let a: String = input.read_line(parse).unwrap();
-    let b: String = input.read_line(parse).unwrap();
-    let c: String = input.read_line(parse).unwrap();
-    let mut a = a.chars().into_iter();
-    let mut b = b.chars().into_iter();
-    let mut c = c.chars().into_iter();
-    for _ in 0..n {
-        let ai = a.next().unwrap();
-        let bi = b.next().unwrap();
-        let ci = c.next().unwrap();
-
-        if ai != ci && bi != ci {
-            return true;
+            if ai != ci && bi != ci {
+                return true;
+            }
         }
+        false
     }
-    false
 }
+
 // @code end

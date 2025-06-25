@@ -8,15 +8,13 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, m, k] is [isize; 3]
+    ) -> bool
+    {
+        k < (n - (n + m - 1) / m)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let [n, m, k]: [isize; 3] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    k < (n - (n + m - 1) / m)
-}
 // @code end

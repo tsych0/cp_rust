@@ -239,7 +239,7 @@ pub fn suffix_array(s: &str) -> Vec<usize> {
 
 // Reference:
 // T. Kasai, G. Lee, H. Arimura, S. Arikawa, and K. Park,
-// Linear-Time Longest-Common-Prefix Computation in Suffix Arrays and Its
+// Linear-Time Longest-Common-Prefix Computation is Suffix Arrays and Its
 // Applications
 pub fn lcp_array_arbitrary<T: Ord>(s: &[T], sa: &[usize]) -> Vec<usize> {
     assert!(s.len() == sa.len());

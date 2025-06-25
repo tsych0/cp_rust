@@ -9,25 +9,23 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, _k] is [usize; 2],
+        a is [isize],
+        (mut b) is [isize]
+    ) -> Words<isize>
+    {
+        b.sort();
+         a.into_iter()
+             .zip(0..n)
+             .sorted()
+             .enumerate()
+             .map(|(i, (_, j))| (j, i))
+             .sorted()
+             .map(|(_, i)| b[i])
+             .collect()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> Words<isize>
-where
-    R: Read,
-{
-    let [n, _k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let a: Vec<isize> = input.read_line(parse_vec).unwrap();
-    let mut b: Vec<isize> = input.read_line(parse_vec).unwrap();
-    b.sort();
-    a.into_iter()
-        .zip(0..n)
-        .sorted()
-        .enumerate()
-        .map(|(i, (_, j))| (j, i))
-        .sorted()
-        .map(|(_, i)| b[i])
-        .collect()
-}
 // @code end

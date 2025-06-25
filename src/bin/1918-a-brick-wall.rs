@@ -8,15 +8,13 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, m] is [usize; 2]
+    ) -> usize
+    {
+        n * (m / 2)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [n, m]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    n * (m / 2)
-}
 // @code end

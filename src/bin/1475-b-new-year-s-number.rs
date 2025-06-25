@@ -7,15 +7,13 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize
+    ) -> bool
+    {
+        n / 2020 >= n % 2020
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    n / 2020 >= n % 2020
-}
 // @code end

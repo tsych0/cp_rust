@@ -4,22 +4,18 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let n: String = input.read_line(parse).unwrap();
-    n.chars()
-        .filter(|&c| c == '4' || c == '7')
-        .count()
-        .to_string()
-        .chars()
-        .all(|c| c == '4' || c == '7')
+sol! {
+    (
+        n is String
+    ) -> bool
+    {
+        n.chars()
+            .filter(|&c| c == '4' || c == '7')
+            .count()
+            .to_string()
+            .chars()
+            .all(|c| c == '4' || c == '7')
+    }
 }
 // @code end

@@ -89,7 +89,7 @@ impl Grid {
         truncated
     }
 
-    /// Return the number of positions in this grid.
+    /// Return the number of positions is this grid.
     #[must_use]
     pub const fn size(&self) -> usize {
         self.width * self.height

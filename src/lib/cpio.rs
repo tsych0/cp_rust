@@ -1,9 +1,12 @@
 use std::{
-    fmt::Display,
-    io::{stdin, stdout, BufRead, BufReader, BufWriter, Read, Result, StdinLock, Write},
+    convert::TryInto,
+    fmt::{Debug, Display},
+    io::{stdin, stdout, BufRead, BufReader, BufWriter, Read, StdinLock, Write},
     iter::FromIterator,
     str::FromStr,
 };
+
+type Result<T> = std::result::Result<T, String>;
 
 pub struct ListOf<const SEP: char, T>(pub Vec<T>);
 pub type Words<T> = ListOf<' ', T>;
@@ -117,57 +120,70 @@ where
 
     pub fn read_line<F, T>(&mut self, parser: F) -> Result<T>
     where
-        F: Fn(&str) -> T,
+        F: Fn(&str) -> Result<T>,
     {
         self.buf.clear();
-        self.reader.read_line(&mut self.buf)?;
-        Ok(parser(self.buf.trim()))
+        self.reader
+            .read_line(&mut self.buf)
+            .map_err(|err| err.to_string())?;
+        parser(self.buf.trim())
     }
 
     pub fn read_lines<F, T>(&mut self, n: usize, parser: F) -> Result<Vec<T>>
     where
-        F: Fn(&str) -> T,
+        F: Fn(&str) -> Result<T>,
     {
         (1..=n)
             .map(|_| {
                 self.buf.clear();
-                self.reader.read_line(&mut self.buf)?;
-                Ok(parser(&self.buf.trim()))
+                self.reader
+                    .read_line(&mut self.buf)
+                    .map_err(|err| err.to_string())?;
+                parser(&self.buf.trim())
             })
             .collect()
     }
 }
 
-pub fn parse<T: FromStr>(s: &str) -> T {
-    match s.parse() {
-        Ok(v) => v,
-        Err(_) => panic!("Error while parsing words"),
-    }
+pub fn parse<T: FromStr>(s: &str) -> Result<T>
+where
+    T::Err: ToString,
+{
+    s.parse::<T>().map_err(|err| err.to_string())
 }
 
-pub fn parse_vec<T: FromStr>(s: &str) -> Vec<T> {
+pub fn parse_vec<T: FromStr>(s: &str) -> Result<Vec<T>>
+where
+    T::Err: ToString,
+{
     s.split(' ')
-        .map(|s| match s.parse() {
-            Ok(v) => v,
-            Err(_) => panic!("Error while parsing words"),
-        })
+        .map(|s| s.parse::<T>().map_err(|err| err.to_string()))
         .collect()
 }
 
-pub fn parse_chars(s: &str) -> Vec<char> {
-    s.chars().collect()
+pub fn parse_slice<T: FromStr + Debug, const N: usize>(s: &str) -> Result<[T; N]>
+where
+    T::Err: ToString,
+{
+    let vec: Vec<T> = parse_vec(s)?;
+    vec.try_into()
+        .map_err(|_| format!("error while converting to slice"))
 }
 
-pub fn parse_binary(s: &str) -> Vec<u8> {
-    s.chars().map(|s| if s == '0' { 0 } else { 1 }).collect()
+pub fn parse_chars(s: &str) -> Result<Vec<char>> {
+    Ok(s.chars().collect())
+}
+
+pub fn parse_binary(s: &str) -> Result<Vec<u8>> {
+    Ok(s.chars().map(|s| if s == '0' { 0 } else { 1 }).collect())
 }
 
 pub fn solve<O>(solution: fn(&mut CPInput<StdinLock<'static>>) -> O)
 where
     O: CPOutput,
 {
-    let mut io = CPInput::new(stdin().lock());
-    let output = solution(&mut io);
+    let mut input = CPInput::new(stdin().lock());
+    let output = solution(&mut input);
     stdout()
         .lock()
         .write_all(&output.cp_fmt().as_bytes())
@@ -187,4 +203,85 @@ where
         writer.write("\n".as_bytes()).unwrap();
     }
     writer.flush().unwrap();
+}
+
+#[macro_export]
+macro_rules! sol {
+    (
+        (
+            $(
+               $var:tt is $ty:tt $(; $n:expr)?
+            ),* $(,)?
+        ) -> $ret:ty
+        $body:block
+    ) => {
+        fn main() {
+            solve(solution);
+        }
+        fn solution<R>(input: &mut CPInput<R>) -> $ret
+        where
+            R: std::io::Read,
+        {
+            $(
+                read_value!(input, $var, $ty $(; $n)?);
+            )*
+            $body
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! sol_n {
+    (
+        (
+            $(
+               $var:tt is $ty:tt $(; $n:expr)?
+            ),* $(,)?
+        ) -> $ret:ty
+        $body:block
+    ) => {
+        fn main() {
+            solve_n(solution);
+        }
+        fn solution<R>(input: &mut CPInput<R>) -> $ret
+        where
+            R: std::io::Read,
+        {
+            $(
+                read_value!(input, $var, $ty $(; $n)?);
+            )*
+            $body
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! read_value {
+    ($input:ident, $var:tt, [[char]]; $n:expr) => {
+        let $var: Vec<Vec<char>> = $input.read_lines($n, parse_chars).unwrap();
+    };
+    ($input:ident, $var:tt, [[01]]; $n:expr) => {
+        let $var: Vec<Vec<u8>> = $input.read_lines($n, parse_binary).unwrap();
+    };
+    ($input:ident, $var:tt, [[$inner:ty]]; $n:expr) => {
+        let $var: Vec<Vec<$inner>> = $input.read_lines($n, parse_vec).unwrap();
+    };
+    ($input:ident, $var:tt, [char]) => {
+        let $var: Vec<char> = $input.read_line(parse_chars).unwrap();
+    };
+    ($input:ident, $var:tt, [01]) => {
+        let $var: Vec<u8> = $input.read_line(parse_binary).unwrap();
+    };
+    ($input:ident, $var:tt, [$inner:ty]; $n: expr) => {
+        let $var: Vec<$inner> = $input.read_lines($n, parse).unwrap();
+    };
+    ($input:ident, $var:tt, [$inner:ty; $N:literal]) => {
+        let $var: [$inner; $N] = $input.read_line(parse_slice).unwrap();
+    };
+    ($input:ident, $var:tt, [$inner:ty]) => {
+        let $var: Vec<$inner> = $input.read_line(parse_vec).unwrap();
+    };
+    ($input:ident, $var:tt, $inner:ty) => {
+        let $var: $inner = $input.read_line(parse).unwrap();
+    };
 }

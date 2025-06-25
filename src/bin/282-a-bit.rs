@@ -3,28 +3,26 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve;
+use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        n is usize,
+        operations is [String]
+    ) -> i32
+    {
+        operations.into_iter().fold(
+            0,
+            |acc, op| {
+                if op.contains('+') {
+                    acc + 1
+                } else {
+                    acc - 1
+                }
+            },
+        )
+    }
 }
 
-fn solution<R>(input: &mut cpio::CPInput<R>) -> i32
-where
-    R: Read,
-{
-    let n: usize = input.read_line(cpio::parse).unwrap();
-    let operations: Vec<String> = input.read_lines(n, cpio::parse).unwrap();
-    operations.into_iter().fold(
-        0,
-        |acc, op| {
-            if op.contains('+') {
-                acc + 1
-            } else {
-                acc - 1
-            }
-        },
-    )
-}
 // @code end

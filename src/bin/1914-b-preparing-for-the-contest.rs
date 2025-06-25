@@ -8,22 +8,20 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, k] is [usize; 2]
+    ) -> Words<usize>
+    {
+        let cut_point = n - k;
+
+        [
+            (cut_point..=n).collect::<Vec<_>>(),
+            (1..cut_point).rev().collect::<Vec<_>>(),
+        ]
+        .concat()
+        .into()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
-where
-    R: Read,
-{
-    let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    let cut_point = n - k;
-
-    [
-        (cut_point..=n).collect::<Vec<_>>(),
-        (1..cut_point).rev().collect::<Vec<_>>(),
-    ]
-    .concat()
-    .into()
-}
 // @code end

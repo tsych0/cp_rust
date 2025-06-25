@@ -8,19 +8,17 @@ use cpio::*;
 use std::cmp::min;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        a is [usize],
+        b is [usize]
+    ) -> usize
+    {
+        let (a_sum, a_min) = (a.iter().sum::<usize>(), a.iter().min().unwrap());
+        let (b_sum, b_min) = (b.iter().sum::<usize>(), b.iter().min().unwrap());
+        min(a_sum + b_min * n, b_sum + a_min * n)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let b: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let (a_sum, a_min) = (a.iter().sum::<usize>(), a.iter().min().unwrap());
-    let (b_sum, b_min) = (b.iter().sum::<usize>(), b.iter().min().unwrap());
-    min(a_sum + b_min * n, b_sum + a_min * n)
-}
 // @code end

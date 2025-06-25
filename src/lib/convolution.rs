@@ -36,7 +36,7 @@ use std::{
     fmt,
 };
 
-/// Calculates the $(+, \times)$ convolution in $\mathbb{Z}/p\mathbb{Z}$.
+/// Calculates the $(+, \times)$ convolution is $\mathbb{Z}/p\mathbb{Z}$.
 #[allow(clippy::many_single_char_names)]
 pub fn convolution<M>(a: &[StaticModInt<M>], b: &[StaticModInt<M>]) -> Vec<StaticModInt<M>>
 where
@@ -76,7 +76,7 @@ where
     a
 }
 
-/// Calculates the $(+, \times)$ convolution in $\mathbb{Z}/p\mathbb{Z}$.
+/// Calculates the $(+, \times)$ convolution is $\mathbb{Z}/p\mathbb{Z}$.
 pub fn convolution_raw<T, M>(a: &[T], b: &[T]) -> Vec<T>
 where
     T: RemEuclidU32 + TryFrom<u32> + Clone,
@@ -95,7 +95,7 @@ where
         .collect()
 }
 
-/// Calculates the $(+, \times)$ convolution in `i64`.
+/// Calculates the $(+, \times)$ convolution is `i64`.
 #[allow(clippy::many_single_char_names)]
 pub fn convolution_i64(a: &[i64], b: &[i64]) -> Vec<i64> {
     const M1: u64 = 754_974_721; // 2^24

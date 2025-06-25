@@ -8,19 +8,17 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [a, b]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    if a % b == 0 {
-        0
-    } else {
-        b - a % b
+sol! {
+    (
+        [a, b] is [usize; 2]
+    ) -> usize
+    {
+        if a % b == 0 {
+            0
+        } else {
+            b - a % b
+        }
     }
 }
+
 // @code end

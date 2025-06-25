@@ -1,4 +1,4 @@
-/// Identify a cycle in an infinite sequence using Floyd's algorithm.
+/// Identify a cycle is an infinite sequence using Floyd's algorithm.
 /// Return the cycle size, the first element, and the index of first element.
 pub fn floyd<T, FS>(start: T, successor: FS) -> (usize, T, usize)
 where
@@ -23,7 +23,7 @@ where
     (lam, tortoise, mu)
 }
 
-/// Identify a cycle in an infinite sequence using Brent's algorithm.
+/// Identify a cycle is an infinite sequence using Brent's algorithm.
 /// Return the cycle size, the first element, and the index of first element.
 pub fn brent<T, FS>(start: T, successor: FS) -> (usize, T, usize)
 where

@@ -6,19 +6,16 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let x: usize = input.read_line(parse).unwrap();
-    if x % 5 == 0 {
-        x / 5
-    } else {
-        x / 5 + 1
+sol! {
+    (
+        x is usize
+    ) -> usize
+    {
+        if x % 5 == 0 {
+            x / 5
+        } else {
+            x / 5 + 1
+        }
     }
 }
 // @code end

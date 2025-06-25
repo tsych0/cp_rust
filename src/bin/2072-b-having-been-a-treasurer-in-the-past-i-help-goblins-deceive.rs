@@ -7,18 +7,14 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let s: String = input.read_line(parse).unwrap();
-    let a = s.chars().filter(|&c| c == '_').count();
-    let b = s.chars().filter(|&c| c == '-').count();
-    ((b + 1) / 2) * (b / 2) * a
+sol! {
+    (        _n is usize,
+        s is String
+    ) -> usize
+    {
+        let a = s.chars().filter(|&c| c == '_').count();
+        let b = s.chars().filter(|&c| c == '-').count();
+        ((b + 1) / 2) * (b / 2) * a
+    }
 }
 // @code end

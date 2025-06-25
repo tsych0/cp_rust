@@ -7,16 +7,14 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        a is [isize]
+    ) -> isize
+    {
+        a[n - 1] - a[n - 2] + a.into_iter().take(n - 2).sum::<isize>()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> isize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let a: Vec<isize> = input.read_line(parse_vec).unwrap();
-    a[n - 1] - a[n - 2] + a.into_iter().take(n - 2).sum::<isize>()
-}
 // @code end

@@ -8,23 +8,21 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let s: Vec<u8> = input.read_line(parse_binary).unwrap();
-    let one_count = s.iter().filter(|&&i| i == 1).count();
-    if one_count % 2 == 0 && one_count != 2 {
-        true
-    } else if one_count == 2 {
-        s.into_iter().group_by(|&c| c).filter(|g| g[0] == 1).count() == 2
-    } else {
-        false
+sol! {
+    (
+        n is usize,
+        s is [01]
+    ) -> bool
+    {
+        let one_count = s.iter().filter(|&&i| i == 1).count();
+        if one_count % 2 == 0 && one_count != 2 {
+            true
+        } else if one_count == 2 {
+            s.into_iter().group_by(|&c| c).filter(|g| g[0] == 1).count() == 2
+        } else {
+            false
+        }
     }
 }
+
 // @code end

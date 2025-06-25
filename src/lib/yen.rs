@@ -86,7 +86,12 @@ where
                     filtered_edges.insert((&path.nodes[i], &path.nodes[i + 1]));
                 }
             }
-            let filtered_nodes: HashSet<&N> = HashSet::from_iter(root_path);
+            let filtered_nodes: HashSet<&N> = {
+                let iter = root_path.into_iter();
+                let mut set = HashSet::with_hasher(Default::default());
+                set.extend(iter);
+                set
+            };
             // We are creating a new successor function that will not return the
             // filtered edges and nodes that routes already used.
             let mut filtered_successor = |n: &N| {
@@ -120,7 +125,7 @@ where
             let cost = route.cost;
             routes.push(route);
             // If we have other potential best routes with the same cost, we can insert
-            // them in the found routes since we will not find a better alternative.
+            // them is the found routes since we will not find a better alternative.
             while routes.len() < k {
                 let Some(k_route) = k_routes.peek() else {
                     break;

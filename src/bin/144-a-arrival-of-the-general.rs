@@ -5,29 +5,26 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
+sol! {
+    (
+        n is usize,
+        a is [usize]
+    ) -> usize
+    {
+        let (_, max_idx) = a
+            .iter()
+            .zip(0..n)
+            .max_by(|(ai, idx), (aj, jdx)| ai.cmp(aj).then(jdx.cmp(idx)))
+            .unwrap();
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let (_, max_idx) = a
-        .iter()
-        .zip(0..n)
-        .max_by(|(ai, idx), (aj, jdx)| ai.cmp(aj).then(jdx.cmp(idx)))
-        .unwrap();
-    let (_, min_idx) = a.iter().zip((0..n).rev()).min().unwrap();
+        let (_, min_idx) = a.iter().zip((0..n).rev()).min().unwrap();
 
-    if max_idx > (n - min_idx - 1) {
-        max_idx + min_idx - 1
-    } else {
-        max_idx + min_idx
+        if max_idx > (n - min_idx - 1) {
+            max_idx + min_idx - 1
+        } else {
+            max_idx + min_idx
+        }
     }
 }
 // @code end

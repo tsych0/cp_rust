@@ -3,22 +3,19 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve;
-use std::{collections::HashSet, io::Read};
+use cpio::*;
+use std::collections::HashSet;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut cpio::CPInput<R>) -> String
-where
-    R: Read,
-{
-    let s: String = input.read_line(cpio::parse).unwrap();
-    if s.chars().collect::<HashSet<_>>().len() % 2 == 0 {
-        "CHAT WITH HER!".into()
-    } else {
-        "IGNORE HIM!".into()
+sol! {
+    (        s is String
+    ) -> String
+    {
+        if s.chars().collect::<HashSet<_>>().len() % 2 == 0 {
+            "CHAT WITH HER!".into()
+        } else {
+            "IGNORE HIM!".into()
+        }
     }
 }
+
 // @code end

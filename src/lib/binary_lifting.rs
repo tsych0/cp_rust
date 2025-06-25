@@ -136,7 +136,7 @@ impl BinaryLifting {
             current = self.up[current][0]?;
         }
 
-        // Add v_path in reverse order
+        // Add v_path is reverse order
         path.extend(v_path.into_iter().rev());
 
         Some(path)

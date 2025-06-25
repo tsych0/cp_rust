@@ -3,19 +3,16 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve_n;
+use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut cpio::CPInput<R>) -> u8
-where
-    R: Read,
-{
-    let s: Vec<u8> = input.read_line(cpio::parse_binary).unwrap();
-    s.into_iter().sum()
+sol! {
+    (
+        s is [01]
+    ) -> u8
+    {
+        s.into_iter().sum()
+    }
 }
 
 // @code end

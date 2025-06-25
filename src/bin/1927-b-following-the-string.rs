@@ -9,35 +9,33 @@ use std::collections::HashMap;
 use std::collections::VecDeque;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
+sol! {
+    (
+        _n is usize,
+        a is [usize]
+    ) -> String
+    {
+        let mut trace = HashMap::<usize, VecDeque<char>>::new();
+        trace.insert(
+            0,
+            VecDeque::from(('a'..='z').into_iter().collect::<Vec<_>>()),
+        );
 
-fn solution<R>(input: &mut CPInput<R>) -> String
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let mut trace = HashMap::<usize, VecDeque<char>>::new();
-    trace.insert(
-        0,
-        VecDeque::from(('a'..='z').into_iter().collect::<Vec<_>>()),
-    );
-
-    let mut res = vec![];
-    for ai in a {
-        let ti = trace.get_mut(&ai).unwrap();
-        let c = ti.pop_front().unwrap();
-        res.push(c);
-        if trace.contains_key(&(ai + 1)) {
-            let ti = trace.get_mut(&(ai + 1)).unwrap();
-            ti.push_back(c);
-        } else {
-            trace.insert(ai + 1, VecDeque::from(vec![c]));
+        let mut res = vec![];
+        for ai in a {
+            let ti = trace.get_mut(&ai).unwrap();
+            let c = ti.pop_front().unwrap();
+            res.push(c);
+            if trace.contains_key(&(ai + 1)) {
+                let ti = trace.get_mut(&(ai + 1)).unwrap();
+                ti.push_back(c);
+            } else {
+                trace.insert(ai + 1, VecDeque::from(vec![c]));
+            }
         }
-    }
 
-    res.into_iter().collect()
+        res.into_iter().collect()
+    }
 }
+
 // @code end

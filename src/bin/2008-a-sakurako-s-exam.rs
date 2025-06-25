@@ -7,15 +7,13 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [a, b] is [usize; 2]
+    ) -> bool
+    {
+        a % 2 == 0 && (b % 2 == 0 || a >= 2)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let [a, b]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    a % 2 == 0 && (b % 2 == 0 || a >= 2)
-}
 // @code end

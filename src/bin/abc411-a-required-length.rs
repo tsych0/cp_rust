@@ -5,18 +5,14 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let s: String = input.read_line(parse).unwrap();
-    let n: usize = input.read_line(parse).unwrap();
-    s.len() >= n
+sol! {
+    (
+        s is String,
+        n is usize
+    ) -> bool
+    {
+        s.len() >= n
+    }
 }
 // @code end

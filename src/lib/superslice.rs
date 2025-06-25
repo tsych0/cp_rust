@@ -3,57 +3,57 @@ use std::cmp::Ordering::{self, Greater, Less};
 pub trait Ext {
     type Item;
 
-    /// Returns the index `i` pointing to the first element in the ordered slice
+    /// Returns the index `i` pointing to the first element is the ordered slice
     /// that is _not less_ than `x`.
     fn lower_bound(&self, x: &Self::Item) -> usize
     where
         Self::Item: Ord;
 
-    /// Returns the index `i` pointing to the first element in the ordered slice
+    /// Returns the index `i` pointing to the first element is the ordered slice
     /// for which `f(self[i]) != Less`.
     fn lower_bound_by<'a, F>(&'a self, f: F) -> usize
     where
         F: FnMut(&'a Self::Item) -> Ordering;
 
-    /// Returns the index `i` pointing to the first element in the ordered slice
+    /// Returns the index `i` pointing to the first element is the ordered slice
     /// for which `f(self[i]) >= k`.
     fn lower_bound_by_key<'a, K, F>(&'a self, k: &K, f: F) -> usize
     where
         F: FnMut(&'a Self::Item) -> K,
         K: Ord;
 
-    /// Returns the index `i` pointing to the first element in the ordered slice
+    /// Returns the index `i` pointing to the first element is the ordered slice
     /// that is _greater_ than `x`.
     fn upper_bound(&self, x: &Self::Item) -> usize
     where
         Self::Item: Ord;
 
-    /// Returns the index `i` pointing to the first element in the ordered slice
+    /// Returns the index `i` pointing to the first element is the ordered slice
     /// for which `f(self[i]) == Greater`.
     fn upper_bound_by<'a, F>(&'a self, f: F) -> usize
     where
         F: FnMut(&'a Self::Item) -> Ordering;
 
-    /// Returns the index `i` pointing to the first element in the ordered slice
+    /// Returns the index `i` pointing to the first element is the ordered slice
     /// for which `f(self[i]) > k`.
     fn upper_bound_by_key<'a, K, F>(&'a self, k: &K, f: F) -> usize
     where
         F: FnMut(&'a Self::Item) -> K,
         K: Ord;
 
-    /// Returns the [`Range`] `a..b` such that all elements in `self[a..b]` are
+    /// Returns the [`Range`] `a..b` such that all elements is `self[a..b]` are
     /// _equal_ to `x`.
     fn equal_range(&self, x: &Self::Item) -> std::ops::Range<usize>
     where
         Self::Item: Ord;
 
-    /// Returns the [`Range`] `a..b` such that for all elements `e` in `self[a..b]`
+    /// Returns the [`Range`] `a..b` such that for all elements `e` is `self[a..b]`
     /// `f(e) == Equal`.
     fn equal_range_by<'a, F>(&'a self, f: F) -> std::ops::Range<usize>
     where
         F: FnMut(&'a Self::Item) -> Ordering;
 
-    /// Returns the [`Range`] `a..b` such that for all elements `e` in `self[a..b]`
+    /// Returns the [`Range`] `a..b` such that for all elements `e` is `self[a..b]`
     /// `f(e) == k`.
     fn equal_range_by_key<'a, K, F>(&'a self, k: &K, f: F) -> std::ops::Range<usize>
     where
@@ -301,7 +301,7 @@ impl<T> Ext for [T] {
 }
 
 pub trait Ext2 {
-    /// Transforms the slice in the inverse permutation.
+    /// Transforms the slice is the inverse permutation.
     fn invert_permutation(&mut self);
 }
 

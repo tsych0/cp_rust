@@ -8,16 +8,13 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        [n, k] is [usize; 2]
+    ) -> String
+    {
+        vec![('a'..).take(k).collect::<String>(); n].concat()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> String
-where
-    R: Read,
-{
-    let [n, k]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-
-    vec![('a'..).take(k).collect::<String>(); n].concat()
-}
 // @code end

@@ -7,22 +7,20 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        h is [u8]
+    ) -> usize
+    {
+        n - h
+              .into_iter()
+              .group_by(|&n| n)
+              .into_iter()
+              .map(|grp| grp.len())
+              .max()
+              .unwrap()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let h: Vec<u8> = input.read_line(parse_vec).unwrap();
-    n - h
-        .into_iter()
-        .group_by(|&n| n)
-        .into_iter()
-        .map(|grp| grp.len())
-        .max()
-        .unwrap()
-}
 // @code end

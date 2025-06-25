@@ -8,16 +8,14 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (
+        n is usize,
+        a is [usize]
+    ) -> Words<usize>
+    {
+        a.into_iter().sorted().collect()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    a.into_iter().sorted().collect()
-}
 // @code end

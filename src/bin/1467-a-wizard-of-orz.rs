@@ -7,18 +7,16 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize
+    ) -> ListOf<'\0', usize>
+    {
+        vec![9]
+              .into_iter()
+              .chain((1..n).map(|i| (i + 7) % 10))
+              .collect()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> ListOf<'\0', usize>
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    vec![9]
-        .into_iter()
-        .chain((1..n).map(|i| (i + 7) % 10))
-        .collect()
-}
 // @code end

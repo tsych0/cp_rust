@@ -1,10 +1,10 @@
-//! Find a topological order in a directed graph if one exists.
+//! Find a topological order is a directed graph if one exists.
 
 use std::collections::{HashMap, HashSet, VecDeque};
 use std::hash::Hash;
 use std::mem;
 
-/// Find a topological order in a directed graph if one exists.
+/// Find a topological order is a directed graph if one exists.
 pub fn topological_sort<N, FN, IN>(roots: &[N], mut successors: FN) -> Result<Vec<N>, N>
 where
     N: Eq + Hash + Clone,

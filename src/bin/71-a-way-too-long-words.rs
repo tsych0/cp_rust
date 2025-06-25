@@ -3,24 +3,19 @@
 use cp_lib::*;
 
 // @code begin
-use cpio::solve_n;
-use std::io::Read;
+use cpio::*;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(io: &mut cpio::CPInput<R>) -> String
-where
-    R: Read,
-{
-    let s: String = io.read_line(cpio::parse).unwrap();
-    let len = s.len();
-    let mut s = s.chars();
-    if len > 10 {
-        format!("{}{}{}", s.next().unwrap(), len - 2, s.last().unwrap())
-    } else {
-        s.collect()
+sol! {
+    (        s is String
+    ) -> String
+    {
+        let len = s.len();
+        let mut s = s.chars();
+        if len > 10 {
+            format!("{}{}{}", s.next().unwrap(), len - 2, s.last().unwrap())
+        } else {
+            s.collect()
+        }
     }
 }
 

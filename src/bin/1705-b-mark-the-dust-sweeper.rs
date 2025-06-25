@@ -7,22 +7,20 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        a is [usize]
+    ) -> usize
+    {
+        let zero_count = a
+            .iter()
+            .take(n - 1)
+            .skip_while(|&&i| i == 0)
+            .filter(|&&i| i == 0)
+            .count();
+        a.iter().sum::<usize>() - a[n - 1] + zero_count
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    let zero_count = a
-        .iter()
-        .take(n - 1)
-        .skip_while(|&&i| i == 0)
-        .filter(|&&i| i == 0)
-        .count();
-    a.iter().sum::<usize>() - a[n - 1] + zero_count
-}
 // @code end

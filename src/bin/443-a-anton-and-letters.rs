@@ -8,18 +8,15 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (        s is String
+    ) -> usize
+    {
+        s.chars()
+               .filter(|x| ![',', ' ', '{', '}'].contains(x))
+               .unique()
+               .count()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let s: String = input.read_line(parse).unwrap();
-    s.chars()
-        .filter(|x| ![',', ' ', '{', '}'].contains(x))
-        .unique()
-        .count()
-}
 // @code end

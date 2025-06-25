@@ -8,16 +8,13 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (        _n is usize,
+        s is String
+    ) -> bool
+    {
+        s.to_lowercase().chars().unique().count() == 26
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> bool
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let s: String = input.read_line(parse).unwrap();
-    s.to_lowercase().chars().unique().count() == 26
-}
 // @code end

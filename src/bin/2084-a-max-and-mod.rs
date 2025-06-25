@@ -4,21 +4,16 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(io: &mut cpio::CPInput<R>) -> Words<i16>
-where
-    R: Read,
-{
-    let n: i16 = io.read_line(cpio::parse).unwrap();
-    if n % 2 == 0 {
-        ListOf(vec![-1])
-    } else {
-        (n..=n).chain(1..n).collect()
+sol! {
+    (        n is i16
+    ) -> Words<i16>
+    {
+        if n % 2 == 0 {
+            ListOf(vec![-1])
+        } else {
+            (n..=n).chain(1..n).collect()
+        }
     }
 }
 // @code end

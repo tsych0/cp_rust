@@ -7,24 +7,22 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        (mut n) is usize
+    ) -> Lines<Words<usize>>
+    {
+        let mut mask = 1;
+        let mut res = vec![];
+        while n > 0 {
+            if n % 10 != 0 {
+                res.push(n % 10 * mask);
+            }
+            n /= 10;
+            mask *= 10;
+        }
+        vec![vec![res.len()].into(), ListOf(res)].into()
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> Lines<Words<usize>>
-where
-    R: Read,
-{
-    let mut n: usize = input.read_line(parse).unwrap();
-    let mut mask = 1;
-    let mut res = vec![];
-    while n > 0 {
-        if n % 10 != 0 {
-            res.push(n % 10 * mask);
-        }
-        n /= 10;
-        mask *= 10;
-    }
-    vec![vec![res.len()].into(), ListOf(res)].into()
-}
 // @code end

@@ -7,33 +7,31 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        _s is String,
+        s is [[char]]; 8
+    ) -> char
+    {
+        'l: for i in 0..8 {
+            for j in 0..8 {
+                if s[i][j] != 'R' {
+                    continue 'l;
+                }
+            }
+            return 'R';
+        }
+        'l: for i in 0..8 {
+            for j in 0..8 {
+                if s[j][i] != 'B' {
+                    continue 'l;
+                }
+            }
+            return 'B';
+        }
+
+        '.'
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> char
-where
-    R: Read,
-{
-    let _s: String = input.read_line(parse).unwrap();
-    let s: Vec<Vec<char>> = input.read_lines(8, parse_chars).unwrap();
-    'l: for i in 0..8 {
-        for j in 0..8 {
-            if s[i][j] != 'R' {
-                continue 'l;
-            }
-        }
-        return 'R';
-    }
-    'l: for i in 0..8 {
-        for j in 0..8 {
-            if s[j][i] != 'B' {
-                continue 'l;
-            }
-        }
-        return 'B';
-    }
-
-    '.'
-}
 // @code end

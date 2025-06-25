@@ -4,19 +4,15 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-#[allow(unused)]
-use std::convert::TryInto;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let [a, b]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    1 + (b - 2) / (a - 1)
+sol! {
+    (
+        [a, b] is [usize; 2]
+    ) -> usize {
+        if b < 2 {
+            return 0;
+        }
+        1 + (b - 2) / (a - 1)
+    }
 }
 // @code end

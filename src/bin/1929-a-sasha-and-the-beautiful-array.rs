@@ -7,16 +7,13 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    a.iter().max().unwrap() - a.iter().min().unwrap()
+sol! {
+    (
+        _n is usize,
+        a is [usize]
+    ) -> usize
+    {
+        a.iter().max().unwrap() - a.iter().min().unwrap()
+    }
 }
 // @code end

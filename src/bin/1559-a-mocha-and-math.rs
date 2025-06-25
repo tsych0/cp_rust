@@ -6,16 +6,14 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        _n is usize,
+        a is [usize]
+    ) -> usize
+    {
+        a.into_iter().fold(usize::MAX, |acc, ai| acc & ai)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let _n: usize = input.read_line(parse).unwrap();
-    let a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    a.into_iter().fold(usize::MAX, |acc, ai| acc & ai)
-}
 // @code end

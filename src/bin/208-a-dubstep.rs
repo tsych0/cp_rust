@@ -5,20 +5,16 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
+sol! {
+    (        s is String
+    ) -> String
+    {
+        s.split("WUB")
+            .filter(|c| !c.is_empty())
+            .collect::<Vec<_>>()
+            .join(" ")
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> String
-where
-    R: Read,
-{
-    let s: String = input.read_line(parse).unwrap();
-    s.split("WUB")
-        .filter(|c| !c.is_empty())
-        .collect::<Vec<_>>()
-        .join(" ")
-}
 // @code end

@@ -7,19 +7,16 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    if n % 2 == 0 {
-        ListOf(vec![vec![1, 3], vec![2; n - 2]].concat())
-    } else {
-        ListOf(vec![69; n])
+sol! {
+    (        n is usize
+    ) -> Words<usize>
+    {
+        if n % 2 == 0 {
+            ListOf(vec![vec![1, 3], vec![2; n - 2]].concat())
+        } else {
+            ListOf(vec![69; n])
+        }
     }
 }
+
 // @code end

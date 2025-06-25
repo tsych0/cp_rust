@@ -7,16 +7,14 @@ use cpio::*;
 use std::convert::TryInto;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        [x, y] is [usize; 2]
+    ) -> usize
+    {
+        n.div_ceil(x.min(y))
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let [x, y]: [usize; 2] = input.read_line(parse_vec).unwrap().try_into().unwrap();
-    n.div_ceil(x.min(y))
-}
 // @code end

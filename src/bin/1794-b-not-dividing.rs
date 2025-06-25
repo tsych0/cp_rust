@@ -7,26 +7,24 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        (mut a) is [usize]
+    ) -> Words<usize>
+    {
+        for i in 0..n {
+            if a[i] == 1 {
+                a[i] = 2;
+            }
+        }
+        for i in 1..n {
+            while a[i] % a[i - 1] == 0 {
+                a[i] += 1
+            }
+        }
+        ListOf(a)
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> Words<usize>
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let mut a: Vec<usize> = input.read_line(parse_vec).unwrap();
-    for i in 0..n {
-        if a[i] == 1 {
-            a[i] = 2;
-        }
-    }
-    for i in 1..n {
-        while a[i] % a[i - 1] == 0 {
-            a[i] += 1
-        }
-    }
-    ListOf(a)
-}
 // @code end

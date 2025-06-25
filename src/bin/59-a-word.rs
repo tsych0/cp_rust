@@ -4,23 +4,19 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::io::Read;
 
-fn main() {
-    solve(solution)
-}
-
-fn solution<R>(input: &mut CPInput<R>) -> String
-where
-    R: Read,
-{
-    let s: String = input.read_line(parse).unwrap();
-    if s.chars().into_iter().filter(|c| c.is_lowercase()).count()
-        < s.chars().into_iter().filter(|c| c.is_uppercase()).count()
+sol! {
+    (        s is String
+    ) -> String
     {
-        s.to_uppercase()
-    } else {
-        s.to_lowercase()
+        if s.chars().into_iter().filter(|c| c.is_lowercase()).count()
+            < s.chars().into_iter().filter(|c| c.is_uppercase()).count()
+        {
+            s.to_uppercase()
+        } else {
+            s.to_lowercase()
+        }
     }
 }
+
 // @code end

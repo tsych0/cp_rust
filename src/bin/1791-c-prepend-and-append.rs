@@ -7,25 +7,23 @@ use cp_lib::*;
 use cpio::*;
 use std::io::Read;
 
-fn main() {
-    solve_n(solution)
+sol! {
+    (
+        n is usize,
+        s is [01]
+    ) -> usize
+    {
+        let (mut i, mut j) = (0, n - 1);
+        while i < j {
+            if s[i] + s[j] == 1 {
+                i += 1;
+                j -= 1;
+            } else {
+                break;
+            }
+        }
+        j - i + 1
+    }
 }
 
-fn solution<R>(input: &mut CPInput<R>) -> usize
-where
-    R: Read,
-{
-    let n: usize = input.read_line(parse).unwrap();
-    let s: Vec<u8> = input.read_line(parse_binary).unwrap();
-    let (mut i, mut j) = (0, n - 1);
-    while i < j {
-        if s[i] + s[j] == 1 {
-            i += 1;
-            j -= 1;
-        } else {
-            break;
-        }
-    }
-    j - i + 1
-}
 // @code end
