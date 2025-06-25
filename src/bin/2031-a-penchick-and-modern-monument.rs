@@ -6,7 +6,7 @@ use cp_lib::*;
 use crate::itertools::Itertools;
 use cpio::*;
 
-sol! {
+sol_n! {
     fn solution(
         n: usize,
         h: [u8]

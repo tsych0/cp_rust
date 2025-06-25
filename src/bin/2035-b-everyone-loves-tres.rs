@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 use std::iter::repeat;
 
-sol! {
+sol_n! {
     fn solution(
         n: usize
     ) -> String {

@@ -8,7 +8,7 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::cmp::min;
 
-sol! {
+sol_n! {
     fn solution(
         n: usize,
         a: [isize]

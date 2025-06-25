@@ -7,7 +7,7 @@ use cp_lib::*;
 use crate::itertools::Itertools;
 use cpio::*;
 
-sol! {
+sol_n! {
     fn solution(
         [_, k]: [usize; 2],
         s: String

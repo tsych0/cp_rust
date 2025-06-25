@@ -6,7 +6,7 @@ use cp_lib::*;
 use cpio::*;
 use std::collections::HashSet;
 
-sol! {
+sol_n! {
     fn solution(
         n: usize,
         a: [usize]

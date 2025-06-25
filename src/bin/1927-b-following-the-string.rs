@@ -8,7 +8,7 @@ use cpio::*;
 use std::collections::HashMap;
 use std::collections::VecDeque;
 
-sol! {
+sol_n! {
     fn solution(
         _n: usize,
         a: [usize]

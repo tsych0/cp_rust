@@ -8,7 +8,7 @@ use crate::itertools::Itertools;
 use cpio::*;
 use std::collections::HashMap;
 
-sol! {
+sol_n! {
     fn solution(
         [_n, k]: [usize; 2],
         s: String

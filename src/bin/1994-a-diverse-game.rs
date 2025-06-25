@@ -5,7 +5,7 @@ use cp_lib::*;
 // @code begin
 use cpio::*;
 
-sol! {
+sol_n! {
     fn solution(
         [n, m]: [usize; 2],
         matrix: [[isize]]; n

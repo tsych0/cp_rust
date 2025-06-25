@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 use sieve::Sieve;
 
-sol! {
+sol_n! {
     fn solution(
         n: usize
     ) -> Lines<Words<usize>> {

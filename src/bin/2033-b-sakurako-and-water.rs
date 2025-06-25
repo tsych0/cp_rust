@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 use std::collections::HashMap;
 
-sol! {
+sol_n! {
     fn solution(
         n: usize,
         a: [[isize]]; n

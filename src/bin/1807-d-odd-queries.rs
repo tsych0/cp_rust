@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 use std::convert::TryInto;
 
-sol! {
+sol_n! {
     fn solution(
         [_n, q]: [usize; 2],
         a: [usize],

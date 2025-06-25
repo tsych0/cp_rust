@@ -5,7 +5,7 @@ use cp_lib::*;
 // @code begin
 use cpio::*;
 
-sol! {
+sol_n! {
     fn solution(
         s: [01]
     ) -> u8 {

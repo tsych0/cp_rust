@@ -7,7 +7,7 @@ use cp_lib::*;
 use cpio::*;
 use std::cmp::max;
 
-sol! {
+sol_n! {
     fn solution(
         [n, m]: [usize; 2]
     ) -> usize {

@@ -6,7 +6,7 @@ use cp_lib::*;
 // @code begin
 use cpio::*;
 
-sol! {
+sol_n! {
     fn solution(
         [n, x, y]: [isize; 3]
     ) -> Words<isize> {

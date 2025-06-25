@@ -6,7 +6,7 @@ use cp_lib::*;
 // @code begin
 use cpio::*;
 
-sol! {
+sol_n! {
     fn solution(
         [xa, ya]: [usize; 2],
         [xb, yb]: [usize; 2],
