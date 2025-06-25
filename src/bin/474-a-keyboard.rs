@@ -6,11 +6,11 @@ use cp_lib::*;
 // @code begin
 use cpio::*;
 use std::collections::HashMap;
-use std::io::Read;
 use std::ops::*;
 
 sol! {
-    (        dir is char,
+    (
+        dir is char,
         s is String
     ) -> String
     {

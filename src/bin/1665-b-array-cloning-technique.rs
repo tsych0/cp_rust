@@ -7,7 +7,6 @@ use cp_lib::*;
 use crate::itertools::Itertools;
 use cpio::*;
 use std::cmp::min;
-use std::io::Read;
 
 sol! {
     (

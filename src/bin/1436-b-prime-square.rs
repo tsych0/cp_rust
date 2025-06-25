@@ -6,7 +6,6 @@ use cp_lib::*;
 // @code begin
 use cpio::*;
 use sieve::Sieve;
-use std::io::Read;
 
 sol! {
     (

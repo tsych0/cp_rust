@@ -4,7 +4,6 @@
 use cp_lib::*;
 
 use cpio::*;
-use std::io::Read;
 
 sol! {
     (

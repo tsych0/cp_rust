@@ -5,7 +5,6 @@ use cp_lib::*;
 // @code begin
 use crate::itertools::Itertools;
 use cpio::*;
-use std::io::Read;
 
 sol! {
     (

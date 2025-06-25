@@ -7,7 +7,6 @@ use cp_lib::*;
 use cpio::*;
 use std::collections::HashMap;
 use std::collections::VecDeque;
-use std::io::Read;
 
 sol! {
     (

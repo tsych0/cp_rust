@@ -6,7 +6,6 @@ use cp_lib::*;
 // @code begin
 use cpio::*;
 use std::collections::HashMap;
-use std::io::Read;
 
 sol! {
     (

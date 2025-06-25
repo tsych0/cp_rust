@@ -7,8 +7,6 @@ use cp_lib::*;
 use crate::itertools::Itertools;
 use cpio::*;
 use std::collections::HashSet;
-use std::convert::TryInto;
-use std::io::Read;
 
 sol! {
     (

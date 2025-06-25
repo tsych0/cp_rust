@@ -4,8 +4,6 @@
 use cp_lib::*;
 
 use cpio::*;
-use std::convert::TryInto;
-use std::io::Read;
 
 sol! {
     (

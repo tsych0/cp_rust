@@ -6,7 +6,6 @@ use cp_lib::*;
 use cpio::*;
 #[allow(unused)]
 use std::convert::TryInto;
-use std::io::Read;
 
 sol! {
     (

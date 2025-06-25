@@ -6,7 +6,6 @@ use cp_lib::*;
 // @code begin
 use cpio::*;
 use std::cmp::max;
-use std::io::Read;
 
 sol! {
     (

@@ -6,10 +6,10 @@ use cp_lib::*;
 // @code begin
 use crate::itertools::Itertools;
 use cpio::*;
-use std::io::Read;
 
 sol! {
-    (        _n is usize,
+    (
+        _n is usize,
         s is String
     ) -> bool
     {

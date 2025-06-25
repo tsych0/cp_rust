@@ -6,8 +6,6 @@ use cp_lib::*;
 // @code begin
 use crate::itertools::Itertools;
 use cpio::*;
-use std::convert::TryInto;
-use std::io::Read;
 
 sol! {
     (

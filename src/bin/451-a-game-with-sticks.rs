@@ -5,11 +5,10 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::convert::TryInto;
-use std::io::Read;
 
 sol! {
-    (        [n, m] is [usize; 2]
+    (
+        [n, m] is [usize; 2]
     ) -> String
     {
         if n.min(m) % 2 == 0 {

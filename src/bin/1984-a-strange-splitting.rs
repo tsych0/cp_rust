@@ -4,7 +4,7 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
-use std::{collections::HashSet, io::Read};
+use std::collections::HashSet;
 
 sol! {
     (
