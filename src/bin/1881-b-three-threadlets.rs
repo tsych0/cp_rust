@@ -5,12 +5,14 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
+use math::*;
 
 sol_n! {
     fn solution(
-        n: usize
+        [a, b, c]: [usize; 3]
     ) -> bool {
-        n > 2 && n % 2 == 0
+        let d = gcd(gcd(a, b), gcd(b, c));
+        (a/d) + (b/d) + (c/d) - 3 <= 3
     }
 }
 // @code end

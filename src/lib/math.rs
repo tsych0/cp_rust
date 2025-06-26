@@ -1,4 +1,5 @@
 use crate::internal_math;
+use crate::internal_type_traits::{Integral, One, Signed, Zero};
 
 use std::mem::swap;
 
@@ -89,4 +90,52 @@ pub fn floor_sum(n: i64, m: i64, a: i64, b: i64) -> i64 {
     }
     let ret = ans + internal_math::floor_sum_unsigned(wn, wm, wa, wb);
     ret.0 as i64
+}
+
+/// Euclidean GCD for any Integer + Signed type
+pub fn gcd(mut a: usize, mut b: usize) -> usize {
+    while !(b == 0) {
+        let t = b;
+        b = a % b;
+        a = t;
+    }
+    a
+}
+
+/// Binary GCD (Stein’s algorithm) for unsigned integers
+pub fn binary_gcd(mut a: usize, mut b: usize) -> usize {
+    if a == 0 {
+        return b;
+    }
+    if b == 0 {
+        return a;
+    }
+
+    let shift = a.trailing_zeros().min(b.trailing_zeros());
+    a = a >> a.trailing_zeros();
+
+    while !(b == 0) {
+        b = b >> b.trailing_zeros();
+        if a > b {
+            std::mem::swap(&mut a, &mut b);
+        }
+        b = b - a;
+    }
+
+    a << shift
+}
+
+/// Extended GCD: returns (g, x, y) such that ax + by = g = gcd(a, b)
+pub fn extended_gcd<T>(a: T, b: T) -> (T, T, T)
+where
+    T: Integral + Copy + Signed,
+{
+    if b == Zero::zero() {
+        return (a.abs(), a.signum(), T::zero());
+    }
+
+    let (g, x1, y1) = extended_gcd(b, a % b);
+    let x = y1;
+    let y = x1 - (a / b) * y1;
+    (g, x, y)
 }

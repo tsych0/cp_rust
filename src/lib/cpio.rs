@@ -248,28 +248,6 @@ macro_rules! sol_main {
     };
 }
 
-// Shared implementation for solution functions
-#[macro_export]
-macro_rules! sol_impl {
-    (
-        fn $name:ident (
-            $(
-               $var:tt: $ty:tt $(; $n:expr)?
-            ),* $(,)?
-        ) -> $ret:ty
-        $body:block
-    ) => {
-        fn $name<R>(input: &mut CPInput<R>) -> $ret
-        where
-            R: std::io::Read, {
-            $(
-                read_value!(input, $var, $ty $(; $n)?);
-            )*
-            $body
-        }
-    };
-}
-
 /// Macro for single test case problems
 #[macro_export]
 macro_rules! sol {
@@ -282,7 +260,15 @@ macro_rules! sol {
         $body:block
     ) => {
         sol_main!(solve, $name);
-        sol_impl!(fn $name($($var: $ty $(; $n)?),*) -> $ret $body);
+
+        fn $name<R>(input: &mut CPInput<R>) -> $ret
+        where
+            R: std::io::Read, {
+            $(
+                read_value!(input, $var, $ty $(; $n)?);
+            )*
+            $body
+        }
     };
 }
 
@@ -298,7 +284,15 @@ macro_rules! sol_n {
         $body:block
     ) => {
         sol_main!(solve_n, $name);
-        sol_impl!(fn $name($($var: $ty $(; $n)?),*) -> $ret $body);
+
+        fn $name<R>(input: &mut CPInput<R>) -> $ret
+        where
+            R: std::io::Read, {
+            $(
+                read_value!(input, $var, $ty $(; $n)?);
+            )*
+            $body
+        }
     };
 }
 
@@ -348,5 +342,14 @@ macro_rules! read_value {
     // Single value
     ($input:ident, $var:tt, $inner:ty) => {
         let $var: $inner = $input.read_line(parse).unwrap();
+    };
+}
+
+// Debug utilities (only in debug builds)
+#[cfg(debug_assertions)]
+#[macro_export]
+macro_rules! dbg_cp {
+    ($($arg:expr),* $(,)?) => {
+        eprintln!($($arg),*);
     };
 }

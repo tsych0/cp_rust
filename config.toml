@@ -16,9 +16,14 @@ filename = ''' {{#if (regex_is_match pattern="codeforces.com" on=url)}} {{#with 
 ./src/bin/{{url_parts._1}}-{{to_lower_case url_parts._3}}{{#if (to_kebab_case title_parts._1)}}-{{to_kebab_case title_parts._1}}{{/if}}.rs {{/with}} {{/with}} {{/if}}
 '''
 template = "./src/main.rs"
-modifier = ''' {{!-- Triple braces to prevent html escaping --}} {{!-- Base code block --}} {{{code}}} {{!-- Iterate over each library is lib_files --}} {{#each lib_files}}
-mod {{{@key}}} { {{{this}}}
-} {{/each}}
+modifier = ''' {{!-- Triple braces to prevent html escaping --}} {{!-- Base code block --}}
+{{{code}}}
+{{!-- Iterate over each library is lib_files --}}
+{{#each lib_files}}
+mod {{{@key}}} {
+    {{{this}}}
+}
+{{/each}}
 '''
 lib_check_regex = "use.*{{name}}(::|;)"
 
