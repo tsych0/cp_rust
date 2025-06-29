@@ -45,6 +45,21 @@ pub struct CPInput<R: Read> {
     buf: String,
 }
 
+#[derive(Debug, Clone, Copy)]
+pub struct Bool(bool);
+
+impl From<bool> for Bool {
+    fn from(b: bool) -> Self {
+        Bool(b)
+    }
+}
+
+impl CPFormat for Bool {
+    fn cp_fmt(self) -> String {
+        if self.0 { "YES" } else { "NO" }.to_string()
+    }
+}
+
 /// Trait for formatting output in competitive programming style
 pub trait CPFormat {
     fn cp_fmt(self) -> String;
@@ -299,29 +314,24 @@ macro_rules! sol_n {
 /// Macro for reading input values with various patterns
 #[macro_export]
 macro_rules! read_value {
+    // 2D grid with fixed sized
+    ($input:ident, $var:tt, [[$inner:ty; $N:literal]; $n:expr]) => {
+        let $var: Vec<[$inner; $N]> = $input.read_lines($n, parse_array).unwrap();
+    };
+
     // 2D character grid
-    ($input:ident, $var:tt, [[char]]; $n:expr) => {
+    ($input:ident, $var:tt, [[char]; $n:expr]) => {
         let $var: Vec<Vec<char>> = $input.read_lines($n, parse_chars).unwrap();
     };
 
     // 2D binary grid
-    ($input:ident, $var:tt, [[01]]; $n:expr) => {
+    ($input:ident, $var:tt, [[01]; $n:expr]) => {
         let $var: Vec<Vec<u8>> = $input.read_lines($n, parse_binary).unwrap();
     };
 
-    // 2D numeric grid
-    ($input:ident, $var:tt, [[$inner:ty]]; $n:expr) => {
+    // 2D grid
+    ($input:ident, $var:tt, [[$inner:ty]; $n:expr]) => {
         let $var: Vec<Vec<$inner>> = $input.read_lines($n, parse_vec).unwrap();
-    };
-
-    // Single line of characters
-    ($input:ident, $var:tt, [char]) => {
-        let $var: Vec<char> = $input.read_line(parse_chars).unwrap();
-    };
-
-    // Single line of binary
-    ($input:ident, $var:tt, [01]) => {
-        let $var: Vec<u8> = $input.read_line(parse_binary).unwrap();
     };
 
     // Multiple lines of single values
@@ -332,6 +342,16 @@ macro_rules! read_value {
     // Fixed-size array from single line
     ($input:ident, $var:tt, [$inner:ty; $N:literal]) => {
         let $var: [$inner; $N] = $input.read_line(parse_array).unwrap();
+    };
+
+    // Single line of characters
+    ($input:ident, $var:tt, [char]) => {
+        let $var: Vec<char> = $input.read_line(parse_chars).unwrap();
+    };
+
+    // Single line of binary
+    ($input:ident, $var:tt, [01]) => {
+        let $var: Vec<u8> = $input.read_line(parse_binary).unwrap();
     };
 
     // Vector from single line

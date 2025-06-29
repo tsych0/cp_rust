@@ -9,7 +9,7 @@ use cpio::*;
 sol! {
     fn solution(
         n: usize,
-        pq: [[usize]]; n
+        pq: [[usize]; n]
     ) -> usize {
         pq.into_iter().filter(|pqi| pqi[1] - pqi[0] >= 2).count()
     }

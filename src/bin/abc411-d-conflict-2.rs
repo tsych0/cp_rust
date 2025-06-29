@@ -9,7 +9,7 @@ use cpio::*;
 sol! {
     fn solution(
         [_, q]: [usize; 2],
-        queries: [[String]]; q
+        queries: [[String]; q]
     ) -> String {
         let mut res = vec![];
         let mut current_pc: usize = 0;

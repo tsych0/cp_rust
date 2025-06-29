@@ -7,7 +7,7 @@ use cpio::*;
 
 sol! {
     fn solution(
-        matrix: [[u8]]; 5
+        matrix: [[u8]; 5]
     ) -> i8 {
         for i in 0..5 {
             for j in 0..5 {

@@ -8,7 +8,7 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, m]: [usize; 2],
-        matrix: [[01]]; n
+        matrix: [[01]; n]
     ) -> u16 {
         u16::max(
             (0..n).fold(0, |acc, i| {

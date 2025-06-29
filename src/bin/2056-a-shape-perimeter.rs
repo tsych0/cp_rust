@@ -8,7 +8,7 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, m]: [u16; 2],
-        xys: [[u16]]; n as usize
+        xys: [[u16]; n as usize]
     ) -> u16 {
         (4 * m)
             + xys

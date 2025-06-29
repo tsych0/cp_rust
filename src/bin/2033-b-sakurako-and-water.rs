@@ -10,7 +10,7 @@ use std::collections::HashMap;
 sol_n! {
     fn solution(
         n: usize,
-        a: [[isize]]; n
+        a: [[isize]; n]
     ) -> isize {
         let mut values: HashMap<isize, isize> = HashMap::new();
 

@@ -8,7 +8,7 @@ use cpio::*;
 sol! {
     fn solution(
         n: usize,
-        abs: [[usize]]; n
+        abs: [[usize]; n]
     ) -> usize {
         abs.into_iter()
             .fold((0, 0), |(curr, cap), ab| {

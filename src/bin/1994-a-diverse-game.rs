@@ -8,7 +8,7 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, m]: [usize; 2],
-        matrix: [[isize]]; n
+        matrix: [[isize]; n]
     ) -> Lines<Words<isize>> {
         let mut matrix = matrix;
         if n != 1 {

@@ -8,7 +8,7 @@ use cpio::*;
 sol! {
     fn solution(
         n: usize,
-        confidence: [[u16]]; n
+        confidence: [[u16]; n]
     ) -> u16 {
         confidence
             .into_iter()

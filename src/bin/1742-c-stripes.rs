@@ -9,7 +9,7 @@ use cpio::*;
 sol_n! {
     fn solution(
         _s: String,
-        s: [[char]]; 8
+        s: [[char]; 8]
     ) -> char {
         'l: for i in 0..8 {
             for j in 0..8 {

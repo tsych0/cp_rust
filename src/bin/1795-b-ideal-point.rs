@@ -9,7 +9,7 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, k]: [usize; 2],
-        lrs: [[usize]]; n
+        lrs: [[usize]; n]
     ) -> bool {
         for lr in &lrs {
             if lr[0] == k && lr[0] == lr[1] {

@@ -11,7 +11,7 @@ sol_n! {
     fn solution(
         [_n, q]: [usize; 2],
         a: [usize],
-        queries: [[usize]]; q
+        queries: [[usize]; q]
     ) -> Lines<bool> {
         let (a_partial_sum, a_sum) = a.into_iter().fold((vec![0], 0), |(mut acc, acc_sum), i| {
             acc.push(acc_sum + i);
