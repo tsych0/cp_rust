@@ -7,27 +7,17 @@ use cpio::*;
 
 sol_n! {
     fn solution(
-        [n, m, k]: [usize; 3],
+        [_n, _m, k]: [usize; 3],
         [x, y]: [isize; 2],
         friends: [[isize; 2]; k]
-    ) -> bool {
-        for xc in [-1, 0, 1isize] {
-        'l:
-            for yc in [-1, 0, 1isize] {
-                if xc.abs() + yc.abs() > 1 {
-                    continue;
-                }
-
-                for &[xi, yi] in &friends {
-                    if (x.abs_diff(xi) as isize) < (y - yi) * (xc + yc) {
-                        continue 'l;
-                    }
-                }
-
-                return false;
+    ) -> Bool {
+        let color = (x + y) % 2;
+        for [xi, yi] in friends {
+            if (xi + yi) % 2 == color {
+                return false.into();
             }
         }
-        true
+        true.into()
     }
 }
 

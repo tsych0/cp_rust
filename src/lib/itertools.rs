@@ -1,20 +1,21 @@
 use std::cmp::Ordering;
 use std::collections::HashSet;
 use std::hash::Hash;
+use std::iter::Peekable;
 
+/// Extension trait providing additional iterator methods for competitive programming
 pub trait Itertools: Iterator {
+    /// Groups consecutive elements by a key function
     fn group_by<F, K>(self, key_fn: F) -> GroupBy<Self, F, K>
     where
         Self: Sized,
         F: Fn(&Self::Item) -> K,
         K: PartialEq,
     {
-        GroupBy {
-            iter: self.peekable(),
-            key_fn,
-        }
+        GroupBy::new(self, key_fn)
     }
 
+    /// Removes duplicate elements while preserving order
     fn unique(self) -> Unique<Self>
     where
         Self: Sized,
@@ -23,26 +24,16 @@ pub trait Itertools: Iterator {
         Unique::new(self)
     }
 
+    /// Checks if iterator is sorted in ascending order
     fn is_sorted(self) -> bool
     where
         Self: Sized,
         Self::Item: PartialOrd,
     {
-        let mut iter = self;
-        let mut prev = match iter.next() {
-            Some(item) => item,
-            None => return true, // Empty iterator is sorted
-        };
-
-        for current in iter {
-            if prev > current {
-                return false;
-            }
-            prev = current;
-        }
-        true
+        Itertools::is_sorted_by(self, |a, b| a.partial_cmp(b).unwrap_or(Ordering::Equal))
     }
 
+    /// Checks if iterator is sorted by comparison function
     fn is_sorted_by<F>(self, mut compare: F) -> bool
     where
         Self: Sized,
@@ -63,6 +54,7 @@ pub trait Itertools: Iterator {
         true
     }
 
+    /// Checks if iterator is sorted by key function
     fn is_sorted_by_key<F, K>(self, mut key_fn: F) -> bool
     where
         Self: Sized,
@@ -85,26 +77,29 @@ pub trait Itertools: Iterator {
         true
     }
 
+    /// Returns sorted iterator (consumes original)
     fn sorted(self) -> Sorted<Self::Item>
     where
         Self: Sized,
         Self::Item: Ord,
     {
         let mut items: Vec<_> = self.collect();
-        items.sort();
+        items.sort_unstable(); // Faster for CP
         Sorted::new(items)
     }
 
+    /// Returns sorted iterator by comparison function
     fn sorted_by<F>(self, compare: F) -> Sorted<Self::Item>
     where
         Self: Sized,
         F: FnMut(&Self::Item, &Self::Item) -> Ordering,
     {
         let mut items: Vec<_> = self.collect();
-        items.sort_by(compare);
+        items.sort_unstable_by(compare);
         Sorted::new(items)
     }
 
+    /// Returns sorted iterator by key function
     fn sorted_by_key<F, K>(self, key_fn: F) -> Sorted<Self::Item>
     where
         Self: Sized,
@@ -112,10 +107,11 @@ pub trait Itertools: Iterator {
         K: Ord,
     {
         let mut items: Vec<_> = self.collect();
-        items.sort_by_key(key_fn);
+        items.sort_unstable_by_key(key_fn);
         Sorted::new(items)
     }
 
+    /// Splits iterator into chunks of specified size
     fn chunks(self, size: usize) -> Chunks<Self>
     where
         Self: Sized,
@@ -123,14 +119,7 @@ pub trait Itertools: Iterator {
         Chunks::new(self, size)
     }
 
-    fn take_while_ref<P>(&mut self, predicate: P) -> TakeWhileRef<Self, P>
-    where
-        Self: Sized,
-        P: FnMut(&Self::Item) -> bool,
-    {
-        TakeWhileRef::new(self, predicate)
-    }
-
+    /// Intersperses separator between elements
     fn intersperse(self, separator: Self::Item) -> Intersperse<Self>
     where
         Self: Sized,
@@ -138,14 +127,66 @@ pub trait Itertools: Iterator {
     {
         Intersperse::new(self, separator)
     }
+
+    /// Collects into Vec (shorthand for competitive programming)
+    fn collect_vec(self) -> Vec<Self::Item>
+    where
+        Self: Sized,
+    {
+        self.collect()
+    }
+
+    /// Finds minimum and maximum in one pass
+    fn minmax(self) -> Option<(Self::Item, Self::Item)>
+    where
+        Self: Sized,
+        Self::Item: Ord + Clone,
+    {
+        let mut iter = self;
+        let first = iter.next()?;
+        let (mut min, mut max) = (first.clone(), first);
+
+        for item in iter {
+            if item < min {
+                min = item.clone();
+            }
+            if item > max {
+                max = item;
+            }
+        }
+        Some((min, max))
+    }
+
+    /// Counts elements satisfying predicate
+    fn count_where<P>(self, mut predicate: P) -> usize
+    where
+        Self: Sized,
+        P: FnMut(&Self::Item) -> bool,
+    {
+        self.filter(|x| predicate(x)).count()
+    }
+
+    /// Creates frequency map
+    fn frequencies(self) -> std::collections::HashMap<Self::Item, usize>
+    where
+        Self: Sized,
+        Self::Item: Eq + Hash,
+    {
+        let mut freq = std::collections::HashMap::new();
+        for item in self {
+            *freq.entry(item).or_insert(0) += 1;
+        }
+        freq
+    }
 }
 
-// Sorted iterator wrapper
+/// Sorted iterator wrapper
 pub struct Sorted<T> {
     items: std::vec::IntoIter<T>,
 }
 
 impl<T> Sorted<T> {
+    #[inline]
     fn new(items: Vec<T>) -> Self {
         Self {
             items: items.into_iter(),
@@ -156,18 +197,27 @@ impl<T> Sorted<T> {
 impl<T> Iterator for Sorted<T> {
     type Item = T;
 
+    #[inline]
     fn next(&mut self) -> Option<Self::Item> {
         self.items.next()
     }
+
+    #[inline]
+    fn size_hint(&self) -> (usize, Option<usize>) {
+        self.items.size_hint()
+    }
 }
 
-// Chunks iterator
+impl<T> ExactSizeIterator for Sorted<T> {}
+
+/// Chunks iterator
 pub struct Chunks<I: Iterator> {
     iter: I,
     size: usize,
 }
 
 impl<I: Iterator> Chunks<I> {
+    #[inline]
     fn new(iter: I, size: usize) -> Self {
         assert!(size > 0, "Chunk size must be greater than 0");
         Self { iter, size }
@@ -193,25 +243,23 @@ impl<I: Iterator> Iterator for Chunks<I> {
     }
 }
 
-// Intersperse iterator
+/// Intersperse iterator
 pub struct Intersperse<I: Iterator> {
-    iter: I,
+    iter: Peekable<I>,
     separator: I::Item,
     needs_separator: bool,
-    pending: Option<I::Item>,
 }
 
 impl<I: Iterator> Intersperse<I>
 where
     I::Item: Clone,
 {
-    fn new(mut iter: I, separator: I::Item) -> Self {
-        let pending = iter.next();
+    #[inline]
+    fn new(iter: I, separator: I::Item) -> Self {
         Self {
-            iter,
+            iter: iter.peekable(),
             separator,
             needs_separator: false,
-            pending,
         }
     }
 }
@@ -225,69 +273,45 @@ where
     fn next(&mut self) -> Option<Self::Item> {
         if self.needs_separator {
             self.needs_separator = false;
-            Some(self.separator.clone())
-        } else if let Some(item) = self.pending.take() {
-            self.pending = self.iter.next();
-            if self.pending.is_some() {
-                self.needs_separator = true;
-            }
-            Some(item)
-        } else {
-            None
-        }
-    }
-}
-
-// TakeWhileRef for borrowing predicate
-pub struct TakeWhileRef<'a, I: Iterator, P> {
-    iter: &'a mut I,
-    predicate: P,
-    done: bool,
-}
-
-impl<'a, I: Iterator, P> TakeWhileRef<'a, I, P> {
-    fn new(iter: &'a mut I, predicate: P) -> Self {
-        Self {
-            iter,
-            predicate,
-            done: false,
-        }
-    }
-}
-
-impl<'a, I: Iterator, P> Iterator for TakeWhileRef<'a, I, P>
-where
-    P: FnMut(&I::Item) -> bool,
-{
-    type Item = I::Item;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        if self.done {
-            return None;
+            return Some(self.separator.clone());
         }
 
         match self.iter.next() {
             Some(item) => {
-                if (self.predicate)(&item) {
-                    Some(item)
-                } else {
-                    self.done = true;
-                    None
+                if self.iter.peek().is_some() {
+                    self.needs_separator = true;
                 }
+                Some(item)
             }
             None => None,
         }
     }
 }
 
+/// GroupBy iterator
 pub struct GroupBy<I, F, K>
 where
     I: Iterator,
     F: Fn(&I::Item) -> K,
     K: PartialEq,
 {
-    iter: std::iter::Peekable<I>,
+    iter: Peekable<I>,
     key_fn: F,
+}
+
+impl<I, F, K> GroupBy<I, F, K>
+where
+    I: Iterator,
+    F: Fn(&I::Item) -> K,
+    K: PartialEq,
+{
+    #[inline]
+    fn new(iter: I, key_fn: F) -> Self {
+        Self {
+            iter: iter.peekable(),
+            key_fn,
+        }
+    }
 }
 
 impl<I, F, K> Iterator for GroupBy<I, F, K>
@@ -314,6 +338,7 @@ where
     }
 }
 
+/// Unique iterator
 pub struct Unique<I: Iterator> {
     iter: I,
     seen: HashSet<I::Item>,
@@ -324,7 +349,8 @@ where
     I: Iterator,
     I::Item: Eq + Hash + Clone,
 {
-    pub fn new(iter: I) -> Self {
+    #[inline]
+    fn new(iter: I) -> Self {
         Self {
             iter,
             seen: HashSet::new(),
@@ -340,17 +366,19 @@ where
     type Item = I::Item;
 
     fn next(&mut self) -> Option<Self::Item> {
-        while let Some(v) = self.iter.next() {
-            if self.seen.insert(v.clone()) {
-                return Some(v);
+        loop {
+            let item = self.iter.next()?;
+            if self.seen.insert(item.clone()) {
+                return Some(item);
             }
         }
-        None
     }
 }
 
+// Implement Itertools for all iterators
 impl<T: Iterator> Itertools for T {}
 
+/// Cartesian product of two iterables
 pub fn cartesian_product<I, J>(iter1: I, iter2: J) -> Vec<(I::Item, J::Item)>
 where
     I: IntoIterator,
@@ -358,17 +386,64 @@ where
     I::Item: Clone,
     J::Item: Clone,
 {
-    let iter1: Vec<_> = iter1.into_iter().collect();
-    iter2
-        .into_iter()
-        .flat_map(|b| iter1.iter().map(move |a| (a.clone(), b.clone())))
-        .collect()
+    let vec1: Vec<_> = iter1.into_iter().collect();
+    let vec2: Vec<_> = iter2.into_iter().collect();
+
+    let mut result = Vec::with_capacity(vec1.len() * vec2.len());
+    for b in &vec2 {
+        for a in &vec1 {
+            result.push((a.clone(), b.clone()));
+        }
+    }
+    result
 }
 
+/// Generate all permutations of length r
 pub fn permutations<I>(iterable: I, r: usize) -> Vec<Vec<I::Item>>
 where
     I: IntoIterator,
-    I::Item: Clone + PartialEq,
+    I::Item: Clone,
+{
+    let pool: Vec<_> = iterable.into_iter().collect();
+    let n = pool.len();
+
+    if r > n || r == 0 {
+        return if r == 0 { vec![vec![]] } else { vec![] };
+    }
+
+    let mut result = Vec::new();
+    generate_permutations(&pool, r, &mut Vec::new(), &mut vec![false; n], &mut result);
+    result
+}
+
+fn generate_permutations<T: Clone>(
+    pool: &[T],
+    r: usize,
+    current: &mut Vec<T>,
+    used: &mut [bool],
+    result: &mut Vec<Vec<T>>,
+) {
+    if current.len() == r {
+        result.push(current.clone());
+        return;
+    }
+
+    for i in 0..pool.len() {
+        if !used[i] {
+            used[i] = true;
+            current.push(pool[i].clone());
+            generate_permutations(pool, r, current, used, result);
+            current.pop();
+            used[i] = false;
+        }
+    }
+}
+
+/// Generate all combinations of length r
+pub fn combinations<I>(iterable: I, r: usize) -> Vec<Vec<I::Item>>
+where
+    I: IntoIterator,
+    I::Item: Clone,
 {
     let pool: Vec<_> = iterable.into_iter().collect();
     let n = pool.len();
@@ -376,42 +451,30 @@ where
     if r > n {
         return vec![];
     }
-
-    let mut result = Vec::new();
-    let mut indices: Vec<usize> = (0..n).collect();
-    let mut cycles: Vec<usize> = (n - r + 1..=n).collect();
-
-    // First permutation
-    let perm: Vec<I::Item> = (0..r).map(|i| pool[indices[i]].clone()).collect();
-    result.push(perm);
-
-    while n > 0 {
-        let mut found_valid = false;
-
-        for i in (0..r).rev() {
-            cycles[i] -= 1;
-            if cycles[i] == 0 {
-                // Move last element to position i
-                indices.push(indices[i]);
-                indices.remove(i);
-                cycles[i] = n - i;
-            } else {
-                let j = cycles[i];
-                indices.swap(i, n - j);
-
-                // Add the next permutation
-                let next_perm: Vec<I::Item> = (0..r).map(|i| pool[indices[i]].clone()).collect();
-                result.push(next_perm);
-
-                found_valid = true;
-                break;
-            }
-        }
-
-        if !found_valid {
-            break;
-        }
+    if r == 0 {
+        return vec![vec![]];
     }
 
+    let mut result = Vec::new();
+    generate_combinations(&pool, r, 0, &mut Vec::new(), &mut result);
     result
+}
+
+fn generate_combinations<T: Clone>(
+    pool: &[T],
+    r: usize,
+    start: usize,
+    current: &mut Vec<T>,
+    result: &mut Vec<Vec<T>>,
+) {
+    if current.len() == r {
+        result.push(current.clone());
+        return;
+    }
+
+    for i in start..pool.len() {
+        current.push(pool[i].clone());
+        generate_combinations(pool, r, i + 1, current, result);
+        current.pop();
+    }
 }
