@@ -8,15 +8,15 @@ use cpio::*;
 sol_n! {
     fn solution(
         n: usize
-    ) -> Words<isize> {
+    ) -> Option<Words<usize>> {
         if n % 2 == 0 {
-            vec![-1].into()
+            None
         } else {
-            let second_part = (1..=n as isize).take((n + 1) / 2).collect::<Vec<_>>();
-            let first_part = (1..=n as isize).rev().take(n / 2).collect::<Vec<_>>();
-            [first_part.as_slice(), second_part.as_slice()]
+            let second_part = (1..=n).take((n + 1) / 2).collect::<Vec<_>>();
+            let first_part = (1..=n).rev().take(n / 2).collect::<Vec<_>>();
+            Some([first_part.as_slice(), second_part.as_slice()]
                 .concat()
-                .into()
+                .into())
         }
     }
 }

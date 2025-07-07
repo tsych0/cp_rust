@@ -8,7 +8,7 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, a, b]: [usize; 3],
-    ) -> Words<isize> {
+    ) -> Option<Words<usize>> {
         let mut res = vec![0; n];
         res[0] = a;
         res[n - 1] = b;
@@ -17,9 +17,9 @@ sol_n! {
         }
         if res[0..n / 2].into_iter().min().unwrap() == &a
             && res[n / 2..n].into_iter().max().unwrap() == &b {
-            ListOf(res.into_iter().map(|x| x as isize).collect())
+            Some(ListOf(res))
         } else {
-            ListOf(vec![-1])
+            None
         }
     }
 }

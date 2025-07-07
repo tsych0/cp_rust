@@ -5,7 +5,9 @@ use cp_lib::*;
 
 // @code begin
 use cpio::*;
+use itertools::Itertools;
 use std::convert::TryInto;
+use std::{iter::once, ops::AddAssign};
 
 sol_n! {
     fn solution(
@@ -13,15 +15,19 @@ sol_n! {
         a: [usize],
         queries: [[usize]; q]
     ) -> Lines<bool> {
-        let (a_partial_sum, a_sum) = a.into_iter().fold((vec![0], 0), |(mut acc, acc_sum), i| {
-            acc.push(acc_sum + i);
-            (acc, acc_sum + i)
-        });
+        let prefix_sum = once(0)
+            .chain(a.into_iter().scan(0, |acc, x| {
+                acc.add_assign(x);
+                Some(*acc)
+            })).collect_vec();
+
+        let a_sum = prefix_sum.last().unwrap();
+
         queries
             .into_iter()
             .map(|lrk| {
                 let [l, r, k] = lrk.try_into().unwrap();
-                let final_sum = a_sum - (a_partial_sum[r] - a_partial_sum[l - 1]) + (r - l + 1) * k;
+                let final_sum = a_sum - (prefix_sum[r] - prefix_sum[l - 1]) + (r - l + 1) * k;
                 final_sum % 2 == 1
             })
             .collect()

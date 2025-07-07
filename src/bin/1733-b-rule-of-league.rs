@@ -8,11 +8,11 @@ use cpio::*;
 
 sol_n! {
     fn solution(
-        [n, x, y]: [isize; 3]
-    ) -> Words<isize> {
+        [n, x, y]: [usize; 3]
+    ) -> Option<Words<usize>> {
         let k = x + y;
         if x != 0 && y != 0 || x + y == 0 || ((n - 1) % k != 0) {
-            ListOf(vec![-1])
+            None
         } else {
             ListOf(
                 vec![
@@ -20,7 +20,7 @@ sol_n! {
                     (k..n - 1).map(|j| 2 + (j / k) * k).collect(),
                 ]
                 .concat(),
-            )
+            ).into()
         }
     }
 }

@@ -65,6 +65,18 @@ pub trait CPFormat {
     fn cp_fmt(self) -> String;
 }
 
+impl<T> CPFormat for Option<T>
+where
+    T: CPFormat,
+{
+    fn cp_fmt(self) -> String {
+        match self {
+            Some(t) => t.cp_fmt(),
+            None => "-1".into(),
+        }
+    }
+}
+
 impl CPFormat for bool {
     fn cp_fmt(self) -> String {
         (if self { "Yes" } else { "No" }).to_string()

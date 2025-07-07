@@ -9,7 +9,7 @@ use cpio::*;
 sol_n! {
     fn solution(
         n: usize
-    ) -> isize {
+    ) -> Option<usize> {
         let (two_count, rem) = (0..)
             .try_fold(n, |acc, i| {
                 if acc % 2 == 0 {
@@ -29,9 +29,9 @@ sol_n! {
             })
             .unwrap_err();
         if two_count > three_count || rem != 1 {
-            -1
+            None
         } else {
-            2 * three_count - two_count
+            Some(2 * three_count - two_count)
         }
     }
 }

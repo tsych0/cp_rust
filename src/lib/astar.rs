@@ -9,7 +9,6 @@ use crate::indexmap::IndexMap;
 use crate::pathfinding::reverse_path;
 
 /// Compute a shortest path using the [A* search algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
-#[expect(clippy::missing_panics_doc)]
 pub fn astar<N, C, FN, IN, FH, FS>(
     start: &N,
     mut successors: FN,
@@ -80,7 +79,6 @@ where
 
 /// Compute all shortest paths using the [A* search
 /// algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
-#[expect(clippy::missing_panics_doc)]
 pub fn astar_bag<N, C, FN, IN, FH, FS>(
     start: &N,
     mut successors: FN,

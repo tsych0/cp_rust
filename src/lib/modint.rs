@@ -529,7 +529,6 @@ macro_rules! impl_basic_traits {
             }
         }
 
-        #[allow(clippy::derived_hash_with_manual_eq)]
         impl<$generic_param: $generic_param_bound> Hash for $self {
             #[inline]
             fn hash<H: Hasher>(&self, state: &mut H) {

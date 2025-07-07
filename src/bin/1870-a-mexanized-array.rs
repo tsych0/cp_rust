@@ -8,16 +8,16 @@ use cpio::*;
 
 sol_n! {
     fn solution(
-        [n, k, x]: [isize; 3]
-    ) -> isize {
+        [n, k, x]: [usize; 3]
+    ) -> Option<usize> {
         if k > n || k > x + 1 {
-            return -1;
+            return None;
         }
         if x == k {
-            (0..k).sum::<isize>() + (n - k) * (x - 1)
+            (0..k).sum::<usize>() + (n - k) * (x - 1)
         } else {
-            (0..k).sum::<isize>() + (n - k) * x
-        }
+            (0..k).sum::<usize>() + (n - k) * x
+        }.into()
     }
 }
 

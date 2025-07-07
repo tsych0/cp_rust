@@ -85,7 +85,6 @@ where
 }
 
 /// Compute the strongly connected component containing a given node.
-#[expect(clippy::missing_panics_doc)]
 pub fn strongly_connected_component<N, FN, IN>(node: &N, successors: FN) -> Vec<N>
 where
     N: Clone + Hash + Eq,

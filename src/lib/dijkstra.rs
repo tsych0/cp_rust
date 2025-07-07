@@ -66,7 +66,6 @@ where
 /// Determine some reachable nodes from a starting point as well as the minimum cost to
 /// reach them and a possible optimal parent node
 /// using the [Dijkstra search algorithm](https://en.wikipedia.org/wiki/Dijkstra's_algorithm).
-#[expect(clippy::missing_panics_doc)]
 pub fn dijkstra_partial<N, C, FN, IN, FS>(
     start: &N,
     mut successors: FN,
@@ -155,7 +154,6 @@ where
 /// Build a path leading to a target according to a parents map, which must
 /// contain no loop. This function can be used after [`dijkstra_all`] or
 /// [`dijkstra_partial`] to build a path from a starting point to a reachable target.
-#[expect(clippy::implicit_hasher)]
 pub fn build_path<N, C>(target: &N, parents: &HashMap<N, (N, C)>) -> Vec<N>
 where
     N: Eq + Hash + Clone,

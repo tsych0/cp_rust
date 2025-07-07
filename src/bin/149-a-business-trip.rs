@@ -10,18 +10,18 @@ sol! {
     fn solution(
         k: usize,
         a: [usize]
-    ) -> isize {
+    ) -> Option<usize> {
         let a: Vec<_> = a.into_iter().sorted().collect();
         let r = a.into_iter().rev().try_fold((0, 0), |(count, sum), ai| {
             if sum >= k {
-                Err(count as isize)
+                Err(count)
             } else {
                 Ok((count+1, sum+ai))
             }
         });
         match r {
-            Ok((c, s)) => {if s >= k {c} else {-1}},
-            Err(c) => c
+            Ok((c, s)) => {if s >= k {Some(c)} else {None}},
+            Err(c) => c.into()
         }
     }
 }

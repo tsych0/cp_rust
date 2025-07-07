@@ -75,7 +75,6 @@ where
 /// Compute a shortest path using the [breadth-first search
 /// algorithm](https://en.wikipedia.org/wiki/Breadth-first_search) with
 /// [bidirectional search].
-#[allow(clippy::missing_panics_doc)]
 pub fn bfs_bidirectional<'a, N, S, E, FNS, FNP, IN>(
     start: S,
     end: E,

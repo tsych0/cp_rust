@@ -1,10 +1,9 @@
 use crate::internal_math;
-use crate::internal_type_traits::{Integral, One, Signed, Zero};
+use crate::internal_type_traits::{Integral, Signed, Zero};
 
 use std::mem::swap;
 
 /// Returns $x^n \bmod m$.
-#[allow(clippy::many_single_char_names)]
 pub fn pow_mod(x: i64, mut n: i64, m: u32) -> u32 {
     assert!(0 <= n && 1 <= m && m <= 2u32.pow(31));
     if m == 1 {
@@ -71,7 +70,6 @@ pub fn crt(r: &[i64], m: &[i64]) -> (i64, i64) {
 /// $$\sum_{i = 0}^{n - 1} \left\lfloor \frac{a \times i + b}{m} \right\rfloor.$$
 ///
 /// It returns the answer is $\bmod 2^{\mathrm{64}}$, if overflowed.
-#[allow(clippy::many_single_char_names)]
 pub fn floor_sum(n: i64, m: i64, a: i64, b: i64) -> i64 {
     use std::num::Wrapping as W;
     assert!((0..1i64 << 32).contains(&n));

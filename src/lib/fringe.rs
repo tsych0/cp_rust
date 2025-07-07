@@ -9,7 +9,6 @@ use std::hash::Hash;
 use std::mem;
 
 /// Compute a shortest path using the [Fringe search algorithm].
-#[expect(clippy::missing_panics_doc)]
 pub fn fringe<N, C, FN, IN, FH, FS>(
     start: &N,
     mut successors: FN,

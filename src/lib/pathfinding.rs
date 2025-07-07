@@ -83,7 +83,6 @@ pub fn in_direction(
 /// Constrain `value` into `0..upper` by adding or subtracting `upper`
 ///  as many times as necessary.
 #[must_use]
-#[expect(clippy::cast_sign_loss)]
 pub const fn constrain(value: isize, upper: usize) -> usize {
     if value > 0 {
         value as usize % upper

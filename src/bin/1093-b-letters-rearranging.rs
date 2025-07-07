@@ -9,11 +9,11 @@ use itertools::Itertools;
 sol_n! {
     fn solution(
         s: String
-    ) -> String {
+    ) -> Option<String> {
         if s.chars().unique().count() > 1 {
-            s.chars().sorted().collect()
+            s.chars().sorted().collect::<String>().into()
         } else {
-            "-1".into()
+            None
         }
     }
 }

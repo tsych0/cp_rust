@@ -40,7 +40,6 @@ impl Barrett {
 }
 
 /// Calculates `a * b % m`.
-#[allow(clippy::many_single_char_names)]
 pub(crate) fn mul_mod(a: u32, b: u32, m: u32, im: u64) -> u32 {
     let mut z = a as u64;
     z *= b as u64;
@@ -54,7 +53,6 @@ pub(crate) fn mul_mod(a: u32, b: u32, m: u32, im: u64) -> u32 {
 
 /// # Returns
 /// `(x ** n) % m`
-#[allow(clippy::many_single_char_names)]
 pub(crate) fn pow_mod(x: i64, mut n: i64, m: i32) -> i64 {
     if m == 1 {
         return 0;
@@ -173,7 +171,6 @@ pub(crate) fn primitive_root(m: i32) -> i32 {
 /// # Returns
 /// `sum_{i=0}^{n-1} floor((ai + b) / m) (mod 2^64)`
 /* const */
-#[allow(clippy::many_single_char_names)]
 pub(crate) fn floor_sum_unsigned(
     mut n: W<u64>,
     mut m: W<u64>,

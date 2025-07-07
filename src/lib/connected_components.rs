@@ -148,7 +148,6 @@ where
 }
 
 /// Locate vertices amongst disjoint sets.
-#[expect(clippy::implicit_hasher)]
 pub fn component_index<N>(components: &[HashSet<N>]) -> HashMap<N, usize>
 where
     N: Clone + Hash + Eq,

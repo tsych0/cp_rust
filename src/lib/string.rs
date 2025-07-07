@@ -1,5 +1,3 @@
-#![allow(clippy::many_single_char_names)]
-
 fn sa_naive<T: Ord>(s: &[T]) -> Vec<usize> {
     let n = s.len();
     let mut sa: Vec<usize> = (0..n).collect();
@@ -65,7 +63,6 @@ impl Threshold for DefaultThreshold {
     }
 }
 
-#[allow(clippy::cognitive_complexity)]
 fn sa_is<T: Threshold>(s: &[usize], upper: usize) -> Vec<usize> {
     let n = s.len();
     match n {

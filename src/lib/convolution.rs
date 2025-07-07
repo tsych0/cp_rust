@@ -37,7 +37,6 @@ use std::{
 };
 
 /// Calculates the $(+, \times)$ convolution is $\mathbb{Z}/p\mathbb{Z}$.
-#[allow(clippy::many_single_char_names)]
 pub fn convolution<M>(a: &[StaticModInt<M>], b: &[StaticModInt<M>]) -> Vec<StaticModInt<M>>
 where
     M: Modulus,
@@ -96,7 +95,6 @@ where
 }
 
 /// Calculates the $(+, \times)$ convolution is `i64`.
-#[allow(clippy::many_single_char_names)]
 pub fn convolution_i64(a: &[i64], b: &[i64]) -> Vec<i64> {
     const M1: u64 = 754_974_721; // 2^24
     const M2: u64 = 167_772_161; // 2^25
@@ -141,7 +139,6 @@ pub fn convolution_i64(a: &[i64], b: &[i64]) -> Vec<i64> {
         .collect()
 }
 
-#[allow(clippy::many_single_char_names)]
 fn butterfly<M: Modulus>(a: &mut [StaticModInt<M>]) {
     let n = a.len();
     let h = internal_bit::ceil_pow2(n as u32);
@@ -167,7 +164,6 @@ fn butterfly<M: Modulus>(a: &mut [StaticModInt<M>]) {
     });
 }
 
-#[allow(clippy::many_single_char_names)]
 fn butterfly_inv<M: Modulus>(a: &mut [StaticModInt<M>]) {
     let n = a.len();
     let h = internal_bit::ceil_pow2(n as u32);
