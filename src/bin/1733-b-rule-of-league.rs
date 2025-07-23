@@ -9,18 +9,18 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, x, y]: [usize; 3]
-    ) -> Option<Words<usize>> {
+    ) -> Result<Words<usize>> {
         let k = x + y;
         if x != 0 && y != 0 || x + y == 0 || ((n - 1) % k != 0) {
-            None
+            Err("-1".into())
         } else {
-            ListOf(
+            Ok(
                 vec![
                     vec![1; k as usize],
                     (k..n - 1).map(|j| 2 + (j / k) * k).collect(),
                 ]
-                .concat(),
-            ).into()
+                .concat()
+                .into())
         }
     }
 }

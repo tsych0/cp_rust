@@ -9,15 +9,15 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, k, x]: [usize; 3]
-    ) -> Option<usize> {
+    ) -> Result<usize> {
         if k > n || k > x + 1 {
-            return None;
+            return Err("-1".into());
         }
-        if x == k {
+        Ok(if x == k {
             (0..k).sum::<usize>() + (n - k) * (x - 1)
         } else {
             (0..k).sum::<usize>() + (n - k) * x
-        }.into()
+        })
     }
 }
 

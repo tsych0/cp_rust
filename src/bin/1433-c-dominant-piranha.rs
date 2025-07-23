@@ -9,17 +9,17 @@ sol_n! {
     fn solution(
         n: usize,
         a: [usize]
-    ) -> Option<usize> {
+    ) -> Result<usize> {
         let am = *a.iter().max().unwrap();
         for (i, _) in a.iter().enumerate().filter(|&(_, &ai)| ai == am) {
             if i > 0 && a[i-1] < am {
-                return Some(1+i);
+                return Ok(1+i);
             }
             if i < n - 1 && a[i+1] < am {
-                return Some(1+i);
+                return Ok(1+i);
             }
         }
-        None
+        Err("-1".into())
     }
 }
 

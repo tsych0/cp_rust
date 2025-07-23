@@ -8,9 +8,9 @@ use cpio::*;
 sol_n! {
     fn solution(
         n: usize,
-    ) -> Option<Lines<Words<usize>>> {
+    ) -> Result<Lines<Words<usize>>> {
         if n == 2 {
-            return None;
+            return Err("-1".into());
         }
 
         let mut matrix = vec![vec![0; n]; n];
@@ -34,7 +34,7 @@ sol_n! {
             start = (dx * (scaler / 2), dy * (scaler / 2));
         }
 
-        Some(matrix.into_iter().map(|l| l.into_iter().collect()).collect())
+        Ok(matrix.into_iter().map(|l| l.into_iter().collect()).collect())
     }
 }
 

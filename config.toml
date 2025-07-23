@@ -47,4 +47,4 @@ lib = "./src/lib/"
 [toggle]
 create_file = true
 run_on_save = true
-submit_on_ac = true
+submit_on_ac = false

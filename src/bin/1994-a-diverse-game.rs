@@ -9,20 +9,20 @@ sol_n! {
     fn solution(
         [n, m]: [usize; 2],
         matrix: [[usize]; n]
-    ) -> Option<Lines<Words<usize>>> {
+    ) -> Result<Lines<Words<usize>>> {
         let mut matrix = matrix;
         if n != 1 {
             let x = matrix.pop().unwrap();
             matrix.insert(0, x);
-            Some(matrix.into_iter().map(|v| ListOf(v)).collect())
+            Ok(matrix.into_iter().map(|v| ListOf(v)).collect())
         } else if m != 1 {
             for i in 0..n {
                 let y = matrix[i].pop().unwrap();
                 matrix[i].insert(0, y);
             }
-            Some(matrix.into_iter().map(|v| ListOf(v)).collect())
+            Ok(matrix.into_iter().map(|v| ListOf(v)).collect())
         } else {
-            None
+            Err("-1".into())
         }
     }
 }

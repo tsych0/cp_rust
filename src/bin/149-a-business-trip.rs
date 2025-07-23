@@ -10,7 +10,7 @@ sol! {
     fn solution(
         k: usize,
         a: [usize]
-    ) -> Option<usize> {
+    ) -> Result<usize> {
         let a: Vec<_> = a.into_iter().sorted().collect();
         let r = a.into_iter().rev().try_fold((0, 0), |(count, sum), ai| {
             if sum >= k {
@@ -20,8 +20,8 @@ sol! {
             }
         });
         match r {
-            Ok((c, s)) => {if s >= k {Some(c)} else {None}},
-            Err(c) => c.into()
+            Ok((c, s)) => {if s >= k {Ok(c)} else {Err("-1".into())}},
+            Err(c) => Ok(c.into())
         }
     }
 }

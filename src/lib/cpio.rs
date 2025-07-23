@@ -6,7 +6,7 @@ use std::{
     str::FromStr,
 };
 
-type Result<T> = std::result::Result<T, String>;
+pub type Result<T> = std::result::Result<T, String>;
 
 /// A generic list with configurable separator for formatting
 pub struct ListOf<const SEP: char, T>(pub Vec<T>);
@@ -65,14 +65,15 @@ pub trait CPFormat {
     fn cp_fmt(self) -> String;
 }
 
-impl<T> CPFormat for Option<T>
+impl<T, Q> CPFormat for std::result::Result<T, Q>
 where
     T: CPFormat,
+    Q: CPFormat,
 {
     fn cp_fmt(self) -> String {
         match self {
-            Some(t) => t.cp_fmt(),
-            None => "-1".into(),
+            Ok(t) => t.cp_fmt(),
+            Err(e) => e.cp_fmt(),
         }
     }
 }
@@ -326,14 +327,14 @@ macro_rules! sol_n {
 /// Macro for reading input values with various patterns
 #[macro_export]
 macro_rules! read_value {
-    // 2D grid with fixed sized
-    ($input:ident, $var:tt, [[$inner:ty; $N:literal]; $n:expr]) => {
-        let $var: Vec<[$inner; $N]> = $input.read_lines($n, parse_array).unwrap();
-    };
-
     // 2D character grid
     ($input:ident, $var:tt, [[char]; $n:expr]) => {
         let $var: Vec<Vec<char>> = $input.read_lines($n, parse_chars).unwrap();
+    };
+
+    // 2D grid with fixed sized
+    ($input:ident, $var:tt, [[$inner:ty; $N:literal]; $n:expr]) => {
+        let $var: Vec<[$inner; $N]> = $input.read_lines($n, parse_array).unwrap();
     };
 
     // 2D binary grid

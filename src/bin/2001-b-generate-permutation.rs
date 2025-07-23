@@ -8,13 +8,13 @@ use cpio::*;
 sol_n! {
     fn solution(
         n: usize
-    ) -> Option<Words<usize>> {
+    ) -> Result<Words<usize>> {
         if n % 2 == 0 {
-            None
+            Err("-1".into())
         } else {
             let second_part = (1..=n).take((n + 1) / 2).collect::<Vec<_>>();
             let first_part = (1..=n).rev().take(n / 2).collect::<Vec<_>>();
-            Some([first_part.as_slice(), second_part.as_slice()]
+            Ok([first_part.as_slice(), second_part.as_slice()]
                 .concat()
                 .into())
         }
