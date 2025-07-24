@@ -1,6 +1,6 @@
 author = "Ayush Biswas"
 
-editor = "zed"
+editor = "rustrover"
 
 [code]
 filename = ''' {{#if (regex_is_match pattern="codeforces.com" on=url)}} {{#with (regex_captures

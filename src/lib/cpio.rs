@@ -34,7 +34,7 @@ impl<T, const S: char> From<Vec<T>> for ListOf<S, T> {
 }
 
 impl<R, const S: char> FromIterator<R> for ListOf<S, R> {
-    fn from_iter<T: IntoIterator<Item = R>>(iter: T) -> Self {
+    fn from_iter<T: IntoIterator<Item=R>>(iter: T) -> Self {
         iter.into_iter().collect::<Vec<_>>().into()
     }
 }
@@ -379,9 +379,8 @@ macro_rules! read_value {
 }
 
 // Debug utilities (only in debug builds)
-#[cfg(debug_assertions)]
 #[macro_export]
-macro_rules! dbg_cp {
+macro_rules! debug {
     ($($arg:expr),* $(,)?) => {
         eprintln!($($arg),*);
     };
