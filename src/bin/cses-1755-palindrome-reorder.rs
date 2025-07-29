@@ -8,13 +8,13 @@ use itertools::Itertools;
 use std::{collections::HashMap, iter::repeat, ops::AddAssign};
 
 sol! {
-    fn solution(s: [char]) -> Result<String> {
+    fn solution(s: [char]) -> CPResult<String, String> {
         let count = s.into_iter().sorted().fold(HashMap::new(), |mut count, c| {
             count.entry(c).or_insert(0).add_assign(1);
             count
         });
         if count.values().filter(|&v| v % 2 == 1).count() > 1 {
-            return Err("NO SOLUTION".into());
+            return Err("NO SOLUTION".into()).into();
         }
 
         let side: String = count
@@ -38,7 +38,7 @@ sol! {
             })
             .collect();
 
-        Ok(format!("{}{}{}", side, mid, side.chars().rev().collect::<String>()))
+        Ok(format!("{}{}{}", side, mid, side.chars().rev().collect::<String>())).into()
     }
 }
 

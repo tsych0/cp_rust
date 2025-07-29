@@ -10,7 +10,7 @@ sol! {
     fn solution(
         [_n, target]: [usize; 2],
         a: [usize]
-    ) -> Result<Words<usize>> {
+    ) -> CPResult<Words<usize>, String> {
         let mut seen = HashMap::new();
         a.into_iter().zip(1..).find_map(|(ai, i)|  {
             let bj = target.saturating_sub(ai);
@@ -20,6 +20,7 @@ sol! {
                 .or_else(|| {seen.insert(ai, i); None})
         })
         .ok_or("IMPOSSIBLE".into())
+        .into()
     }
 }
 

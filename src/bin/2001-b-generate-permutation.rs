@@ -8,16 +8,16 @@ use cpio::*;
 sol_n! {
     fn solution(
         n: usize
-    ) -> Result<Words<usize>> {
+    ) -> CPResult<Words<usize>, i8> {
         if n % 2 == 0 {
-            Err("-1".into())
+            Err(-1)
         } else {
             let second_part = (1..=n).take((n + 1) / 2).collect::<Vec<_>>();
             let first_part = (1..=n).rev().take(n / 2).collect::<Vec<_>>();
             Ok([first_part.as_slice(), second_part.as_slice()]
                 .concat()
                 .into())
-        }
+        }.into()
     }
 }
 

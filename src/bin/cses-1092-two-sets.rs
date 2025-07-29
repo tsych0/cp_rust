@@ -45,9 +45,9 @@ sol! {
         vec![
             "YES".into(),
             first_set.len().to_string(),
-            words_of(first_set).cp_fmt(),
+            words_of(first_set).to_string(),
             second_set.len().to_string(),
-            words_of(second_set).cp_fmt(),
+            words_of(second_set).to_string(),
         ]
         .into()
     }

@@ -8,11 +8,11 @@ use cpio::*;
 sol_n! {
     fn solution(
         n: usize,
-    ) -> Result<Words<usize>> {
+    ) -> CPResult<Words<usize>, i8> {
         for i in 0.. {
             let threes = 3 * i;
             if threes == n {
-                return Ok(vec![i, 0, 0].into());
+                return Success(vec![i, 0, 0].into());
             }
             if threes > n {
                 break;
@@ -20,7 +20,7 @@ sol_n! {
             for j in 0.. {
                 let fives = 5 * j;
                 if threes + fives == n {
-                    return Ok(vec![i, j, 0].into());
+                    return Success(vec![i, j, 0].into());
                 }
                 if threes + fives > n {
                     break;
@@ -28,7 +28,7 @@ sol_n! {
                 for k in 0.. {
                     let sevens = 7 * k;
                     if threes + fives + sevens == n {
-                        return Ok(vec![i, j, k].into());
+                        return Success(vec![i, j, k].into());
                     }
                     if threes + fives + sevens > n {
                         break;
@@ -36,7 +36,7 @@ sol_n! {
                 }
             }
         }
-        Err("-1".into())
+        Failure(-1)
     }
 }
 

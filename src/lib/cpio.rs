@@ -1,3 +1,4 @@
+use std::fmt::Formatter;
 use std::{
     convert::TryInto,
     fmt::{Debug, Display},
@@ -5,8 +6,81 @@ use std::{
     iter::FromIterator,
     str::FromStr,
 };
+pub use CPResult::*;
 
-pub type Result<T> = std::result::Result<T, String>;
+pub enum CPResult<T, E>
+where
+    T: Display,
+    E: Display,
+{
+    Success(T),
+    Failure(E),
+}
+
+#[macro_export]
+macro_rules! unwrap {
+    ($value:expr) => {
+            match $value {
+            Ok(v) => v,
+            Err(e) => return Failure(e)
+        }
+    };
+}
+
+impl<T, E> From<Result<T, E>> for CPResult<T, E>
+where
+    T: Display,
+    E: Display,
+{
+    fn from(value: Result<T, E>) -> Self {
+        use CPResult::*;
+        match value {
+            Ok(v) => Success(v),
+            Err(e) => Failure(e),
+        }
+    }
+}
+
+impl<S, T> Display for CPResult<S, T>
+where
+    S: Display,
+    T: Display,
+{
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Success(v) => write!(f, "{v}"),
+            Failure(v) => write!(f, "{v}"),
+        }
+    }
+}
+
+pub struct Boolean<const CASE: u8>(bool);
+
+pub type Bool = Boolean<0>;
+pub type BOOL = Boolean<1>;
+
+impl From<bool> for Bool {
+    fn from(value: bool) -> Self {
+        Boolean(value)
+    }
+}
+
+impl From<bool> for BOOL {
+    fn from(value: bool) -> Self {
+        Boolean(value)
+    }
+}
+
+impl<const CASE: u8> Display for Boolean<CASE> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        let res = if self.0 { "Yes" } else { "No" };
+        if CASE == 1 {
+            write!(f, "{}", res.to_uppercase())
+        } else {
+            write!(f, "{res}")
+        }
+    }
+}
 
 /// A generic list with configurable separator for formatting
 pub struct ListOf<const SEP: char, T>(pub Vec<T>);
@@ -34,7 +108,7 @@ impl<T, const S: char> From<Vec<T>> for ListOf<S, T> {
 }
 
 impl<R, const S: char> FromIterator<R> for ListOf<S, R> {
-    fn from_iter<T: IntoIterator<Item=R>>(iter: T) -> Self {
+    fn from_iter<T: IntoIterator<Item = R>>(iter: T) -> Self {
         iter.into_iter().collect::<Vec<_>>().into()
     }
 }
@@ -43,45 +117,6 @@ impl<R, const S: char> FromIterator<R> for ListOf<S, R> {
 pub struct CPInput<R: Read> {
     reader: BufReader<R>,
     buf: String,
-}
-
-#[derive(Debug, Clone, Copy)]
-pub struct Bool(bool);
-
-impl From<bool> for Bool {
-    fn from(b: bool) -> Self {
-        Bool(b)
-    }
-}
-
-impl CPFormat for Bool {
-    fn cp_fmt(self) -> String {
-        if self.0 { "YES" } else { "NO" }.to_string()
-    }
-}
-
-/// Trait for formatting output in competitive programming style
-pub trait CPFormat {
-    fn cp_fmt(self) -> String;
-}
-
-impl<T, Q> CPFormat for std::result::Result<T, Q>
-where
-    T: CPFormat,
-    Q: CPFormat,
-{
-    fn cp_fmt(self) -> String {
-        match self {
-            Ok(t) => t.cp_fmt(),
-            Err(e) => e.cp_fmt(),
-        }
-    }
-}
-
-impl CPFormat for bool {
-    fn cp_fmt(self) -> String {
-        (if self { "Yes" } else { "No" }).to_string()
-    }
 }
 
 impl<T, const SEP: char> Display for ListOf<SEP, T>
@@ -112,47 +147,6 @@ where
     }
 }
 
-impl<T, const SEP: char> CPFormat for ListOf<SEP, T>
-where
-    T: CPFormat,
-{
-    fn cp_fmt(self) -> String {
-        if self.0.is_empty() {
-            return String::new();
-        }
-
-        if SEP == '\0' {
-            // No separator - concatenate directly
-            self.0.into_iter().map(|w| w.cp_fmt()).collect()
-        } else {
-            // With separator
-            let sep_str = SEP.to_string();
-            self.0
-                .into_iter()
-                .map(|w| w.cp_fmt())
-                .collect::<Vec<_>>()
-                .join(&sep_str)
-        }
-    }
-}
-
-// Implement CPFormat for common types
-macro_rules! impl_cp_format {
-    ($($t:ty),* $(,)?) => {
-        $(
-            impl CPFormat for $t {
-                fn cp_fmt(self) -> String {
-                    self.to_string()
-                }
-            }
-        )*
-    };
-}
-
-impl_cp_format!(
-    i8, i16, i32, i64, i128, isize, u8, u16, u32, u64, u128, usize, f32, f64, char, String, &str
-);
-
 impl<R> CPInput<R>
 where
     R: Read,
@@ -166,9 +160,9 @@ where
     }
 
     /// Read a single line and parse it using the provided parser
-    pub fn read_line<F, T>(&mut self, parser: F) -> Result<T>
+    pub fn read_line<F, T>(&mut self, parser: F) -> Result<T, String>
     where
-        F: Fn(&str) -> Result<T>,
+        F: Fn(&str) -> Result<T, String>,
     {
         self.buf.clear();
         self.reader
@@ -178,9 +172,9 @@ where
     }
 
     /// Read multiple lines and parse each using the provided parser
-    pub fn read_lines<F, T>(&mut self, n: usize, parser: F) -> Result<Vec<T>>
+    pub fn read_lines<F, T>(&mut self, n: usize, parser: F) -> Result<Vec<T>, String>
     where
-        F: Fn(&str) -> Result<T>,
+        F: Fn(&str) -> Result<T, String>,
     {
         let mut result = Vec::with_capacity(n);
         for i in 0..n {
@@ -195,7 +189,7 @@ where
 }
 
 /// Parse a single value from string
-pub fn parse<T: FromStr>(s: &str) -> Result<T>
+pub fn parse<T: FromStr>(s: &str) -> Result<T, String>
 where
     T::Err: ToString,
 {
@@ -204,7 +198,7 @@ where
 }
 
 /// Parse space-separated values from string
-pub fn parse_vec<T: FromStr>(s: &str) -> Result<Vec<T>>
+pub fn parse_vec<T: FromStr>(s: &str) -> Result<Vec<T>, String>
 where
     T::Err: ToString,
 {
@@ -212,7 +206,7 @@ where
 }
 
 /// Parse space-separated values into fixed-size array
-pub fn parse_array<T: FromStr + Debug, const N: usize>(s: &str) -> Result<[T; N]>
+pub fn parse_array<T: FromStr + Debug, const N: usize>(s: &str) -> Result<[T; N], String>
 where
     T::Err: ToString,
 {
@@ -222,12 +216,12 @@ where
 }
 
 /// Parse string into vector of characters
-pub fn parse_chars(s: &str) -> Result<Vec<char>> {
+pub fn parse_chars(s: &str) -> Result<Vec<char>, String> {
     Ok(s.chars().collect())
 }
 
 /// Parse binary string (0s and 1s) into vector of u8
-pub fn parse_binary(s: &str) -> Result<Vec<u8>> {
+pub fn parse_binary(s: &str) -> Result<Vec<u8>, String> {
     s.chars()
         .map(|c| match c {
             '0' => Ok(0),
@@ -240,28 +234,26 @@ pub fn parse_binary(s: &str) -> Result<Vec<u8>> {
 /// Solve a single test case problem
 pub fn solve<O>(solution: fn(&mut CPInput<StdinLock<'static>>) -> O)
 where
-    O: CPFormat,
+    O: Display,
 {
     let mut input = CPInput::new(stdin().lock());
+    let mut writer = BufWriter::new(stdout().lock());
     let output = solution(&mut input);
-    let mut stdout = stdout().lock();
-    stdout.write_all(output.cp_fmt().as_bytes()).unwrap();
-    stdout.write_all(b"\n").unwrap();
+    write!(writer, "{output}\n").unwrap();
+    writer.flush().unwrap()
 }
 
 /// Solve multiple test cases problem
 pub fn solve_n<O>(solution: fn(&mut CPInput<StdinLock<'static>>) -> O)
 where
-    O: CPFormat,
+    O: Display,
 {
     let mut input = CPInput::new(stdin().lock());
     let mut writer = BufWriter::new(stdout().lock());
-
     let n: usize = input.read_line(parse).unwrap();
     for _ in 0..n {
         let output = solution(&mut input);
-        writer.write_all(output.cp_fmt().as_bytes()).unwrap();
-        writer.write_all(b"\n").unwrap();
+        write!(writer, "{output}\n").unwrap();
     }
     writer.flush().unwrap();
 }

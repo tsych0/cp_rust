@@ -8,7 +8,7 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, a, b]: [usize; 3],
-    ) -> Result<Words<usize>> {
+    ) -> CPResult<Words<usize>, i8> {
         let mut res = vec![0; n];
         res[0] = a;
         res[n - 1] = b;
@@ -17,9 +17,9 @@ sol_n! {
         }
         if res[0..n / 2].into_iter().min().unwrap() == &a
             && res[n / 2..n].into_iter().max().unwrap() == &b {
-            Ok(ListOf(res))
+            Success(ListOf(res))
         } else {
-            Err("-1".into())
+            Failure(-1)
         }
     }
 }

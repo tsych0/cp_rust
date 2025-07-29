@@ -11,7 +11,7 @@ use std::{
 };
 
 sol! {
-    fn solution(s: [char]) -> Result<String> {
+    fn solution(s: [char]) -> CPResult<String, i8> {
         let n = s.len();
         let mut count: HashMap<char, usize> = s
             .into_iter()
@@ -22,7 +22,7 @@ sol! {
 
         let m = mode(&count);
         if m > n.div_ceil(2) {
-            return Err("-1".into())
+            return Err(-1).into()
         }
 
         let mut res = vec!['.'; n];
@@ -43,10 +43,10 @@ sol! {
                     }
                 }
             }
-            return Err("-1".into())
+            return Err(-1).into()
         }
 
-        Ok(res.into_iter().collect())
+        Ok(res.into_iter().collect()).into()
     }
 }
 

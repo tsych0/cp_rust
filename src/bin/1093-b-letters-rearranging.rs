@@ -9,11 +9,11 @@ use itertools::Itertools;
 sol_n! {
     fn solution(
         s: String
-    ) -> Result<String> {
+    ) -> CPResult<String, i8> {
         if s.chars().unique().count() > 1 {
-            Ok(s.chars().sorted().collect::<String>())
+            Success(s.chars().sorted().collect::<String>())
         } else {
-            Err("-1".into())
+            Failure(-1)
         }
     }
 }

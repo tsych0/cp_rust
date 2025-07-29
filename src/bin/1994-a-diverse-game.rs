@@ -9,7 +9,7 @@ sol_n! {
     fn solution(
         [n, m]: [usize; 2],
         matrix: [[usize]; n]
-    ) -> Result<Lines<Words<usize>>> {
+    ) -> CPResult<Lines<Words<usize>>, i8> {
         let mut matrix = matrix;
         if n != 1 {
             let x = matrix.pop().unwrap();
@@ -22,8 +22,8 @@ sol_n! {
             }
             Ok(matrix.into_iter().map(|v| ListOf(v)).collect())
         } else {
-            Err("-1".into())
-        }
+            Err(-1)
+        }.into()
     }
 }
 

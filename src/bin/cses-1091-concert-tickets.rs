@@ -8,7 +8,7 @@ use itertools::Itertools;
 use std::{collections::BTreeMap, ops::SubAssign};
 
 sol! {
-    fn solution([n, m]: [usize; 2], ticket_price: [usize], budgets: [usize]) -> Lines<Result<usize>> {
+    fn solution([n, m]: [usize; 2], ticket_price: [usize], budgets: [usize]) -> Lines<CPResult<usize, i8>> {
         let mut prices: BTreeMap<usize, usize> = ticket_price
             .into_iter()
             .sorted()
@@ -27,8 +27,8 @@ sol! {
                     }
                     Ok(price)
                 } else {
-                    Err("-1".into())
-                }
+                    Err(-1)
+                }.into()
             })
             .collect::<Vec<_>>()
             .into()

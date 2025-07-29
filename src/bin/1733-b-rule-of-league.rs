@@ -9,12 +9,12 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, x, y]: [usize; 3]
-    ) -> Result<Words<usize>> {
+    ) -> CPResult<Words<usize>, i8> {
         let k = x + y;
         if x != 0 && y != 0 || x + y == 0 || ((n - 1) % k != 0) {
-            Err("-1".into())
+            Failure(-1)
         } else {
-            Ok(
+            Success(
                 vec![
                     vec![1; k as usize],
                     (k..n - 1).map(|j| 2 + (j / k) * k).collect(),

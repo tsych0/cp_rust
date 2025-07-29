@@ -8,19 +8,19 @@ use cpio::*;
 sol_n! {
     fn solution(
         [n, a, b]: [usize; 3]
-    ) -> Result<Lines<String>> {
+    ) -> CPResult<Lines<String>, String> {
         if a + b > n {
-            return Err("NO".into())
+            return Err("NO".into()).into()
         }
         if a * b == 0 && a + b != 0 {
-            return Err("NO".into())
+            return Err("NO".into()).into()
         }
         let m = a + b;
         Ok(vec![
             "YES".into(),
-            (1..=n).collect::<Words<_>>().cp_fmt(),
-            (m - b + 1..=m).chain(1..=m-b).chain(m+1..=n).collect::<Words<_>>().cp_fmt()
-        ].into())
+            (1..=n).collect::<Words<_>>().to_string(),
+            (m - b + 1..=m).chain(1..=m-b).chain(m+1..=n).collect::<Words<_>>().to_string()
+        ].into()).into()
     }
 }
 

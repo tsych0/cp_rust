@@ -12,7 +12,7 @@ sol! {
     fn solution(
         [n, target]: [usize; 2],
         coins: [usize]
-    ) -> Result<u32> {
+    ) -> CPResult<u32, i8> {
         // fn min_coins(target: usize, idx: usize, coins: &[usize]) -> usize {
         //     if target == 0 {
         //         return 0;
@@ -51,9 +51,9 @@ sol! {
         }
 
         if res[target] == MAX {
-            Err("-1".into())
+            Failure(-1)
         } else {
-            Ok(res[target])
+            Success(res[target])
         }
     }
 }

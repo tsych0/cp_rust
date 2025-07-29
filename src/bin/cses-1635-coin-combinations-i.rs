@@ -10,7 +10,7 @@ sol! {
     fn solution(
         [n, target]: [usize; 2],
         coins: [usize]
-    ) -> Result<usize> {
+    ) -> CPResult<usize, i8> {
         // fn num_ways(target: usize, idx: usize, coins: &[usize]) -> usize {
         //     if target == 0 {
         //         return 1;
@@ -46,9 +46,8 @@ sol! {
                 }
             }
         }
-
-
-        Ok(res[target] % MOD)
+        
+        Success(res[target] % MOD)
     }
 }
 
