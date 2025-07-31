@@ -13,11 +13,11 @@ sol! {
         [n, m]: [usize; 2],
         (mut grid): [[char]; n]
     ) -> CPResult<Lines<String>, String> {
-        let mut queue = VecDeque::new(); 
+        let mut queue = VecDeque::new();
         queue.extend(find_monsters(&grid, n, m).into_iter().map(|(x, y)| ('M', x, y)));
         let (startx, starty) = find_start(&grid, n, m);
         queue.push_back(('A', startx, starty));
-        
+
         let mut direction = vec![vec![' '; m]; n];
         let mut res: Option<(usize, usize)> = None;
         while let Some((p, i, j)) = queue.pop_front() {
@@ -42,12 +42,12 @@ sol! {
                         grid[x][y] = 'M';
                         queue.push_back(('M', x, y));
                     }
-                } 
+                }
             }
         }
-        
+
         let (mut i, mut j) = unwrap!(res.ok_or("No".into()));
-        
+
         let mut result = vec![];
         loop {
             let d = direction[i][j];
@@ -55,7 +55,7 @@ sol! {
                 break;
             }
             result.push(d);
-            (i, j) = go(opposite_direction(d), i, j); 
+            (i, j) = go(opposite_direction(d), i, j);
         }
         Success(
             vec![
@@ -83,7 +83,7 @@ fn find_start(grid: &Vec<Vec<char>>, n: usize, m: usize) -> (usize, usize) {
     for i in 0..n {
         for j in 0..m {
             if grid[i][j] == 'A' {
-                return (i, j)
+                return (i, j);
             }
         }
     }

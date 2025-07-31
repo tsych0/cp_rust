@@ -2,10 +2,10 @@
 // https://cses.fi/problemset/task/1667
 use cp_lib::*;
 
+use cpio::*;
+use itertools::Itertools;
 // @code begin
 use std::collections::VecDeque;
-use itertools::Itertools;
-use cpio::*;
 
 sol! {
     fn solution(
@@ -17,10 +17,10 @@ sol! {
             graph[a].push(b);
             graph[b].push(a);
         }
-        
+
         // Calculating the parents for the shortest path using bfs
         let mut parent = vec![0; n + 1];
-        let mut queue = VecDeque::new(); 
+        let mut queue = VecDeque::new();
         queue.push_back(1);
         parent[1] = n + 1;
         while let Some(node) = queue.pop_front() {
@@ -31,10 +31,10 @@ sol! {
                 if parent[child] == 0 {
                     parent[child] = node;
                     queue.push_back(child);
-                } 
+                }
             }
         }
-        
+
         // Building the result
         let res = (1..).scan(n, |state, _| {
             if (*state != n + 1) && (*state != 0) {
@@ -45,7 +45,7 @@ sol! {
                 None
             }
         }).collect_vec();
-        
+
         if res.len() == 1 {
             Failure("IMPOSSIBLE".into())
         } else {

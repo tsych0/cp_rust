@@ -108,7 +108,7 @@ impl<T, const S: char> From<Vec<T>> for ListOf<S, T> {
 }
 
 impl<R, const S: char> FromIterator<R> for ListOf<S, R> {
-    fn from_iter<T: IntoIterator<Item = R>>(iter: T) -> Self {
+    fn from_iter<T: IntoIterator<Item=R>>(iter: T) -> Self {
         iter.into_iter().collect::<Vec<_>>().into()
     }
 }
@@ -123,7 +123,7 @@ impl<T, const SEP: char> Display for ListOf<SEP, T>
 where
     T: Display,
 {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         if self.0.is_empty() {
             return Ok(());
         }
