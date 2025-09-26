@@ -1,10 +1,10 @@
 use std::fmt::Formatter;
 use std::{
-    convert::TryInto,
     fmt::{Debug, Display},
     io::{stdin, stdout, BufRead, BufReader, BufWriter, Read, StdinLock, Write},
     iter::FromIterator,
     str::FromStr,
+    convert::TryInto,
 };
 pub use CPResult::*;
 
@@ -20,9 +20,9 @@ where
 #[macro_export]
 macro_rules! unwrap {
     ($value:expr) => {
-            match $value {
+        match $value {
             Ok(v) => v,
-            Err(e) => return Failure(e)
+            Err(e) => return Failure(e),
         }
     };
 }
@@ -108,7 +108,7 @@ impl<T, const S: char> From<Vec<T>> for ListOf<S, T> {
 }
 
 impl<R, const S: char> FromIterator<R> for ListOf<S, R> {
-    fn from_iter<T: IntoIterator<Item=R>>(iter: T) -> Self {
+    fn from_iter<T: IntoIterator<Item = R>>(iter: T) -> Self {
         iter.into_iter().collect::<Vec<_>>().into()
     }
 }
@@ -117,6 +117,7 @@ impl<R, const S: char> FromIterator<R> for ListOf<S, R> {
 pub struct CPInput<R: Read> {
     reader: BufReader<R>,
     buf: String,
+    eof_reached: bool
 }
 
 impl<T, const SEP: char> Display for ListOf<SEP, T>
@@ -147,6 +148,8 @@ where
     }
 }
 
+
+// Add these methods to CPInput implementation
 impl<R> CPInput<R>
 where
     R: Read,
@@ -155,8 +158,70 @@ where
     pub fn new(input: R) -> Self {
         CPInput {
             reader: BufReader::new(input),
-            buf: String::with_capacity(1024), // Pre-allocate for performance
+            buf: String::with_capacity(1024),
+            eof_reached: false,
         }
+    }
+
+    /// Check if EOF has been reached
+    pub fn is_eof(&self) -> bool {
+        self.eof_reached
+    }
+
+    /// Try to read a line, returning None if EOF is reached
+    pub fn try_read_line<F, T>(&mut self, parser: F) -> Result<Option<T>, String>
+    where
+        F: Fn(&str) -> Result<T, String>,
+    {
+        if self.eof_reached {
+            return Ok(None);
+        }
+
+        self.buf.clear();
+        match self.reader.read_line(&mut self.buf) {
+            Ok(0) => {
+                self.eof_reached = true;
+                Ok(None)
+            }
+            Ok(_) => {
+                let trimmed = self.buf.trim();
+                if trimmed.is_empty() {
+                    // Empty line, try next line
+                    self.try_read_line(parser)
+                } else {
+                    parser(trimmed).map(Some)
+                }
+            }
+            Err(err) => Err(format!("IO error: {}", err)),
+        }
+    }
+
+    /// Try to read multiple lines, returning None if EOF is reached
+    pub fn try_read_lines<F, T>(&mut self, n: usize, parser: F) -> Result<Option<Vec<T>>, String>
+    where
+        F: Fn(&str) -> Result<T, String>,
+    {
+        if self.eof_reached {
+            return Ok(None);
+        }
+
+        let mut result = Vec::with_capacity(n);
+        for i in 0..n {
+            match self.try_read_line(&parser) {
+                Ok(Some(value)) => result.push(value),
+                Ok(None) => {
+                    if i == 0 {
+                        // EOF on first line
+                        return Ok(None);
+                    } else {
+                        // EOF in the middle - this is an error
+                        return Err(format!("Unexpected EOF after reading {} of {} lines", i, n));
+                    }
+                }
+                Err(e) => return Err(e),
+            }
+        }
+        Ok(Some(result))
     }
 
     /// Read a single line and parse it using the provided parser
@@ -187,6 +252,27 @@ where
         Ok(result)
     }
 }
+
+
+
+/// Solve problems that read until EOF
+pub fn solve_eof<O>(solution: fn(&mut CPInput<StdinLock<'static>>) -> Option<O>)
+where
+    O: Display,
+{
+    let mut input = CPInput::new(stdin().lock());
+    let mut writer = BufWriter::new(stdout().lock());
+    
+    while !input.is_eof() {
+        if let Some(output) = solution(&mut input) {
+            write!(writer, "{output}\n").unwrap();
+        } else {
+            break;
+        }
+    }
+    writer.flush().unwrap();
+}
+
 
 /// Parse a single value from string
 pub fn parse<T: FromStr>(s: &str) -> Result<T, String>
@@ -316,6 +402,32 @@ macro_rules! sol_n {
     };
 }
 
+
+/// Macro for EOF problems (read until end of file)
+#[macro_export]
+macro_rules! sol_eof {
+    (
+        fn $name:ident (
+            $(
+               $var:tt: $ty:tt $(; $n:expr)?
+            ),* $(,)?
+        ) -> $ret:ty
+        $body:block
+    ) => {
+        sol_main!(solve_eof, $name);
+
+       fn $name<R>(input: &mut CPInput<R>) -> Option<$ret>
+        where
+            R: std::io::Read, 
+        {
+            $(
+                try_read_value!(input, $var, $ty $(; $n)?);
+            )*
+            Some($body)
+        }
+    };
+}
+
 /// Macro for reading input values with various patterns
 #[macro_export]
 macro_rules! read_value {
@@ -370,10 +482,96 @@ macro_rules! read_value {
     };
 }
 
-// Debug utilities (only in debug builds)
+// Helper macro for trying to read values with EOF detection
 #[macro_export]
-macro_rules! debug {
-    ($($arg:expr),* $(,)?) => {
-        eprintln!($($arg),*);
+macro_rules! try_read_value {
+    // 2D character grid
+    ($input:ident, $var:tt, [[char]; $n:expr]) => {
+        let $var: Vec<Vec<char>> = match $input.try_read_lines($n, parse_chars) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
+    };
+    
+    // 2D grid with fixed sized
+    ($input:ident, $var:tt, [[$inner:ty; $N:literal]; $n:expr]) => {
+        let $var: Vec<[$inner; $N]> = match $input.try_read_lines($n, parse_array) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
+    };
+    
+    // 2D binary grid
+    ($input:ident, $var:tt, [[01]; $n:expr]) => {
+        let $var: Vec<Vec<u8>> = match $input.try_read_lines($n, parse_binary) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
+    };
+    
+    // 2D grid
+    ($input:ident, $var:tt, [[$inner:ty]; $n:expr]) => {
+        let $var: Vec<Vec<$inner>> = match $input.try_read_lines($n, parse_vec) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
+    };
+    
+    // Multiple lines of single values
+    ($input:ident, $var:tt, [$inner:ty]; $n:expr) => {
+        let $var: Vec<$inner> = match $input.try_read_lines($n, parse) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
+    };
+    
+    // Fixed-size array from single line
+    ($input:ident, $var:tt, [$inner:ty; $N:literal]) => {
+        let $var: [$inner; $N] = match $input.try_read_line(parse_array) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
+    };
+    
+    // Single line of characters
+    ($input:ident, $var:tt, [char]) => {
+        let $var: Vec<char> = match $input.try_read_line(parse_chars) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
+    };
+    
+    // Single line of binary
+    ($input:ident, $var:tt, [01]) => {
+        let $var: Vec<u8> = match $input.try_read_line(parse_binary) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
+    };
+    
+    // Vector from single line
+    ($input:ident, $var:tt, [$inner:ty]) => {
+        let $var: Vec<$inner> = match $input.try_read_line(parse_vec) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
+    };
+    
+    // Single value
+    ($input:ident, $var:tt, $inner:ty) => {
+        let $var: $inner = match $input.try_read_line(parse) {
+            Ok(Some(v)) => v,
+            Ok(None) => return None,
+            Err(_) => return None,
+        };
     };
 }

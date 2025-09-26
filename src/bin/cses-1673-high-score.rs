@@ -16,13 +16,13 @@ sol! {
         let mut reachable = vec![false; n + 1];
         reachable[1] = true;
         d[1] = 0;
-        
+
         for _ in 1..n {
             for &[a, b, _] in &tunnels {
                 reachable[b as usize] |= reachable[a as usize];
             }
         }
-        
+
         for _ in 1..n {
             for &[a, b, x] in &tunnels {
                 if reachable[a as usize] {
@@ -30,16 +30,16 @@ sol! {
                 }
             }
         }
-        
+
         for _ in 1..=n {
             for &[a, b, x] in &tunnels {
-                if d[a as usize] - x < d[b as usize] 
+                if d[a as usize] - x < d[b as usize]
                     && reachable[a as usize] && reachable[b as usize] {
-                    d[b as usize] = -INF;        
+                    d[b as usize] = -INF;
                 }
             }
         }
-        
+
         if d[n] >= INF || d[n] <= -INF {
             Failure(-1)
         } else {

@@ -3,8 +3,8 @@
 use cp_lib::*;
 
 // @code begin
-use std::collections::VecDeque;
 use cpio::*;
+use std::collections::VecDeque;
 
 sol! {
     fn solution(
@@ -12,7 +12,7 @@ sol! {
         map: [[char]; n]
     ) -> CPResult<String, String> {
         let start_point = find_start(&map, n, m);
-        let (end_point, directions) = 
+        let (end_point, directions) =
             unwrap!(find_directions(map, start_point, n, m).ok_or("No".into()));
         let mut res = vec![];
         let (mut i, mut j) = end_point;
@@ -25,14 +25,19 @@ sol! {
     }
 }
 
-fn find_directions(map: Vec<Vec<char>>, start: (usize, usize), n: usize, m: usize) -> Option<((usize, usize), Vec<Vec<char>>)> {
+fn find_directions(
+    map: Vec<Vec<char>>,
+    start: (usize, usize),
+    n: usize,
+    m: usize,
+) -> Option<((usize, usize), Vec<Vec<char>>)> {
     let mut queue = VecDeque::new();
     let mut visited = vec![vec![false; m]; n];
     let mut direction = vec![vec![' '; m]; n];
     queue.push_back(start);
     while let Some((i, j)) = queue.pop_front() {
         if map[i][j] == 'B' {
-            return Some(((i, j), direction))
+            return Some(((i, j), direction));
         }
         for mv in ['U', 'D', 'L', 'R'] {
             let (x, y) = go(mv, i, j);
@@ -50,7 +55,7 @@ fn find_start(map: &Vec<Vec<char>>, n: usize, m: usize) -> (usize, usize) {
     for i in 0..n {
         for j in 0..m {
             if map[i][j] == 'A' {
-                return (i, j)
+                return (i, j);
             }
         }
     }
@@ -63,7 +68,7 @@ fn go(d: char, i: usize, j: usize) -> (usize, usize) {
         'D' => (i + 1, j),
         'L' => (i, j - 1),
         'R' => (i, j + 1),
-        _ => (i, j)
+        _ => (i, j),
     }
 }
 
@@ -73,7 +78,7 @@ fn opposite_direction(d: char) -> char {
         'L' => 'R',
         'D' => 'U',
         'R' => 'L',
-        d => d
+        d => d,
     }
 }
 

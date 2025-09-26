@@ -46,7 +46,7 @@ sol! {
                 }
             }
         }
-        
+
         Success(res[target] % MOD)
     }
 }

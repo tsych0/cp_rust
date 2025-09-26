@@ -1,6 +1,6 @@
 author = "Ayush Biswas"
 
-editor = "rustrover"
+editor = "zed"
 
 [code]
 filename = ''' {{#if (regex_is_match pattern="codeforces.com" on=url)}} {{#with (regex_captures
@@ -28,18 +28,26 @@ filename = ''' {{#if (regex_is_match pattern="codeforces.com" on=url)}} {{#with 
 ./src/bin/cses-{{url_parts._1}}-{{to_kebab_case ../title}}.rs
 {{/with}}
 {{/if}}
+{{#if (regex_is_match pattern="judge.u-aizu.ac.jp" on=url)}}
+{{#with (regex_captures
+  pattern="description\\.jsp\\?id=([A-Za-z0-9_]+)"
+  on=url) as |url_parts|}}
+./src/bin/aoj-{{url_parts._1}}-{{to_kebab_case ../title}}.rs
+{{/with}}
+{{/if}}
 '''
 template = "./src/main.rs"
-modifier = ''' {{!-- Triple braces to prevent html escaping --}} {{!-- Base code block --}}
+modifier = ''' {{!-- Triple braces to prevent html escaping --}}
+{{!-- Base code block --}}
 {{{code}}}
 {{!-- Iterate over each library is lib_files --}}
 {{#each lib_files}}
-mod {{{@key}}} {
-    {{{this}}}
+mod {{{this.0}}} {
+    {{{this.1}}}
 }
 {{/each}}
 '''
-lib_check_regex = "use.*{{name}}(::|;)"
+lib_check_regex = "use\\s*{{name}}(::|;)"
 
 [include]
 lib = "./src/lib/"

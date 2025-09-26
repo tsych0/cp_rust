@@ -16,7 +16,7 @@ sol! {
             graph[a].push(b);
             graph[b].push(a);
         }
-        let (p, parents) = 
+        let (p, parents) =
             unwrap!(find_cycle(graph, n).ok_or("IMPOSSIBLE".to_string()));
         // println!("{parents:?}");
         let mut res = vec![p];

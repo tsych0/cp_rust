@@ -14,10 +14,10 @@ sol! {
     ) -> CPResult<Lines<String>, String> {
         let mut d = vec![INF; n + 1];
         let mut parent = vec![0; n + 1];
-        
+
         d[1] = 0;
         let mut x = 0;
-        
+
         for _ in 1..=n {
             x = 0;
             for &[a, b, c] in &edges {
@@ -28,11 +28,11 @@ sol! {
                 }
             }
         }
-        
+
         if x != 0 {
             for _ in 0..n {
                 x = parent[x];
-            } 
+            }
             let mut cycle = vec![x];
             let y = x;
             loop {
@@ -40,7 +40,7 @@ sol! {
                 cycle.push(x);
                 if x == y {
                     break;
-                } 
+                }
             }
             cycle.reverse();
             Success(vec![

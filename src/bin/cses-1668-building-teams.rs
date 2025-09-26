@@ -16,7 +16,7 @@ sol! {
             friends[a].push(b);
             friends[b].push(a);
         }
-        let grps = 
+        let grps =
             unwrap!(assign_grps(friends, n).ok_or("IMPOSSIBLE".to_string()));
         Success(grps.into())
     }

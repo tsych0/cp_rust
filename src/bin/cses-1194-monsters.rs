@@ -96,7 +96,7 @@ fn go(d: char, i: usize, j: usize) -> (usize, usize) {
         'D' => (i + 1, j),
         'L' => (i, j - 1),
         'R' => (i, j + 1),
-        _ => (i, j)
+        _ => (i, j),
     }
 }
 
@@ -106,7 +106,7 @@ fn opposite_direction(d: char) -> char {
         'L' => 'R',
         'D' => 'U',
         'R' => 'L',
-        d => d
+        d => d,
     }
 }
 
